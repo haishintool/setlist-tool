@@ -818,5 +818,5 @@ body.obsBody .obsList.bulletStyle li::before {
   color: white;
 }
 body.nowPlayingBody {
-  background: #00ff00 !important;
+  background: #000000 !important;
 }
