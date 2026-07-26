@@ -823,9 +823,21 @@ body.nowPlayingBody {
 /* Now Playing セットリスト */
 
 .nowPlayingSetlist {
-  margin-top: 24px;
-  text-align: center;
+  width: 700px;
+  margin: 30px auto 0;
+
+  border: 1px solid white;
+
+  padding: 20px 30px;
+
+  text-align: left;
   line-height: 1.5;
+
+  box-sizing: border-box;
+}
+
+.nowPlayingSetlistItem {
+  margin: 8px 0;
 }
 
 .nowPlayingSetlistItem {
