@@ -820,3 +820,15 @@ body.obsBody .obsList.bulletStyle li::before {
 body.nowPlayingBody {
   background: #000000 !important;
 }
+/* Now Playing セットリスト */
+
+.nowPlayingSetlist {
+  margin-top: 24px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.nowPlayingSetlistItem {
+  text-align: center;
+  white-space: nowrap;
+}
