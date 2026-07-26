@@ -113,6 +113,11 @@ const displaySetlist =
 const currentSongElement =
   document.getElementById("currentSong");
 
+const nowPlayingSetlist =
+  document.getElementById(
+    "nowPlayingSetlist"
+  );
+
 /* =========================================================
    保存データ
 ========================================================= */
@@ -440,9 +445,12 @@ function renderNowPlaying() {
     return;
   }
 
-  currentSongElement.textContent =
+  const currentSong =
     state.currentSong ||
     "曲が選択されていません";
+
+  currentSongElement.textContent =
+    `▶ ${currentSong}`;
 
   currentSongElement.style.fontFamily =
     createFontStack(
@@ -451,6 +459,47 @@ function renderNowPlaying() {
 
   currentSongElement.style.fontSize =
     `${state.fontSize}px`;
+
+  currentSongElement.style.fontWeight =
+    "700";
+
+  if (nowPlayingSetlist) {
+
+    nowPlayingSetlist.innerHTML = "";
+
+    state.songs.forEach(
+      (songTitle, index) => {
+
+        const item =
+          document.createElement("div");
+
+        if (state.listStyle === "number") {
+
+          item.textContent =
+            `${index + 1}. ${songTitle}`;
+
+        } else {
+
+          item.textContent =
+            `・${songTitle}`;
+
+        }
+
+        item.style.fontFamily =
+          createFontStack(
+            state.fontFamily
+          );
+
+        item.style.fontSize =
+          `${state.fontSize}px`;
+
+        nowPlayingSetlist.appendChild(
+          item
+        );
+      }
+    );
+
+  }
 
   if (displayTitle) {
     displayTitle.hidden =
