@@ -840,10 +840,10 @@ body.nowPlayingBody {
     sans-serif;
 
   color: white;
-  font-size: 1.3em;
+  font-size: 1.0em;
 
   position: relative;
-  top: -2px;      /* ↓2px下へ */
+  top: -1px;      /* ↓2px下へ */
   /* top: -2px; なら2px上へ */
 
   margin-right: 0.25em;
