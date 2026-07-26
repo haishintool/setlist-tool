@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>SET LIST TOOL</title>
+
+  <link rel="stylesheet" href="./style.css?v=1" />
+  <script src="./script.js?v=1" defer></script>
+</head>
+
+<body>
+  <main class="app">
+    <header class="appHeader">
+      <div>
+        <p class="eyebrow">STREAMING SUPPORT TOOL</p>
+        <h1>SET LIST</h1>
+      </div>
+
+      <a
+        class="obsPageLink"
+        href="./display.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        表示画面を開く
+      </a>
+    </header>
+
+    <section class="controlPanel controlPanelSingle" aria-labelledby="controlPanelTitle">
+      <div class="sectionHeader">
+        <div>
+          <p class="sectionNumber">01</p>
+          <h2 id="controlPanelTitle">CONTROL</h2>
+        </div>
+
+        <span id="songCount" class="songCount">0 SONGS</span>
+      </div>
+
+      <section class="controlGroup" aria-labelledby="songAddTitle">
+        <div class="controlGroupHeader">
+          <h3 id="songAddTitle">曲名を追加</h3>
+        </div>
+
+        <form id="songForm" class="songForm">
+          <label class="srOnly" for="songInput">曲名</label>
+
+          <input
+            id="songInput"
+            class="textInput"
+            name="songTitle"
+            type="text"
+            placeholder="曲名を入力"
+            autocomplete="off"
+            maxlength="100"
+            required
+          />
+
+          <button class="primaryButton" type="submit">
+            追加
+          </button>
+        </form>
+      </section>
+
+      <section class="controlGroup" aria-labelledby="listStyleTitle">
+        <div class="controlGroupHeader">
+          <h3 id="listStyleTitle">表示形式</h3>
+        </div>
+
+        <div
+          class="segmentedControl"
+          role="radiogroup"
+          aria-label="セットリストの表示形式"
+        >
+          <button
+            id="numberStyleButton"
+            class="segmentButton isActive"
+            type="button"
+            role="radio"
+            aria-checked="true"
+            data-list-style="number"
+          >
+            1. 2. 3.
+          </button>
+
+          <button
+            id="bulletStyleButton"
+            class="segmentButton"
+            type="button"
+            role="radio"
+            aria-checked="false"
+            data-list-style="bullet"
+          >
+            ・中黒
+          </button>
+        </div>
+      </section>
+
+      <section class="controlGroup" aria-labelledby="fontTitle">
+        <div class="controlGroupHeader">
+          <h3 id="fontTitle">フォント</h3>
+        </div>
+
+        <div class="fontControls">
+          <label class="fieldLabel" for="fontPreset">
+            よく使うフォント
+          </label>
+
+          <select id="fontPreset" class="selectInput">
+            <option value="">選択してください</option>
+            <option value="Yu Gothic">游ゴシック</option>
+            <option value="Yu Mincho">游明朝</option>
+            <option value="Meiryo">メイリオ</option>
+            <option value="MS Gothic">MS ゴシック</option>
+            <option value="MS Mincho">MS 明朝</option>
+            <option value="BIZ UDPGothic">BIZ UDPゴシック</option>
+            <option value="BIZ UDPMincho">BIZ UDP明朝</option>
+            <option value="Noto Sans JP">Noto Sans JP</option>
+            <option value="Noto Serif JP">Noto Serif JP</option>
+          </select>
+
+          <label class="fieldLabel" for="fontInput">
+            PC内のフォント名を直接入力
+          </label>
+
+          <div class="fontInputRow">
+            <input
+              id="fontInput"
+              class="textInput"
+              type="text"
+              placeholder="例：BIZ UDPゴシック"
+              autocomplete="off"
+              maxlength="100"
+            />
+
+            <button
+              id="applyFontButton"
+              class="secondaryButton"
+              type="button"
+            >
+              適用
+            </button>
+          </div>
+
+          <p class="helpText">
+            Windowsのフォント設定などに表示されている名前を入力してください。
+          </p>
+        </div>
+      </section>
+
+      <section class="controlGroup" aria-labelledby="fontSizeTitle">
+        <div class="controlGroupHeader">
+          <h3 id="fontSizeTitle">文字サイズ</h3>
+        </div>
+
+        <div class="stepper">
+          <button
+            id="decreaseFontSizeButton"
+            class="stepperButton"
+            type="button"
+            aria-label="文字サイズを小さくする"
+          >
+            −
+          </button>
+
+          <output id="fontSizeValue" class="stepperValue">
+            32px
+          </output>
+
+          <button
+            id="increaseFontSizeButton"
+            class="stepperButton"
+            type="button"
+            aria-label="文字サイズを大きくする"
+          >
+            ＋
+          </button>
+        </div>
+      </section>
+
+      <section class="controlGroup" aria-labelledby="titleSettingTitle">
+        <div class="controlGroupHeader">
+          <h3 id="titleSettingTitle">タイトル表示</h3>
+        </div>
+
+        <label class="switchRow" for="showTitleToggle">
+          <span>
+            <strong>「SET LIST」を表示</strong>
+            <small>表示画面上部のタイトルを切り替えます。</small>
+          </span>
+
+          <input
+            id="showTitleToggle"
+            class="switchInput"
+            type="checkbox"
+            checked
+          />
+
+          <span class="switchVisual" aria-hidden="true"></span>
+        </label>
+      </section>
+
+      <section class="controlGroup" aria-labelledby="listActionsTitle">
+        <div class="controlGroupHeader">
+          <h3 id="listActionsTitle">セットリスト操作</h3>
+        </div>
+
+        <div class="listActions">
+          <button
+            id="undoButton"
+            class="secondaryButton"
+            type="button"
+            disabled
+          >
+            1曲戻す
+          </button>
+
+          <button
+            id="clearButton"
+            class="dangerButton"
+            type="button"
+            disabled
+          >
+            すべて削除
+          </button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div
+    id="confirmModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="confirmModalTitle"
+    aria-describedby="confirmModalText"
+    hidden
+  >
+    <button
+      class="modalBackdrop"
+      type="button"
+      aria-label="ダイアログを閉じる"
+      data-close-modal
+    ></button>
+
+    <div class="modalCard">
+      <p class="modalEyebrow">CONFIRM</p>
+      <h2 id="confirmModalTitle">
+        セットリストを削除しますか？
+      </h2>
+
+      <p id="confirmModalText">
+        登録されている曲をすべて削除します。
+      </p>
+
+      <div class="modalActions">
+        <button
+          id="cancelClearButton"
+          class="secondaryButton"
+          type="button"
+          data-close-modal
+        >
+          キャンセル
+        </button>
+
+        <button
+          id="confirmClearButton"
+          class="dangerButton"
+          type="button"
+        >
+          削除する
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
