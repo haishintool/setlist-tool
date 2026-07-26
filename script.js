@@ -449,8 +449,8 @@ function renderNowPlaying() {
     state.currentSong ||
     "曲が選択されていません";
 
-currentSongElement.textContent =
-  `► ${state.currentSong}`;
+currentSongElement.innerHTML =
+  `<span class="playMark">▶</span> ${state.currentSong}`;
 
   currentSongElement.style.fontFamily =
     createFontStack(
