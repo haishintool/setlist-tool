@@ -2,82 +2,121 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
   <title>SET LIST TOOL</title>
 
-  <link rel="stylesheet" href="./style.css?v=1" />
-<script src="./script.js?v=2" defer></script>
+  <link
+    rel="stylesheet"
+    href="./style.css?v=1"
+  />
+
+  <script
+    src="./script.js?v=3"
+    defer
+  ></script>
 </head>
 
 <body>
   <main class="app">
     <header class="appHeader">
       <div>
-        <p class="eyebrow">STREAMING SUPPORT TOOL</p>
+        <p class="eyebrow">
+          STREAMING SUPPORT TOOL
+        </p>
+
         <h1>SET LIST</h1>
       </div>
 
-<div class="pageLinks">
-  <a
-    id="nowPlayingPageLink"
-    class="obsPageLink"
-    href="#"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Now Playingを開く
-  </a>
+      <div class="pageLinks">
+        <a
+          id="nowPlayingPageLink"
+          class="obsPageLink"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Now Playingを開く
+        </a>
 
-  <a
-    id="setlistPageLink"
-    class="obsPageLink"
-    href="#"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    セットリストを開く
-  </a>
+        <a
+          id="setlistPageLink"
+          class="obsPageLink"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          セットリストを開く
+        </a>
 
-  <a
-    id="playerPageLink"
-    class="obsPageLink"
-    href="#"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    プレイヤーを開く
-  </a>
-</div>
+        <a
+          id="playerPageLink"
+          class="obsPageLink"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          プレイヤーを開く
+        </a>
+      </div>
 
-<button
-  id="copyRoomUrlButton"
-  class="secondaryButton"
-  type="button"
->
-  部屋URLをコピー
-</button>
+      <button
+        id="copyRoomUrlButton"
+        class="secondaryButton"
+        type="button"
+      >
+        部屋URLをコピー
+      </button>
 
-<p id="copyRoomUrlStatus"></p>
+      <p id="copyRoomUrlStatus"></p>
     </header>
 
-    <section class="controlPanel controlPanelSingle" aria-labelledby="controlPanelTitle">
+    <section
+      class="controlPanel controlPanelSingle"
+      aria-labelledby="controlPanelTitle"
+    >
       <div class="sectionHeader">
         <div>
           <p class="sectionNumber">01</p>
-          <h2 id="controlPanelTitle">CONTROL</h2>
+
+          <h2 id="controlPanelTitle">
+            CONTROL
+          </h2>
         </div>
 
-        <span id="songCount" class="songCount">0 SONGS</span>
+        <span
+          id="songCount"
+          class="songCount"
+        >
+          0 SONGS
+        </span>
       </div>
 
-      <section class="controlGroup" aria-labelledby="songAddTitle">
+      <!-- 曲名追加 -->
+
+      <section
+        class="controlGroup"
+        aria-labelledby="songAddTitle"
+      >
         <div class="controlGroupHeader">
-          <h3 id="songAddTitle">曲名を追加</h3>
+          <h3 id="songAddTitle">
+            曲名を追加
+          </h3>
         </div>
 
-        <form id="songForm" class="songForm">
-          <label class="srOnly" for="songInput">曲名</label>
+        <form
+          id="songForm"
+          class="songForm"
+        >
+          <label
+            class="srOnly"
+            for="songInput"
+          >
+            曲名
+          </label>
 
           <input
             id="songInput"
@@ -90,15 +129,25 @@
             required
           />
 
-          <button class="primaryButton" type="submit">
+          <button
+            class="primaryButton"
+            type="submit"
+          >
             追加
           </button>
         </form>
       </section>
 
-      <section class="controlGroup" aria-labelledby="listStyleTitle">
+      <!-- 表示形式 -->
+
+      <section
+        class="controlGroup"
+        aria-labelledby="listStyleTitle"
+      >
         <div class="controlGroupHeader">
-          <h3 id="listStyleTitle">表示形式</h3>
+          <h3 id="listStyleTitle">
+            表示形式
+          </h3>
         </div>
 
         <div
@@ -130,36 +179,81 @@
         </div>
       </section>
 
-      <section class="controlGroup" aria-labelledby="fontTitle">
+      <!-- Now Playing フォント -->
+
+      <section
+        class="controlGroup"
+        aria-labelledby="nowPlayingFontTitle"
+      >
         <div class="controlGroupHeader">
-          <h3 id="fontTitle">フォント</h3>
+          <h3 id="nowPlayingFontTitle">
+            Now Playingのフォント
+          </h3>
         </div>
 
         <div class="fontControls">
-          <label class="fieldLabel" for="fontPreset">
+          <label
+            class="fieldLabel"
+            for="nowPlayingFontPreset"
+          >
             よく使うフォント
           </label>
 
-          <select id="fontPreset" class="selectInput">
-            <option value="">選択してください</option>
-            <option value="Yu Gothic">游ゴシック</option>
-            <option value="Yu Mincho">游明朝</option>
-            <option value="Meiryo">メイリオ</option>
-            <option value="MS Gothic">MS ゴシック</option>
-            <option value="MS Mincho">MS 明朝</option>
-            <option value="BIZ UDPGothic">BIZ UDPゴシック</option>
-            <option value="BIZ UDPMincho">BIZ UDP明朝</option>
-            <option value="Noto Sans JP">Noto Sans JP</option>
-            <option value="Noto Serif JP">Noto Serif JP</option>
+          <select
+            id="nowPlayingFontPreset"
+            class="selectInput"
+          >
+            <option value="">
+              選択してください
+            </option>
+
+            <option value="Yu Gothic">
+              游ゴシック
+            </option>
+
+            <option value="Yu Mincho">
+              游明朝
+            </option>
+
+            <option value="Meiryo">
+              メイリオ
+            </option>
+
+            <option value="MS Gothic">
+              MS ゴシック
+            </option>
+
+            <option value="MS Mincho">
+              MS 明朝
+            </option>
+
+            <option value="BIZ UDPGothic">
+              BIZ UDPゴシック
+            </option>
+
+            <option value="BIZ UDPMincho">
+              BIZ UDP明朝
+            </option>
+
+            <option value="Noto Sans JP">
+              Noto Sans JP
+            </option>
+
+            <option value="Noto Serif JP">
+              Noto Serif JP
+            </option>
           </select>
 
-          <label class="fieldLabel" for="fontInput">
+          <label
+            class="fieldLabel"
+            for="nowPlayingFontInput"
+          >
             PC内のフォント名を直接入力
           </label>
 
           <div class="fontInputRow">
             <input
-              id="fontInput"
+              id="nowPlayingFontInput"
               class="textInput"
               type="text"
               placeholder="例：BIZ UDPゴシック"
@@ -168,75 +262,123 @@
             />
 
             <button
-              id="applyFontButton"
+              id="applyNowPlayingFontButton"
               class="secondaryButton"
               type="button"
             >
               適用
             </button>
           </div>
-
-          <p class="helpText">
-            Windowsのフォント設定などに表示されている名前を入力してください。
-          </p>
         </div>
       </section>
 
-      <section class="controlGroup" aria-labelledby="fontSizeTitle">
+      <!-- セットリスト フォント -->
+
+      <section
+        class="controlGroup"
+        aria-labelledby="setlistFontTitle"
+      >
         <div class="controlGroupHeader">
-          <h3 id="fontSizeTitle">文字サイズ</h3>
+          <h3 id="setlistFontTitle">
+            セットリストのフォント
+          </h3>
         </div>
 
-        <div class="stepper">
-          <button
-            id="decreaseFontSizeButton"
-            class="stepperButton"
-            type="button"
-            aria-label="文字サイズを小さくする"
+        <div class="fontControls">
+          <label
+            class="fieldLabel"
+            for="setlistFontPreset"
           >
-            −
-          </button>
+            よく使うフォント
+          </label>
 
-          <output id="fontSizeValue" class="stepperValue">
-            32px
-          </output>
-
-          <button
-            id="increaseFontSizeButton"
-            class="stepperButton"
-            type="button"
-            aria-label="文字サイズを大きくする"
+          <select
+            id="setlistFontPreset"
+            class="selectInput"
           >
-            ＋
-          </button>
+            <option value="">
+              選択してください
+            </option>
+
+            <option value="Yu Gothic">
+              游ゴシック
+            </option>
+
+            <option value="Yu Mincho">
+              游明朝
+            </option>
+
+            <option value="Meiryo">
+              メイリオ
+            </option>
+
+            <option value="MS Gothic">
+              MS ゴシック
+            </option>
+
+            <option value="MS Mincho">
+              MS 明朝
+            </option>
+
+            <option value="BIZ UDPGothic">
+              BIZ UDPゴシック
+            </option>
+
+            <option value="BIZ UDPMincho">
+              BIZ UDP明朝
+            </option>
+
+            <option value="Noto Sans JP">
+              Noto Sans JP
+            </option>
+
+            <option value="Noto Serif JP">
+              Noto Serif JP
+            </option>
+          </select>
+
+          <label
+            class="fieldLabel"
+            for="setlistFontInput"
+          >
+            PC内のフォント名を直接入力
+          </label>
+
+          <div class="fontInputRow">
+            <input
+              id="setlistFontInput"
+              class="textInput"
+              type="text"
+              placeholder="例：BIZ UDPゴシック"
+              autocomplete="off"
+              maxlength="100"
+            />
+
+            <button
+              id="applySetlistFontButton"
+              class="secondaryButton"
+              type="button"
+            >
+              適用
+            </button>
+          </div>
         </div>
+
+        <p class="helpText">
+          Windowsのフォント設定などに表示されている名前を入力してください。
+        </p>
       </section>
 
-      <section class="controlGroup" aria-labelledby="titleSettingTitle">
+      <!-- セットリスト操作 -->
+
+      <section
+        class="controlGroup"
+        aria-labelledby="listActionsTitle"
+      >
         <div class="controlGroupHeader">
-          <h3 id="titleSettingTitle">タイトル表示</h3>
-        </div>
-
-        <label class="switchRow" for="showTitleToggle">
-          <span>
-            <strong>「SET LIST」を表示</strong>
-            <small>表示画面上部のタイトルを切り替えます。</small>
-          </span>
-
-          <input
-            id="showTitleToggle"
-            class="switchInput"
-            type="checkbox"
-            checked
-          />
-
-          <span class="switchVisual" aria-hidden="true"></span>
-        </label>
-      </section>
-
-      <section class="controlGroup" aria-labelledby="listActionsTitle">
-        <div class="controlGroupHeader">
-          <h3 id="listActionsTitle">セットリスト操作</h3>
+          <h3 id="listActionsTitle">
+            セットリスト操作
+          </h3>
         </div>
 
         <div class="listActions">
@@ -262,6 +404,8 @@
     </section>
   </main>
 
+  <!-- 削除確認モーダル -->
+
   <div
     id="confirmModal"
     class="modal"
@@ -279,7 +423,10 @@
     ></button>
 
     <div class="modalCard">
-      <p class="modalEyebrow">CONFIRM</p>
+      <p class="modalEyebrow">
+        CONFIRM
+      </p>
+
       <h2 id="confirmModalTitle">
         セットリストを削除しますか？
       </h2>

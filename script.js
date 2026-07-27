@@ -92,14 +92,35 @@ const numberStyleButton =
 const bulletStyleButton =
   document.getElementById("bulletStyleButton");
 
-const fontPreset =
-  document.getElementById("fontPreset");
+const nowPlayingFontPreset =
+  document.getElementById(
+    "nowPlayingFontPreset"
+  );
 
-const fontInput =
-  document.getElementById("fontInput");
+const nowPlayingFontInput =
+  document.getElementById(
+    "nowPlayingFontInput"
+  );
 
-const applyFontButton =
-  document.getElementById("applyFontButton");
+const applyNowPlayingFontButton =
+  document.getElementById(
+    "applyNowPlayingFontButton"
+  );
+
+const setlistFontPreset =
+  document.getElementById(
+    "setlistFontPreset"
+  );
+
+const setlistFontInput =
+  document.getElementById(
+    "setlistFontInput"
+  );
+
+const applySetlistFontButton =
+  document.getElementById(
+    "applySetlistFontButton"
+  );
 
 const undoButton =
   document.getElementById("undoButton");
@@ -347,25 +368,53 @@ function renderListStyleButtons() {
 }
 
 function renderFontControls() {
-  if (fontPreset) {
+  if (nowPlayingFontPreset) {
     const matchingOption =
-      Array.from(fontPreset.options).find(
+      Array.from(
+        nowPlayingFontPreset.options
+      ).find(
+        (option) =>
+          option.value ===
+          state.nowPlayingFontFamily
+      );
+
+    nowPlayingFontPreset.value =
+      matchingOption
+        ? state.nowPlayingFontFamily
+        : "";
+  }
+
+  if (
+    nowPlayingFontInput &&
+    document.activeElement !==
+      nowPlayingFontInput
+  ) {
+    nowPlayingFontInput.value =
+      state.nowPlayingFontFamily;
+  }
+
+  if (setlistFontPreset) {
+    const matchingOption =
+      Array.from(
+        setlistFontPreset.options
+      ).find(
         (option) =>
           option.value ===
           state.setlistFontFamily
       );
 
-    fontPreset.value =
+    setlistFontPreset.value =
       matchingOption
         ? state.setlistFontFamily
         : "";
   }
 
   if (
-    fontInput &&
-    document.activeElement !== fontInput
+    setlistFontInput &&
+    document.activeElement !==
+      setlistFontInput
   ) {
-    fontInput.value =
+    setlistFontInput.value =
       state.setlistFontFamily;
   }
 }
@@ -562,7 +611,9 @@ window.finishCurrentSong =
    フォント操作
 ========================================================= */
 
-function applyFont(fontName) {
+function applyNowPlayingFont(
+  fontName
+) {
   const normalizedFontName =
     String(fontName ?? "").trim();
 
@@ -570,10 +621,26 @@ function applyFont(fontName) {
     return;
   }
 
-updateState({
-  setlistFontFamily:
-    normalizedFontName
-});
+  updateState({
+    nowPlayingFontFamily:
+      normalizedFontName
+  });
+}
+
+function applySetlistFont(
+  fontName
+) {
+  const normalizedFontName =
+    String(fontName ?? "").trim();
+
+  if (!normalizedFontName) {
+    return;
+  }
+
+  updateState({
+    setlistFontFamily:
+      normalizedFontName
+  });
 }
 
 /* =========================================================
@@ -659,29 +726,33 @@ bulletStyleButton?.addEventListener(
   }
 );
 
-fontPreset?.addEventListener(
+nowPlayingFontPreset?.addEventListener(
   "change",
   () => {
-    if (!fontPreset.value) {
+    if (!nowPlayingFontPreset.value) {
       return;
     }
 
-    applyFont(fontPreset.value);
+    applyNowPlayingFont(
+      nowPlayingFontPreset.value
+    );
   }
 );
 
-applyFontButton?.addEventListener(
+applyNowPlayingFontButton?.addEventListener(
   "click",
   () => {
-    if (!fontInput) {
+    if (!nowPlayingFontInput) {
       return;
     }
 
-    applyFont(fontInput.value);
+    applyNowPlayingFont(
+      nowPlayingFontInput.value
+    );
   }
 );
 
-fontInput?.addEventListener(
+nowPlayingFontInput?.addEventListener(
   "keydown",
   (event) => {
     if (event.key !== "Enter") {
@@ -690,7 +761,50 @@ fontInput?.addEventListener(
 
     event.preventDefault();
 
-    applyFont(fontInput.value);
+    applyNowPlayingFont(
+      nowPlayingFontInput.value
+    );
+  }
+);
+
+setlistFontPreset?.addEventListener(
+  "change",
+  () => {
+    if (!setlistFontPreset.value) {
+      return;
+    }
+
+    applySetlistFont(
+      setlistFontPreset.value
+    );
+  }
+);
+
+applySetlistFontButton?.addEventListener(
+  "click",
+  () => {
+    if (!setlistFontInput) {
+      return;
+    }
+
+    applySetlistFont(
+      setlistFontInput.value
+    );
+  }
+);
+
+setlistFontInput?.addEventListener(
+  "keydown",
+  (event) => {
+    if (event.key !== "Enter") {
+      return;
+    }
+
+    event.preventDefault();
+
+    applySetlistFont(
+      setlistFontInput.value
+    );
   }
 );
 
