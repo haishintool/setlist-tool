@@ -12,8 +12,13 @@
 const params = new URLSearchParams(window.location.search);
 const roomId = params.get("id") || "default";
 
-const STORAGE_KEY = `setlist-state-${roomId}`;
-const CHANNEL_NAME = `setlistToolSync-${roomId}`;
+const API_BASE_URL =
+  "https://setlist-api.halismvoice.workers.dev";
+
+const ROOM_API_URL =
+  `${API_BASE_URL}/room/${encodeURIComponent(roomId)}`;
+
+const POLLING_INTERVAL = 1000;
 
 const DEFAULT_STATE = {
   songs: [],
@@ -32,27 +37,12 @@ const FONT_SIZE_STEP = 2;
    状態管理
 ========================================================= */
 
-let state = loadState();
+let state = { ...DEFAULT_STATE };
 let lastSavedData = JSON.stringify(state);
 let lastFocusedElement = null;
-
-const broadcastChannel =
-  "BroadcastChannel" in window
-    ? new BroadcastChannel(CHANNEL_NAME)
-    : null;
-
-    if (broadcastChannel) {
-  broadcastChannel.onmessage = (event) => {
-    if (event.data?.type !== "stateUpdate") {
-      return;
-    }
-
-    state = normalizeState(event.data.state);
-    lastSavedData = JSON.stringify(state);
-
-    render();
-  };
-}
+let isSaving = false;
+let saveRequested = false;
+let isLoading = false;
 
 /* =========================================================
    HTML要素取得
@@ -138,25 +128,33 @@ const nowPlayingSetlist =
    保存データ
 ========================================================= */
 
-function loadState() {
+async function loadState() {
   try {
-    const savedData =
-      localStorage.getItem(STORAGE_KEY);
+    const response = await fetch(ROOM_API_URL, {
+      cache: "no-store"
+    });
 
-    if (!savedData) {
-      return { ...DEFAULT_STATE };
-    }
+if (response.status === 404) {
+  return { ...DEFAULT_STATE };
+}
 
-    const parsedData =
-      JSON.parse(savedData);
+if (!response.ok) {
+  throw new Error(
+    `読み込みに失敗しました: ${response.status}`
+  );
+}
+
+    const data = await response.json();
 
     return normalizeState({
       ...DEFAULT_STATE,
-      ...parsedData
+      ...data
     });
+
   } catch (error) {
+
     console.warn(
-      "保存データの読み込みに失敗しました。",
+      "APIから状態を取得できませんでした。",
       error
     );
 
@@ -164,38 +162,60 @@ function loadState() {
   }
 }
 
-function saveState() {
+async function saveState() {
+  if (isSaving) {
+    saveRequested = true;
+    return;
+  }
+
+  isSaving = true;
+
   try {
-    const savedData =
-      JSON.stringify(state);
+    do {
+      saveRequested = false;
 
-    localStorage.setItem(
-      STORAGE_KEY,
-      savedData
-    );
+      const savedData =
+        JSON.stringify(state);
 
-    lastSavedData = savedData;
+      const response =
+        await fetch(ROOM_API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+          body: savedData
+        });
 
-    broadcastChannel?.postMessage({
-      type: "stateUpdate",
-      state
-    });
+      if (!response.ok) {
+        throw new Error(
+          `保存に失敗しました: ${response.status}`
+        );
+      }
+
+      lastSavedData = savedData;
+    } while (saveRequested);
   } catch (error) {
     console.warn(
-      "保存データの書き込みに失敗しました。",
+      "APIへの保存に失敗しました。",
       error
     );
+  } finally {
+    isSaving = false;
   }
 }
 
-function updateState(newState) {
+async function updateState(newState) {
+
   state = normalizeState({
     ...state,
     ...newState
   });
 
-  saveState();
   render();
+
+  await saveState();
+
 }
 
 function normalizeState(targetState) {
@@ -461,12 +481,22 @@ function renderNowPlaying() {
     return;
   }
 
-  const currentSong =
-    state.currentSong ||
-    "曲が選択されていません";
+const currentSong =
+  state.currentSong ||
+  "曲が選択されていません";
 
-currentSongElement.innerHTML =
-  `<span class="playMark">▶</span> ${state.currentSong}`;
+currentSongElement.replaceChildren();
+
+const playMark =
+  document.createElement("span");
+
+playMark.className = "playMark";
+playMark.textContent = "▶";
+
+currentSongElement.append(
+  playMark,
+  ` ${currentSong}`
+);
 
   currentSongElement.style.fontFamily =
     createFontStack(
@@ -853,49 +883,6 @@ document.addEventListener(
 ========================================================= */
 
 /*
-  別タブ・別ウィンドウで
-  localStorageが変更された時に反映。
-*/
-
-window.addEventListener(
-  "storage",
-  (event) => {
-    if (event.key !== STORAGE_KEY) {
-      return;
-    }
-
-    refreshState();
-  }
-);
-
-/*
-  BroadcastChannel対応ブラウザでは、
-  操作内容を即座に別ページへ送信。
-*/
-
-broadcastChannel?.addEventListener(
-  "message",
-  (event) => {
-    if (
-      !event.data ||
-      event.data.type !== "stateUpdate"
-    ) {
-      return;
-    }
-
-    state =
-      normalizeState(
-        event.data.state
-      );
-
-    lastSavedData =
-      JSON.stringify(state);
-
-    render();
-  }
-);
-
-/*
   ページを再表示した時に
   最新状態を読み込む。
 */
@@ -917,29 +904,42 @@ if (
   displaySetlist ||
   currentSongElement
 ) {
-  window.setInterval(() => {
-    const currentSavedData =
-      localStorage.getItem(
-        STORAGE_KEY
-      );
 
-    if (
-      currentSavedData &&
-      currentSavedData !==
-        lastSavedData
-    ) {
-      refreshState();
-    }
-  }, 1000);
+window.setInterval(() => {
+  refreshState();
+}, POLLING_INTERVAL);
+
 }
 
-function refreshState() {
-  state = loadState();
+async function refreshState() {
+  if (isLoading) {
+    return;
+  }
 
-  lastSavedData =
-    JSON.stringify(state);
+  isLoading = true;
 
-  render();
+  try {
+    const latestState =
+      await loadState();
+
+    const latestSavedData =
+      JSON.stringify(latestState);
+
+    if (
+      latestSavedData ===
+      lastSavedData
+    ) {
+      return;
+    }
+
+    state = latestState;
+    lastSavedData =
+      latestSavedData;
+
+    render();
+  } finally {
+    isLoading = false;
+  }
 }
 
 /* =========================================================
@@ -971,4 +971,14 @@ function createFontStack(fontName) {
    初期表示
 ========================================================= */
 
-render();
+(async () => {
+
+  state =
+    await loadState();
+
+  lastSavedData =
+    JSON.stringify(state);
+
+  render();
+
+})();
