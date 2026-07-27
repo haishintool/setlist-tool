@@ -580,6 +580,8 @@ if (scrollContainer) {
     "hidden";
 }
 
+} // ←これが必要
+
 function startAutoScroll() {
   if (!displaySetlist) {
     return;
