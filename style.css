@@ -758,7 +758,7 @@ body.obsBody {
   min-height: 100vh;
   padding: 0;
   overflow: hidden;
-  background: #00ff00 !important;
+  background: #000 !important;
 }
 
 body.obsBody .obsSetlist {
