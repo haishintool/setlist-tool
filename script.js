@@ -9,8 +9,11 @@
    基本設定
 ========================================================= */
 
-const STORAGE_KEY = "setlistToolState";
-const CHANNEL_NAME = "setlistToolSync";
+const params = new URLSearchParams(window.location.search);
+const roomId = params.get("id") || "default";
+
+const STORAGE_KEY = `setlist-state-${roomId}`;
+const CHANNEL_NAME = `setlistToolSync-${roomId}`;
 
 const DEFAULT_STATE = {
   songs: [],
