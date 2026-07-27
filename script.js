@@ -602,9 +602,6 @@ if (scrollContainer) {
 } // ←これが必要
 
 function startAutoScroll() {
-
-  console.log("startAutoScroll");
-
   if (!displaySetlist) {
     return;
   }
@@ -613,6 +610,8 @@ function startAutoScroll() {
     state.songs.length <=
     state.visibleSongs
   ) {
+    displaySetlist.style.transform =
+      "translateY(0px)";
     return;
   }
 
@@ -624,71 +623,53 @@ function startAutoScroll() {
   }
 
   const maxScroll =
-  Math.max(
-    0,
-    scrollContainer.scrollHeight -
-      scrollContainer.clientHeight
-  );
-
-console.log(
-  "scroll",
-  scrollContainer.scrollHeight,
-  scrollContainer.clientHeight,
-  maxScroll
-);
+    Math.max(
+      0,
+      displaySetlist.scrollHeight -
+        scrollContainer.clientHeight
+    );
 
   if (maxScroll <= 0) {
     return;
   }
 
+  let position = 0;
   autoScrollLastTime = null;
 
   const animate = (currentTime) => {
     if (autoScrollLastTime === null) {
-      autoScrollLastTime =
-        currentTime;
+      autoScrollLastTime = currentTime;
     }
 
     const elapsedSeconds =
-      (currentTime -
-        autoScrollLastTime) /
-      1000;
+      Math.min(
+        0.1,
+        (currentTime -
+          autoScrollLastTime) /
+          1000
+      );
 
     autoScrollLastTime =
       currentTime;
 
-const moveAmount =
-  Math.max(
-    1,
-    Math.round(
+    position +=
       state.scrollSpeed *
-      elapsedSeconds
-    )
-  );
+      elapsedSeconds;
 
-scrollContainer.scrollTop +=
-  moveAmount;
+    displaySetlist.style.transform =
+      `translate3d(0, -${position}px, 0)`;
 
-    const currentMaxScroll =
-      Math.max(
-        0,
-        scrollContainer.scrollHeight -
-          scrollContainer.clientHeight
-      );
-
-    if (
-      scrollContainer.scrollTop >=
-      currentMaxScroll - 1
-    ) {
-      scrollContainer.scrollTop =
-        currentMaxScroll;
+    if (position >= maxScroll) {
+      displaySetlist.style.transform =
+        `translate3d(0, -${maxScroll}px, 0)`;
 
       autoScrollAnimationId = null;
       autoScrollLastTime = null;
 
       autoScrollResetTimer =
         window.setTimeout(() => {
-          scrollContainer.scrollTop = 0;
+          displaySetlist.style.transform =
+            "translate3d(0, 0, 0)";
 
           autoScrollResetTimer =
             window.setTimeout(() => {
@@ -700,15 +681,11 @@ scrollContainer.scrollTop +=
     }
 
     autoScrollAnimationId =
-      requestAnimationFrame(
-        animate
-      );
+      requestAnimationFrame(animate);
   };
 
   autoScrollAnimationId =
-    requestAnimationFrame(
-      animate
-    );
+    requestAnimationFrame(animate);
 }
 
 function stopAutoScroll() {
@@ -733,6 +710,11 @@ function stopAutoScroll() {
   }
 
   autoScrollLastTime = null;
+
+  if (displaySetlist) {
+    displaySetlist.style.transform =
+      "translate3d(0, 0, 0)";
+  }
 }
 
 /* =========================================================

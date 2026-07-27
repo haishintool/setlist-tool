@@ -790,6 +790,9 @@ body.obsBody .obsList {
   font-weight: 500;
   line-height: 1.35;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.42);
+
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 body.obsBody .obsList.numberStyle {
