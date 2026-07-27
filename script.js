@@ -9,8 +9,52 @@
    基本設定
 ========================================================= */
 
-const params = new URLSearchParams(window.location.search);
-const roomId = params.get("id") || "default";
+function generateRoomId(length = 12) {
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  let result = "";
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex =
+      Math.floor(Math.random() * chars.length);
+
+    result += chars[randomIndex];
+  }
+
+  return result;
+}
+
+const urlParams =
+  new URLSearchParams(window.location.search);
+
+let roomId =
+  urlParams.get("id");
+
+if (!roomId) {
+  roomId = generateRoomId();
+
+  const newUrl =
+    new URL(window.location.href);
+
+  newUrl.searchParams.set("id", roomId);
+
+  window.location.replace(newUrl.toString());
+}
+
+const displayPageLink =
+  document.getElementById("displayPageLink");
+
+if (displayPageLink) {
+  displayPageLink.href =
+    `./display.html?id=${encodeURIComponent(roomId)}`;
+}
+
+const API_BASE_URL =
+  "https://setlist-api.halismvoice.workers.dev";
+
+const ROOM_API_URL =
+  `${API_BASE_URL}/room/${encodeURIComponent(roomId)}`;
 
 const API_BASE_URL =
   "https://setlist-api.halismvoice.workers.dev";
@@ -91,6 +135,12 @@ const undoButton =
 
 const clearButton =
   document.getElementById("clearButton");
+
+const copyRoomUrlButton =
+  document.getElementById("copyRoomUrlButton");
+
+const copyRoomUrlStatus =
+  document.getElementById("copyRoomUrlStatus");
 
 /* 削除確認モーダル */
 
