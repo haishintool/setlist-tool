@@ -998,13 +998,35 @@ function createFontStack(fontName) {
 
 (async () => {
 
-  const displayPageLink =
-    document.getElementById("displayPageLink");
+const nowPlayingPageLink =
+  document.getElementById(
+    "nowPlayingPageLink"
+  );
 
-  if (displayPageLink) {
-    displayPageLink.href =
-      `./display.html?id=${encodeURIComponent(roomId)}`;
-  }
+const setlistPageLink =
+  document.getElementById(
+    "setlistPageLink"
+  );
+
+const playerPageLink =
+  document.getElementById(
+    "playerPageLink"
+  );
+
+if (nowPlayingPageLink) {
+  nowPlayingPageLink.href =
+    `./nowplaying.html?id=${encodeURIComponent(roomId)}`;
+}
+
+if (setlistPageLink) {
+  setlistPageLink.href =
+    `./display.html?id=${encodeURIComponent(roomId)}`;
+}
+
+if (playerPageLink) {
+  playerPageLink.href =
+    `https://haishintool.github.io/youtube-player/?id=${encodeURIComponent(roomId)}`;
+}
 
   state =
     await loadState();
