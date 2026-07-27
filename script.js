@@ -503,17 +503,42 @@ function renderDisplayPage() {
 
   displaySetlist.replaceChildren();
 
-  state.songs.forEach((songTitle) => {
+  const shouldLoop =
+  state.songs.length >
+  state.visibleSongs;
+
+const loopSongs =
+  shouldLoop
+    ? [...state.songs, ...state.songs]
+    : state.songs;
+
+loopSongs.forEach(
+  (songTitle, index) => {
     const listItem =
       document.createElement("li");
 
     listItem.textContent =
       songTitle;
 
+    /*
+      後半の複製部分は
+      読み上げ対象から外す
+    */
+    if (
+      shouldLoop &&
+      index >= state.songs.length
+    ) {
+      listItem.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+    }
+
     displaySetlist.appendChild(
       listItem
     );
-  });
+  }
+);
 
   renderDisplayStyle();
 
@@ -567,7 +592,7 @@ displaySetlist.style.lineHeight =
   "48px";
 
 displaySetlist.style.paddingBottom =
-  "96px";
+  "0";
 
 const scrollContainer =
   displaySetlist.parentElement;
@@ -611,42 +636,57 @@ function startAutoScroll() {
     state.visibleSongs
   ) {
     displaySetlist.style.transform =
-      "translateY(0px)";
+      "translate3d(0, 0, 0)";
+
     return;
   }
 
-  const scrollContainer =
-    displaySetlist.parentElement;
-
-  if (!scrollContainer) {
-    return;
-  }
-
-  const maxScroll =
-    Math.max(
-      0,
-      displaySetlist.scrollHeight -
-        scrollContainer.clientHeight
+  const listItems =
+    displaySetlist.querySelectorAll(
+      "li"
     );
 
-  if (maxScroll <= 0) {
+  /*
+    2セット目の先頭位置を取得する
+  */
+  const firstItem =
+    listItems[0];
+
+  const duplicatedFirstItem =
+    listItems[state.songs.length];
+
+  if (
+    !firstItem ||
+    !duplicatedFirstItem
+  ) {
+    return;
+  }
+
+  const loopDistance =
+    duplicatedFirstItem.offsetTop -
+    firstItem.offsetTop;
+
+  if (loopDistance <= 0) {
     return;
   }
 
   let position = 0;
+
   autoScrollLastTime = null;
 
   const animate = (currentTime) => {
     if (autoScrollLastTime === null) {
-      autoScrollLastTime = currentTime;
+      autoScrollLastTime =
+        currentTime;
     }
 
     const elapsedSeconds =
       Math.min(
         0.1,
-        (currentTime -
-          autoScrollLastTime) /
-          1000
+        (
+          currentTime -
+          autoScrollLastTime
+        ) / 1000
       );
 
     autoScrollLastTime =
@@ -656,36 +696,28 @@ function startAutoScroll() {
       state.scrollSpeed *
       elapsedSeconds;
 
+    /*
+      1セット分進んだら、
+      見た目が同じ位置のまま
+      座標だけ先頭へ戻す
+    */
+    if (position >= loopDistance) {
+      position -= loopDistance;
+    }
+
     displaySetlist.style.transform =
       `translate3d(0, -${position}px, 0)`;
 
-    if (position >= maxScroll) {
-      displaySetlist.style.transform =
-        `translate3d(0, -${maxScroll}px, 0)`;
-
-      autoScrollAnimationId = null;
-      autoScrollLastTime = null;
-
-      autoScrollResetTimer =
-        window.setTimeout(() => {
-          displaySetlist.style.transform =
-            "translate3d(0, 0, 0)";
-
-          autoScrollResetTimer =
-            window.setTimeout(() => {
-              startAutoScroll();
-            }, 1000);
-        }, 1500);
-
-      return;
-    }
-
     autoScrollAnimationId =
-      requestAnimationFrame(animate);
+      requestAnimationFrame(
+        animate
+      );
   };
 
   autoScrollAnimationId =
-    requestAnimationFrame(animate);
+    requestAnimationFrame(
+      animate
+    );
 }
 
 function stopAutoScroll() {
