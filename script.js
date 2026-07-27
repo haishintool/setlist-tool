@@ -494,16 +494,11 @@ function renderDisplayPage() {
   const scrollContainer =
     displaySetlist.parentElement;
 
-  const previousScrollTop =
-    scrollContainer
-      ? scrollContainer.scrollTop
-      : 0;
-
   stopAutoScroll();
 
   displaySetlist.replaceChildren();
 
-    const shouldLoop =
+  const shouldLoop =
     state.songs.length >
     state.visibleSongs;
 
@@ -578,6 +573,17 @@ function renderDisplayPage() {
     );
   });
 
+  renderDisplayStyle();
+
+  requestAnimationFrame(() => {
+    if (scrollContainer) {
+      scrollContainer.scrollTop = 0;
+    }
+
+    startAutoScroll();
+  });
+}
+
 function renderDisplayStyle() {
   if (!displaySetlist) {
     return;
@@ -612,17 +618,6 @@ displaySetlist.style.paddingBottom =
 
 const scrollContainer =
   displaySetlist.parentElement;
-
-console.log(scrollContainer);
-
-console.log("before maxScroll");
-
-const maxScroll =
-  Math.max(
-    0,
-    scrollContainer.scrollHeight -
-      scrollContainer.clientHeight
-  );
 
 if (scrollContainer) {
   const lineHeight = 48;
