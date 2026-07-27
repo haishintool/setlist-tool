@@ -584,8 +584,16 @@ const maxScroll =
   );
 
 if (scrollContainer) {
+  const lineHeight = 48;
+  const rowGap = 11;
+  const verticalPadding = 60;
+
   scrollContainer.style.height =
-    `${state.visibleSongs * 48}px`;
+    `${
+      state.visibleSongs * lineHeight +
+      Math.max(0, state.visibleSongs - 1) * rowGap +
+      verticalPadding
+    }px`;
 
   scrollContainer.style.overflow =
     "hidden";
