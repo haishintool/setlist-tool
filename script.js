@@ -26,7 +26,7 @@ const DEFAULT_STATE = {
   listStyle: "number",
   fontFamily: "Yu Gothic",
   fontSize: 32,
-  showTitle: true
+  showTitle: false
 };
 
 const MIN_FONT_SIZE = 16;
