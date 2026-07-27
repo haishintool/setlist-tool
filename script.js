@@ -563,9 +563,21 @@ displaySetlist.style.fontFamily =
 displaySetlist.style.fontSize =
   "32px";
 
-displaySetlist.style.paddingBottom =
-  "80px";
+displaySetlist.style.lineHeight =
+  "48px";
 
+displaySetlist.style.paddingBottom =
+  "96px";
+
+const scrollContainer =
+  displaySetlist.parentElement;
+
+if (scrollContainer) {
+  scrollContainer.style.height =
+    `${state.visibleSongs * 48}px`;
+
+  scrollContainer.style.overflow =
+    "hidden";
 }
 
 function startAutoScroll() {
