@@ -240,16 +240,17 @@ async function saveState() {
 }
 
 async function updateState(newState) {
+  const latestState =
+    await loadState();
 
   state = normalizeState({
-    ...state,
+    ...latestState,
     ...newState
   });
 
   render();
 
   await saveState();
-
 }
 
 function normalizeState(targetState) {
@@ -882,16 +883,9 @@ window.addEventListener(
   1秒ごとに保存内容を確認する。
 */
 
-if (
-  displaySetlist ||
-  currentSongElement
-) {
-
 window.setInterval(() => {
   refreshState();
 }, POLLING_INTERVAL);
-
-}
 
 async function refreshState() {
   if (isLoading) {
