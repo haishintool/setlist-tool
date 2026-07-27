@@ -497,15 +497,15 @@ function renderDisplayStyle() {
   displaySetlist.style.fontSize =
     `${state.fontSize}px`;
 
-  if (displayTitle) {
-    displayTitle.hidden =
-      !state.showTitle;
+if (displayTitle) {
+  displayTitle.style.display =
+    state.showTitle ? "" : "none";
 
-    displayTitle.style.fontFamily =
-      createFontStack(
-        state.fontFamily
-      );
-  }
+  displayTitle.style.fontFamily =
+    createFontStack(
+      state.fontFamily
+    );
+}
 }
 
 /* =========================================================
