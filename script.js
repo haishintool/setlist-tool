@@ -537,13 +537,6 @@ function renderDisplayPage() {
   });
 }
 
-  renderDisplayStyle();
-
-  requestAnimationFrame(() => {
-    startAutoScroll();
-  });
-}
-
 function renderDisplayStyle() {
   if (!displaySetlist) {
     return;
