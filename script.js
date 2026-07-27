@@ -54,10 +54,11 @@ const DEFAULT_STATE = {
   songs: [],
   currentSong: "",
   listStyle: "number",
+  nowPlayingFontFamily: "",
+  setlistFontFamily: "",
 
-  nowPlayingFontFamily: "Yu Gothic",
-  setlistFontFamily: "Yu Gothic",
-
+  visibleSongs: 10,
+  scrollSpeed: 20,
 };
 
 /* =========================================================
@@ -70,6 +71,9 @@ let lastFocusedElement = null;
 let isSaving = false;
 let saveRequested = false;
 let isLoading = false;
+let autoScrollAnimationId = null;
+let autoScrollLastTime = null;
+let autoScrollResetTimer = null;
 
 /* =========================================================
    HTML要素取得
@@ -116,6 +120,15 @@ const setlistFontInput =
   document.getElementById(
     "setlistFontInput"
   );
+
+  const visibleSongsInput =
+  document.getElementById("visibleSongsInput");
+
+const scrollSpeedInput =
+  document.getElementById("scrollSpeedInput");
+
+const scrollSpeedValue =
+  document.getElementById("scrollSpeedValue");
 
 const applySetlistFontButton =
   document.getElementById(
@@ -289,12 +302,24 @@ const setlistFontFamily =
     ? targetState.setlistFontFamily.trim()
     : DEFAULT_STATE.setlistFontFamily;
 
+const visibleSongs =
+  Number.isFinite(Number(targetState.visibleSongs))
+    ? Number(targetState.visibleSongs)
+    : DEFAULT_STATE.visibleSongs;
+
+const scrollSpeed =
+  Number.isFinite(Number(targetState.scrollSpeed))
+    ? Number(targetState.scrollSpeed)
+    : DEFAULT_STATE.scrollSpeed;    
+
 return {
   songs,
   currentSong,
   listStyle,
   nowPlayingFontFamily,
   setlistFontFamily,
+  visibleSongs,
+  scrollSpeed,
 };
 }
 
@@ -320,6 +345,7 @@ function renderControlPage() {
   renderSongCount();
   renderListStyleButtons();
   renderFontControls();
+  renderScrollControls();
   renderActionButtons();
 }
 
@@ -420,6 +446,27 @@ function renderFontControls() {
   }
 }
 
+function renderScrollControls() {
+  if (
+    visibleSongsInput &&
+    document.activeElement !==
+      visibleSongsInput
+  ) {
+    visibleSongsInput.value =
+      state.visibleSongs;
+  }
+
+  if (scrollSpeedInput) {
+    scrollSpeedInput.value =
+      state.scrollSpeed;
+  }
+
+  if (scrollSpeedValue) {
+    scrollSpeedValue.textContent =
+      state.scrollSpeed;
+  }
+}
+
 function renderActionButtons() {
   const hasSongs =
     state.songs.length > 0;
@@ -444,6 +491,16 @@ function renderDisplayPage() {
     return;
   }
 
+  const scrollContainer =
+    displaySetlist.parentElement;
+
+  const previousScrollTop =
+    scrollContainer
+      ? scrollContainer.scrollTop
+      : 0;
+
+  stopAutoScroll();
+
   displaySetlist.replaceChildren();
 
   state.songs.forEach((songTitle) => {
@@ -459,6 +516,32 @@ function renderDisplayPage() {
   });
 
   renderDisplayStyle();
+
+  requestAnimationFrame(() => {
+    if (scrollContainer) {
+      const maxScroll =
+        Math.max(
+          0,
+          scrollContainer.scrollHeight -
+            scrollContainer.clientHeight
+        );
+
+      scrollContainer.scrollTop =
+        Math.min(
+          previousScrollTop,
+          maxScroll
+        );
+    }
+
+    startAutoScroll();
+  });
+}
+
+  renderDisplayStyle();
+
+  requestAnimationFrame(() => {
+    startAutoScroll();
+  });
 }
 
 function renderDisplayStyle() {
@@ -487,6 +570,125 @@ displaySetlist.style.fontFamily =
 displaySetlist.style.fontSize =
   "32px";
 
+displaySetlist.style.paddingBottom =
+  "80px";
+
+}
+
+function startAutoScroll() {
+  if (!displaySetlist) {
+    return;
+  }
+
+  if (
+    state.songs.length <=
+    state.visibleSongs
+  ) {
+    return;
+  }
+
+  const scrollContainer =
+    displaySetlist.parentElement;
+
+  if (!scrollContainer) {
+    return;
+  }
+
+  const maxScroll =
+    Math.max(
+      0,
+      scrollContainer.scrollHeight -
+        scrollContainer.clientHeight
+    );
+
+  if (maxScroll <= 0) {
+    return;
+  }
+
+  autoScrollLastTime = null;
+
+  const animate = (currentTime) => {
+    if (autoScrollLastTime === null) {
+      autoScrollLastTime =
+        currentTime;
+    }
+
+    const elapsedSeconds =
+      (currentTime -
+        autoScrollLastTime) /
+      1000;
+
+    autoScrollLastTime =
+      currentTime;
+
+    scrollContainer.scrollTop +=
+      state.scrollSpeed *
+      elapsedSeconds;
+
+    const currentMaxScroll =
+      Math.max(
+        0,
+        scrollContainer.scrollHeight -
+          scrollContainer.clientHeight
+      );
+
+    if (
+      scrollContainer.scrollTop >=
+      currentMaxScroll - 1
+    ) {
+      scrollContainer.scrollTop =
+        currentMaxScroll;
+
+      autoScrollAnimationId = null;
+      autoScrollLastTime = null;
+
+      autoScrollResetTimer =
+        window.setTimeout(() => {
+          scrollContainer.scrollTop = 0;
+
+          autoScrollResetTimer =
+            window.setTimeout(() => {
+              startAutoScroll();
+            }, 1000);
+        }, 1500);
+
+      return;
+    }
+
+    autoScrollAnimationId =
+      requestAnimationFrame(
+        animate
+      );
+  };
+
+  autoScrollAnimationId =
+    requestAnimationFrame(
+      animate
+    );
+}
+
+function stopAutoScroll() {
+  if (
+    autoScrollAnimationId !== null
+  ) {
+    cancelAnimationFrame(
+      autoScrollAnimationId
+    );
+
+    autoScrollAnimationId = null;
+  }
+
+  if (
+    autoScrollResetTimer !== null
+  ) {
+    clearTimeout(
+      autoScrollResetTimer
+    );
+
+    autoScrollResetTimer = null;
+  }
+
+  autoScrollLastTime = null;
 }
 
 /* =========================================================
@@ -806,6 +1008,53 @@ setlistFontInput?.addEventListener(
     applySetlistFont(
       setlistFontInput.value
     );
+  }
+);
+
+visibleSongsInput?.addEventListener(
+  "change",
+  async () => {
+    const visibleSongs =
+      Math.max(
+        1,
+        Number(
+          visibleSongsInput.value
+        ) || DEFAULT_STATE.visibleSongs
+      );
+
+    visibleSongsInput.value =
+      visibleSongs;
+
+    await updateState({
+      visibleSongs
+    });
+  }
+);
+
+scrollSpeedInput?.addEventListener(
+  "input",
+  () => {
+    if (scrollSpeedValue) {
+      scrollSpeedValue.textContent =
+        scrollSpeedInput.value;
+    }
+  }
+);
+
+scrollSpeedInput?.addEventListener(
+  "change",
+  async () => {
+    const scrollSpeed =
+      Math.max(
+        1,
+        Number(
+          scrollSpeedInput.value
+        ) || DEFAULT_STATE.scrollSpeed
+      );
+
+    await updateState({
+      scrollSpeed
+    });
   }
 );
 

@@ -11,11 +11,11 @@
 
   <link
     rel="stylesheet"
-    href="./style.css?v=1"
+    href="./style.css?v=2"
   />
 
   <script
-    src="./script.js?v=3"
+    src="./script.js?v=4"
     defer
   ></script>
 </head>
@@ -369,9 +369,68 @@
         </p>
       </section>
 
-      <!-- セットリスト操作 -->
+      <!-- 自動スクロール設定 -->
 
       <section
+        class="controlGroup"
+        aria-labelledby="autoScrollTitle"
+      >
+        <div class="controlGroupHeader">
+          <h3 id="autoScrollTitle">
+            自動スクロール
+          </h3>
+        </div>
+
+        <div class="fontControls">
+          <label
+            class="fieldLabel"
+            for="visibleSongsInput"
+          >
+            スクロールを開始する曲数
+          </label>
+
+          <input
+            id="visibleSongsInput"
+            class="textInput"
+            type="number"
+            min="1"
+            max="100"
+            step="1"
+            value="10"
+          />
+
+          <p class="helpText">
+            指定した曲数を超えると、自動スクロールを開始します。
+          </p>
+
+          <label
+            class="fieldLabel"
+            for="scrollSpeedInput"
+          >
+            スクロール速度
+          </label>
+
+          <input
+            id="scrollSpeedInput"
+            type="range"
+            min="5"
+            max="100"
+            step="5"
+            value="20"
+          />
+
+          <p class="helpText">
+            現在の速度：
+            <span id="scrollSpeedValue">
+              20
+            </span>
+          </p>
+        </div>
+      </section>
+
+      <!-- セットリスト操作 -->
+
+            <section
         class="controlGroup"
         aria-labelledby="listActionsTitle"
       >

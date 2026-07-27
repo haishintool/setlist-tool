@@ -767,6 +767,7 @@ body.obsBody .obsSetlist {
   padding: 30px;
   color: #fff;
   background: transparent;
+  overflow: hidden;
 }
 
 body.obsBody .obsTitle {
