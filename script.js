@@ -54,14 +54,11 @@ const DEFAULT_STATE = {
   songs: [],
   currentSong: "",
   listStyle: "number",
-  fontFamily: "Yu Gothic",
-  fontSize: 32,
-  showTitle: false
-};
 
-const MIN_FONT_SIZE = 16;
-const MAX_FONT_SIZE = 96;
-const FONT_SIZE_STEP = 2;
+  nowPlayingFontFamily: "Yu Gothic",
+  setlistFontFamily: "Yu Gothic",
+
+};
 
 /* =========================================================
    状態管理
@@ -104,18 +101,6 @@ const fontInput =
 const applyFontButton =
   document.getElementById("applyFontButton");
 
-const decreaseFontSizeButton =
-  document.getElementById("decreaseFontSizeButton");
-
-const increaseFontSizeButton =
-  document.getElementById("increaseFontSizeButton");
-
-const fontSizeValue =
-  document.getElementById("fontSizeValue");
-
-const showTitleToggle =
-  document.getElementById("showTitleToggle");
-
 const undoButton =
   document.getElementById("undoButton");
 
@@ -144,9 +129,6 @@ const closeModalButtons =
 
 /* display.html側 */
 
-const displayTitle =
-  document.getElementById("displayTitle");
-
 const displaySetlist =
   document.getElementById("displaySetlist");
 
@@ -154,11 +136,6 @@ const displaySetlist =
 
 const currentSongElement =
   document.getElementById("currentSong");
-
-const nowPlayingSetlist =
-  document.getElementById(
-    "nowPlayingSetlist"
-  );
 
 /* =========================================================
    保存データ
@@ -278,35 +255,25 @@ function normalizeState(targetState) {
       ? "bullet"
       : "number";
 
-  const fontFamily =
-    typeof targetState.fontFamily === "string" &&
-    targetState.fontFamily.trim()
-      ? targetState.fontFamily.trim()
-      : DEFAULT_STATE.fontFamily;
+const nowPlayingFontFamily =
+  typeof targetState.nowPlayingFontFamily === "string" &&
+  targetState.nowPlayingFontFamily.trim()
+    ? targetState.nowPlayingFontFamily.trim()
+    : DEFAULT_STATE.nowPlayingFontFamily;
 
-  const rawFontSize =
-    Number(targetState.fontSize);
+const setlistFontFamily =
+  typeof targetState.setlistFontFamily === "string" &&
+  targetState.setlistFontFamily.trim()
+    ? targetState.setlistFontFamily.trim()
+    : DEFAULT_STATE.setlistFontFamily;
 
-  const fontSize =
-    Number.isFinite(rawFontSize)
-      ? clamp(
-          rawFontSize,
-          MIN_FONT_SIZE,
-          MAX_FONT_SIZE
-        )
-      : DEFAULT_STATE.fontSize;
-
-  const showTitle =
-    targetState.showTitle !== false;
-
-  return {
-    songs,
-    currentSong,
-    listStyle,
-    fontFamily,
-    fontSize,
-    showTitle
-  };
+return {
+  songs,
+  currentSong,
+  listStyle,
+  nowPlayingFontFamily,
+  setlistFontFamily,
+};
 }
 
 /* =========================================================
@@ -331,8 +298,6 @@ function renderControlPage() {
   renderSongCount();
   renderListStyleButtons();
   renderFontControls();
-  renderFontSizeControls();
-  renderTitleToggle();
   renderActionButtons();
 }
 
@@ -386,12 +351,13 @@ function renderFontControls() {
     const matchingOption =
       Array.from(fontPreset.options).find(
         (option) =>
-          option.value === state.fontFamily
+          option.value ===
+          state.setlistFontFamily
       );
 
     fontPreset.value =
       matchingOption
-        ? state.fontFamily
+        ? state.setlistFontFamily
         : "";
   }
 
@@ -400,34 +366,8 @@ function renderFontControls() {
     document.activeElement !== fontInput
   ) {
     fontInput.value =
-      state.fontFamily;
+      state.setlistFontFamily;
   }
-}
-
-function renderFontSizeControls() {
-  if (fontSizeValue) {
-    fontSizeValue.textContent =
-      `${state.fontSize}px`;
-  }
-
-  if (decreaseFontSizeButton) {
-    decreaseFontSizeButton.disabled =
-      state.fontSize <= MIN_FONT_SIZE;
-  }
-
-  if (increaseFontSizeButton) {
-    increaseFontSizeButton.disabled =
-      state.fontSize >= MAX_FONT_SIZE;
-  }
-}
-
-function renderTitleToggle() {
-  if (!showTitleToggle) {
-    return;
-  }
-
-  showTitleToggle.checked =
-    state.showTitle;
 }
 
 function renderActionButtons() {
@@ -489,23 +429,14 @@ function renderDisplayStyle() {
     !isNumber
   );
 
-  displaySetlist.style.fontFamily =
-    createFontStack(
-      state.fontFamily
-    );
+displaySetlist.style.fontFamily =
+  createFontStack(
+    state.setlistFontFamily
+  );
 
-  displaySetlist.style.fontSize =
-    `${state.fontSize}px`;
+displaySetlist.style.fontSize =
+  "32px";
 
-if (displayTitle) {
-  displayTitle.style.display =
-    state.showTitle ? "" : "none";
-
-  displayTitle.style.fontFamily =
-    createFontStack(
-      state.fontFamily
-    );
-}
 }
 
 /* =========================================================
@@ -523,64 +454,17 @@ const currentSong =
 currentSongElement.textContent =
   currentSong;
 
-  currentSongElement.style.fontFamily =
-    createFontStack(
-      state.fontFamily
-    );
+currentSongElement.style.fontFamily =
+  createFontStack(
+    state.nowPlayingFontFamily
+  );
 
-  currentSongElement.style.fontSize =
-    `${state.fontSize}px`;
+currentSongElement.style.fontSize =
+  "60px";
 
   currentSongElement.style.fontWeight =
     "700";
 
-  if (nowPlayingSetlist) {
-
-    nowPlayingSetlist.innerHTML = "";
-
-    state.songs.forEach(
-      (songTitle, index) => {
-
-        const item =
-          document.createElement("div");
-
-        if (state.listStyle === "number") {
-
-          item.textContent =
-            `${index + 1}. ${songTitle}`;
-
-        } else {
-
-          item.textContent =
-            `・${songTitle}`;
-
-        }
-
-        item.style.fontFamily =
-          createFontStack(
-            state.fontFamily
-          );
-
-        item.style.fontSize =
-          `${state.fontSize}px`;
-
-        nowPlayingSetlist.appendChild(
-          item
-        );
-      }
-    );
-
-  }
-
-  if (displayTitle) {
-    displayTitle.hidden =
-      !state.showTitle;
-
-    displayTitle.style.fontFamily =
-      createFontStack(
-        state.fontFamily
-      );
-  }
 }
 
 /* =========================================================
@@ -686,23 +570,10 @@ function applyFont(fontName) {
     return;
   }
 
-  updateState({
-    fontFamily:
-      normalizedFontName
-  });
-}
-
-function changeFontSize(changeAmount) {
-  const nextFontSize =
-    clamp(
-      state.fontSize + changeAmount,
-      MIN_FONT_SIZE,
-      MAX_FONT_SIZE
-    );
-
-  updateState({
-    fontSize: nextFontSize
-  });
+updateState({
+  setlistFontFamily:
+    normalizedFontName
+});
 }
 
 /* =========================================================
@@ -820,34 +691,6 @@ fontInput?.addEventListener(
     event.preventDefault();
 
     applyFont(fontInput.value);
-  }
-);
-
-decreaseFontSizeButton?.addEventListener(
-  "click",
-  () => {
-    changeFontSize(
-      -FONT_SIZE_STEP
-    );
-  }
-);
-
-increaseFontSizeButton?.addEventListener(
-  "click",
-  () => {
-    changeFontSize(
-      FONT_SIZE_STEP
-    );
-  }
-);
-
-showTitleToggle?.addEventListener(
-  "change",
-  () => {
-    updateState({
-      showTitle:
-        showTitleToggle.checked
-    });
   }
 );
 
@@ -970,17 +813,6 @@ async function refreshState() {
 /* =========================================================
    補助関数
 ========================================================= */
-
-function clamp(
-  value,
-  minimum,
-  maximum
-) {
-  return Math.min(
-    Math.max(value, minimum),
-    maximum
-  );
-}
 
 function createFontStack(fontName) {
   const safeFontName =
