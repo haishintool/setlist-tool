@@ -657,9 +657,17 @@ console.log(
     autoScrollLastTime =
       currentTime;
 
-    scrollContainer.scrollTop +=
+const moveAmount =
+  Math.max(
+    1,
+    Math.round(
       state.scrollSpeed *
-      elapsedSeconds;
+      elapsedSeconds
+    )
+  );
+
+scrollContainer.scrollTop +=
+  moveAmount;
 
     const currentMaxScroll =
       Math.max(
