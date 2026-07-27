@@ -42,20 +42,6 @@ if (!roomId) {
   window.location.replace(newUrl.toString());
 }
 
-const displayPageLink =
-  document.getElementById("displayPageLink");
-
-if (displayPageLink) {
-  displayPageLink.href =
-    `./display.html?id=${encodeURIComponent(roomId)}`;
-}
-
-const API_BASE_URL =
-  "https://setlist-api.halismvoice.workers.dev";
-
-const ROOM_API_URL =
-  `${API_BASE_URL}/room/${encodeURIComponent(roomId)}`;
-
 const API_BASE_URL =
   "https://setlist-api.halismvoice.workers.dev";
 
@@ -1022,6 +1008,14 @@ function createFontStack(fontName) {
 ========================================================= */
 
 (async () => {
+
+  const displayPageLink =
+    document.getElementById("displayPageLink");
+
+  if (displayPageLink) {
+    displayPageLink.href =
+      `./display.html?id=${encodeURIComponent(roomId)}`;
+  }
 
   state =
     await loadState();
