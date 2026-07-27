@@ -41,6 +41,19 @@ const broadcastChannel =
     ? new BroadcastChannel(CHANNEL_NAME)
     : null;
 
+    if (broadcastChannel) {
+  broadcastChannel.onmessage = (event) => {
+    if (event.data?.type !== "stateUpdate") {
+      return;
+    }
+
+    state = normalizeState(event.data.state);
+    lastSavedData = JSON.stringify(state);
+
+    render();
+  };
+}
+
 /* =========================================================
    HTML要素取得
 ========================================================= */
