@@ -583,6 +583,9 @@ if (scrollContainer) {
 } // ←これが必要
 
 function startAutoScroll() {
+
+  console.log("startAutoScroll");
+
   if (!displaySetlist) {
     return;
   }
@@ -602,11 +605,18 @@ function startAutoScroll() {
   }
 
   const maxScroll =
-    Math.max(
-      0,
-      scrollContainer.scrollHeight -
-        scrollContainer.clientHeight
-    );
+  Math.max(
+    0,
+    scrollContainer.scrollHeight -
+      scrollContainer.clientHeight
+  );
+
+console.log(
+  "scroll",
+  scrollContainer.scrollHeight,
+  scrollContainer.clientHeight,
+  maxScroll
+);
 
   if (maxScroll <= 0) {
     return;
