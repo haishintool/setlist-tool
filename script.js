@@ -518,21 +518,10 @@ function renderNowPlaying() {
   }
 
 const currentSong =
-  state.currentSong ||
-  "曲が選択されていません";
+  state.currentSong || "";
 
-currentSongElement.replaceChildren();
-
-const playMark =
-  document.createElement("span");
-
-playMark.className = "playMark";
-playMark.textContent = "▶";
-
-currentSongElement.append(
-  playMark,
-  ` ${currentSong}`
-);
+currentSongElement.textContent =
+  currentSong;
 
   currentSongElement.style.fontFamily =
     createFontStack(
