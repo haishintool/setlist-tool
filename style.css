@@ -864,3 +864,19 @@ body.nowPlayingBody {
 
   margin-right: 0.25em;
 }
+body.obsBody .obsList .loopSpacer {
+  height: 48px;
+  min-height: 48px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  visibility: hidden;
+}
+
+body.obsBody .obsList .loopSpacer::marker {
+  content: "";
+}
+
+body.obsBody .obsList .loopSpacer::before {
+  content: none !important;
+}

@@ -503,64 +503,80 @@ function renderDisplayPage() {
 
   displaySetlist.replaceChildren();
 
-  const shouldLoop =
-  state.songs.length >
-  state.visibleSongs;
+    const shouldLoop =
+    state.songs.length >
+    state.visibleSongs;
 
-const loopSongs =
-  shouldLoop
-    ? [...state.songs, ...state.songs]
-    : state.songs;
+  const loopItems = [];
 
-loopSongs.forEach(
-  (songTitle, index) => {
+  /* 1周目 */
+  state.songs.forEach(
+    (songTitle, index) => {
+      loopItems.push({
+        type: "song",
+        title: songTitle,
+        duplicate: false,
+        songIndex: index
+      });
+    }
+  );
+
+  if (shouldLoop) {
+    /* 空白は常に2行 */
+    loopItems.push({
+      type: "spacer"
+    });
+
+    loopItems.push({
+      type: "spacer"
+    });
+
+    /* 2周目 */
+    state.songs.forEach(
+      (songTitle, index) => {
+        loopItems.push({
+          type: "song",
+          title: songTitle,
+          duplicate: true,
+          songIndex: index
+        });
+      }
+    );
+  }
+
+  loopItems.forEach((item) => {
     const listItem =
       document.createElement("li");
 
-    listItem.textContent =
-      songTitle;
+    if (item.type === "spacer") {
+      listItem.classList.add(
+        "loopSpacer"
+      );
 
-    /*
-      後半の複製部分は
-      読み上げ対象から外す
-    */
-    if (
-      shouldLoop &&
-      index >= state.songs.length
-    ) {
       listItem.setAttribute(
         "aria-hidden",
         "true"
       );
+    } else {
+      listItem.textContent =
+        item.title;
+
+      if (item.duplicate) {
+        listItem.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+        if (item.songIndex === 0) {
+          listItem.value = 1;
+        }
+      }
     }
 
     displaySetlist.appendChild(
       listItem
     );
-  }
-);
-
-  renderDisplayStyle();
-
-  requestAnimationFrame(() => {
-    if (scrollContainer) {
-      const maxScroll =
-        Math.max(
-          0,
-          scrollContainer.scrollHeight -
-            scrollContainer.clientHeight
-        );
-
-      scrollContainer.scrollTop =
-        Math.min(
-          previousScrollTop,
-          maxScroll
-        );
-    }
-
-    startAutoScroll();
   });
-}
 
 function renderDisplayStyle() {
   if (!displaySetlist) {
@@ -652,8 +668,10 @@ function startAutoScroll() {
   const firstItem =
     listItems[0];
 
-  const duplicatedFirstItem =
-    listItems[state.songs.length];
+const duplicatedFirstItem =
+  listItems[
+    state.songs.length + 2
+  ];
 
   if (
     !firstItem ||
