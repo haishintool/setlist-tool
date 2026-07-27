@@ -572,6 +572,17 @@ displaySetlist.style.paddingBottom =
 const scrollContainer =
   displaySetlist.parentElement;
 
+console.log(scrollContainer);
+
+console.log("before maxScroll");
+
+const maxScroll =
+  Math.max(
+    0,
+    scrollContainer.scrollHeight -
+      scrollContainer.clientHeight
+  );
+
 if (scrollContainer) {
   scrollContainer.style.height =
     `${state.visibleSongs * 48}px`;
