@@ -307,6 +307,12 @@
         </div>
 
         <div class="textDecorationGroup">
+  <div class="controlGroupHeader">
+    <h4>
+      テキスト装飾
+    </h4>
+  </div>
+
   <label
     class="fieldLabel"
     for="nowPlayingTextColor"
@@ -319,6 +325,7 @@
       id="nowPlayingTextColor"
       type="color"
       value="#ffffff"
+      aria-label="Now Playingの文字色"
     />
 
     <span
@@ -327,6 +334,66 @@
       #FFFFFF
     </span>
   </div>
+<div class="decorationOption">
+  <label class="toggleLabel">
+    <input
+      id="nowPlayingStrokeEnabled"
+      type="checkbox"
+      checked
+    />
+
+    <span>
+      縁取り
+    </span>
+  </label>
+
+  <label
+    class="fieldLabel"
+    for="nowPlayingStrokeColor"
+  >
+    色
+  </label>
+
+  <div class="colorInputRow">
+    <input
+      id="nowPlayingStrokeColor"
+      type="color"
+      value="#000000"
+      aria-label="Now Playingの縁取り色"
+    />
+
+    <span
+      id="nowPlayingStrokeColorValue"
+    >
+      #000000
+    </span>
+  </div>
+
+  <label
+    class="fieldLabel"
+    for="nowPlayingStrokeWidth"
+  >
+    太さ
+  </label>
+
+  <div class="rangeInputRow">
+    <input
+      id="nowPlayingStrokeWidth"
+      type="range"
+      min="0"
+      max="10"
+      step="1"
+      value="2"
+    />
+
+    <span
+      id="nowPlayingStrokeWidthValue"
+    >
+      2px
+    </span>
+  </div>
+</div>
+
 </div>
 
       </section>

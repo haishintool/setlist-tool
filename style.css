@@ -962,3 +962,40 @@ body.obsBody .obsList .loopSpacer::before {
   color: #b8b8b8;
   font-family: monospace;
 }
+.decorationOption {
+  margin-top: 24px;
+}
+
+.toggleLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.toggleLabel input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.rangeInputRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rangeInputRow input[type="range"] {
+  flex: 1;
+  min-width: 0;
+}
+
+.rangeInputRow span {
+  min-width: 40px;
+  font-size: 14px;
+  color: #b8b8b8;
+  font-family: monospace;
+  text-align: right;
+}
