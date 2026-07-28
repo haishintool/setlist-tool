@@ -61,7 +61,7 @@ const DEFAULT_STATE = {
   nowPlayingStrokeEnabled: true,
   nowPlayingStrokeColor: "#000000",
   nowPlayingStrokeWidth: 2,
-  
+
   nowPlayingShadowEnabled: false,
 nowPlayingShadowColor: "#000000",
 nowPlayingShadowOffsetX: 3,
@@ -468,6 +468,46 @@ const nowPlayingStrokeWidth =
     ? targetState.nowPlayingStrokeWidth
     : DEFAULT_STATE.nowPlayingStrokeWidth;    
 
+const nowPlayingShadowEnabled =
+  typeof targetState.nowPlayingShadowEnabled === "boolean"
+    ? targetState.nowPlayingShadowEnabled
+    : DEFAULT_STATE.nowPlayingShadowEnabled;
+
+const nowPlayingShadowColor =
+  typeof targetState.nowPlayingShadowColor === "string" &&
+  /^#[0-9a-fA-F]{6}$/.test(
+    targetState.nowPlayingShadowColor
+  )
+    ? targetState.nowPlayingShadowColor
+    : DEFAULT_STATE.nowPlayingShadowColor;
+
+const nowPlayingShadowOffsetX =
+  Number.isInteger(
+    targetState.nowPlayingShadowOffsetX
+  ) &&
+  targetState.nowPlayingShadowOffsetX >= -20 &&
+  targetState.nowPlayingShadowOffsetX <= 20
+    ? targetState.nowPlayingShadowOffsetX
+    : DEFAULT_STATE.nowPlayingShadowOffsetX;
+
+const nowPlayingShadowOffsetY =
+  Number.isInteger(
+    targetState.nowPlayingShadowOffsetY
+  ) &&
+  targetState.nowPlayingShadowOffsetY >= -20 &&
+  targetState.nowPlayingShadowOffsetY <= 20
+    ? targetState.nowPlayingShadowOffsetY
+    : DEFAULT_STATE.nowPlayingShadowOffsetY;
+
+const nowPlayingShadowBlur =
+  Number.isInteger(
+    targetState.nowPlayingShadowBlur
+  ) &&
+  targetState.nowPlayingShadowBlur >= 0 &&
+  targetState.nowPlayingShadowBlur <= 30
+    ? targetState.nowPlayingShadowBlur
+    : DEFAULT_STATE.nowPlayingShadowBlur;
+
 return {
   songs,
   currentSong,
@@ -478,6 +518,11 @@ return {
   nowPlayingStrokeEnabled,
   nowPlayingStrokeColor,
   nowPlayingStrokeWidth,
+  nowPlayingShadowEnabled,
+nowPlayingShadowColor,
+nowPlayingShadowOffsetX,
+nowPlayingShadowOffsetY,
+nowPlayingShadowBlur,
   visibleSongs,
   scrollSpeed,
 };
@@ -527,10 +572,15 @@ function renderPreview() {
       previewNowPlayingShadow.style.webkitTextStroke =
         "0px transparent";
 
-      previewNowPlayingShadow.style.textShadow =
-        nowPlayingShadowEnabled?.checked
-          ? `${nowPlayingShadowOffsetX.value}px ${nowPlayingShadowOffsetY.value}px ${nowPlayingShadowBlur.value}px ${nowPlayingShadowColor.value}`
-          : "none";
+previewNowPlayingShadow.style.textShadow =
+  state.nowPlayingShadowEnabled
+    ? `${state.nowPlayingShadowOffsetX}px ${state.nowPlayingShadowOffsetY}px ${state.nowPlayingShadowBlur}px ${state.nowPlayingShadowColor}`
+    : "none";
+
+previewNowPlayingShadow.style.visibility =
+  state.nowPlayingShadowEnabled
+    ? "visible"
+    : "hidden";
     }
 
     if (previewNowPlayingStroke) {
@@ -617,6 +667,52 @@ function renderPreview() {
     nowPlayingStrokeWidthValue.textContent =
       `${state.nowPlayingStrokeWidth}px`;
   }
+
+  if (nowPlayingShadowEnabled) {
+  nowPlayingShadowEnabled.checked =
+    state.nowPlayingShadowEnabled;
+}
+
+if (nowPlayingShadowColor) {
+  nowPlayingShadowColor.value =
+    state.nowPlayingShadowColor;
+}
+
+if (nowPlayingShadowColorValue) {
+  nowPlayingShadowColorValue.textContent =
+    state.nowPlayingShadowColor.toUpperCase();
+}
+
+if (nowPlayingShadowOffsetX) {
+  nowPlayingShadowOffsetX.value =
+    state.nowPlayingShadowOffsetX;
+}
+
+if (nowPlayingShadowOffsetXValue) {
+  nowPlayingShadowOffsetXValue.textContent =
+    `${state.nowPlayingShadowOffsetX}px`;
+}
+
+if (nowPlayingShadowOffsetY) {
+  nowPlayingShadowOffsetY.value =
+    state.nowPlayingShadowOffsetY;
+}
+
+if (nowPlayingShadowOffsetYValue) {
+  nowPlayingShadowOffsetYValue.textContent =
+    `${state.nowPlayingShadowOffsetY}px`;
+}
+
+if (nowPlayingShadowBlur) {
+  nowPlayingShadowBlur.value =
+    state.nowPlayingShadowBlur;
+}
+
+if (nowPlayingShadowBlurValue) {
+  nowPlayingShadowBlurValue.textContent =
+    `${state.nowPlayingShadowBlur}px`;
+}
+
 }
 
 function renderSongCount() {
@@ -1439,7 +1535,14 @@ function updateNowPlayingShadowPreview() {
 
 nowPlayingShadowEnabled?.addEventListener(
   "change",
-  updateNowPlayingShadowPreview
+  async () => {
+    updateNowPlayingShadowPreview();
+
+    await updateState({
+      nowPlayingShadowEnabled:
+        nowPlayingShadowEnabled.checked,
+    });
+  }
 );
 
 nowPlayingShadowColor?.addEventListener(
@@ -1451,6 +1554,16 @@ nowPlayingShadowColor?.addEventListener(
     }
 
     updateNowPlayingShadowPreview();
+  }
+);
+
+nowPlayingShadowColor?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      nowPlayingShadowColor:
+        nowPlayingShadowColor.value,
+    });
   }
 );
 
