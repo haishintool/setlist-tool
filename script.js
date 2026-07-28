@@ -58,6 +58,9 @@ const DEFAULT_STATE = {
   setlistFontFamily: "",
 
   nowPlayingTextColor: "#ffffff",
+  nowPlayingStrokeEnabled: true,
+  nowPlayingStrokeColor: "#000000",
+  nowPlayingStrokeWidth: 2,
 
   visibleSongs: 10,
   scrollSpeed: 20,
@@ -367,6 +370,28 @@ const nowPlayingTextColor =
     ? targetState.nowPlayingTextColor
     : DEFAULT_STATE.nowPlayingTextColor;
 
+const nowPlayingStrokeEnabled =
+  typeof targetState.nowPlayingStrokeEnabled === "boolean"
+    ? targetState.nowPlayingStrokeEnabled
+    : DEFAULT_STATE.nowPlayingStrokeEnabled;
+
+const nowPlayingStrokeColor =
+  typeof targetState.nowPlayingStrokeColor === "string" &&
+  /^#[0-9a-fA-F]{6}$/.test(
+    targetState.nowPlayingStrokeColor
+  )
+    ? targetState.nowPlayingStrokeColor
+    : DEFAULT_STATE.nowPlayingStrokeColor;
+
+const nowPlayingStrokeWidth =
+  Number.isInteger(
+    targetState.nowPlayingStrokeWidth
+  ) &&
+  targetState.nowPlayingStrokeWidth >= 0 &&
+  targetState.nowPlayingStrokeWidth <= 10
+    ? targetState.nowPlayingStrokeWidth
+    : DEFAULT_STATE.nowPlayingStrokeWidth;    
+
 return {
   songs,
   currentSong,
@@ -374,6 +399,9 @@ return {
   nowPlayingFontFamily,
   setlistFontFamily,
   nowPlayingTextColor,
+  nowPlayingStrokeEnabled,
+  nowPlayingStrokeColor,
+  nowPlayingStrokeWidth,
   visibleSongs,
   scrollSpeed,
 };
@@ -417,6 +445,14 @@ if (previewNowPlaying) {
     state.nowPlayingTextColor;
 }
 
+if (state.nowPlayingStrokeEnabled) {
+  previewNowPlaying.style.webkitTextStroke =
+    `${state.nowPlayingStrokeWidth}px ${state.nowPlayingStrokeColor}`;
+} else {
+  previewNowPlaying.style.webkitTextStroke =
+    "0px transparent";
+}
+
 if (previewSetlist) {
   previewSetlist.style.fontFamily =
     createFontStack(
@@ -445,6 +481,31 @@ if (nowPlayingTextColor) {
 if (nowPlayingTextColorValue) {
   nowPlayingTextColorValue.textContent =
     state.nowPlayingTextColor.toUpperCase();
+}
+
+if (nowPlayingStrokeEnabled) {
+  nowPlayingStrokeEnabled.checked =
+    state.nowPlayingStrokeEnabled;
+}
+
+if (nowPlayingStrokeColor) {
+  nowPlayingStrokeColor.value =
+    state.nowPlayingStrokeColor;
+}
+
+if (nowPlayingStrokeColorValue) {
+  nowPlayingStrokeColorValue.textContent =
+    state.nowPlayingStrokeColor.toUpperCase();
+}
+
+if (nowPlayingStrokeWidth) {
+  nowPlayingStrokeWidth.value =
+    state.nowPlayingStrokeWidth;
+}
+
+if (nowPlayingStrokeWidthValue) {
+  nowPlayingStrokeWidthValue.textContent =
+    `${state.nowPlayingStrokeWidth}px`;
 }
 
 }
@@ -1203,6 +1264,38 @@ nowPlayingTextColor?.addEventListener(
     await updateState({
       nowPlayingTextColor:
         nowPlayingTextColor.value
+    });
+  }
+);
+
+nowPlayingStrokeEnabled?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      nowPlayingStrokeEnabled:
+        nowPlayingStrokeEnabled.checked,
+    });
+  }
+);
+
+nowPlayingStrokeColor?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      nowPlayingStrokeColor:
+        nowPlayingStrokeColor.value,
+    });
+  }
+);
+
+nowPlayingStrokeWidth?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      nowPlayingStrokeWidth:
+        Number(
+          nowPlayingStrokeWidth.value
+        ),
     });
   }
 );
