@@ -1006,3 +1006,9 @@ body.obsBody .obsList .loopSpacer::before {
   margin-top: 12px;
   margin-bottom: 18px;
 }
+.decorationCard {
+  padding: 18px;
+  border: 1px solid #2f3038;
+  border-radius: 10px;
+  background: #0d0e13;
+}
