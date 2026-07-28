@@ -2132,6 +2132,9 @@ setlistShadowColor?.addEventListener(
         setlistShadowColor.value.toUpperCase();
     }
 
+    state.setlistShadowColor =
+      setlistShadowColor.value;
+
     renderPreview();
   }
 );
@@ -2176,6 +2179,9 @@ setlistShadowOffsetX?.addEventListener(
       setlistShadowOffsetXValue.textContent =
         `${setlistShadowOffsetX.value}px`;
     }
+
+    state.setlistShadowOffsetX =
+      Number(setlistShadowOffsetX.value);
 
     renderPreview();
   }
@@ -2223,6 +2229,9 @@ setlistShadowOffsetY?.addEventListener(
         `${setlistShadowOffsetY.value}px`;
     }
 
+    state.setlistShadowOffsetY =
+      Number(setlistShadowOffsetY.value);
+
     renderPreview();
   }
 );
@@ -2268,6 +2277,9 @@ setlistShadowBlur?.addEventListener(
       setlistShadowBlurValue.textContent =
         `${setlistShadowBlur.value}px`;
     }
+
+    state.setlistShadowBlur =
+      Number(setlistShadowBlur.value);
 
     renderPreview();
   }
