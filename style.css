@@ -943,7 +943,8 @@ body.obsBody .obsList .loopSpacer::before {
 .colorInputRow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  margin: 0;
 }
 
 .colorInputRow input[type="color"] {
@@ -970,7 +971,6 @@ body.obsBody .obsList .loopSpacer::before {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 18px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -998,4 +998,11 @@ body.obsBody .obsList .loopSpacer::before {
   color: #b8b8b8;
   font-family: monospace;
   text-align: right;
+}
+.strokeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 18px;
 }
