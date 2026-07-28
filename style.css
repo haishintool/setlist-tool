@@ -754,6 +754,11 @@ a:focus-visible {
    setlist.html の body に class="obsBody" を付ける想定
 ========================================================= */
 
+html:has(body.obsBody),
+html:has(body.nowPlayingBody) {
+  background: transparent !important;
+}
+
 body.obsBody {
   min-height: 100vh;
   padding: 0;
