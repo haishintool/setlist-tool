@@ -880,3 +880,46 @@ body.obsBody .obsList .loopSpacer::marker {
 body.obsBody .obsList .loopSpacer::before {
   content: none !important;
 }
+/* =========================================================
+   プレビュー
+========================================================= */
+
+.previewPanel {
+  margin-bottom: 28px;
+}
+
+.previewCard {
+  background: #171717;
+  border: 1px solid #2c2c2c;
+  border-radius: 12px;
+  padding: 22px;
+}
+
+.previewBlock + .previewBlock {
+  margin-top: 22px;
+}
+
+.previewLabel {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #9b9b9b;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.previewNowPlaying {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.previewSetlist {
+  margin: 0;
+  padding-left: 34px;
+
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+}
