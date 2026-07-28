@@ -222,6 +222,21 @@ const previewNowPlayingStroke =
     "previewNowPlayingStroke"
   );
 
+  const previewSetlistShadow =
+  document.getElementById(
+    "previewSetlistShadow"
+  );
+
+const previewSetlistStroke =
+  document.getElementById(
+    "previewSetlistStroke"
+  );
+
+const previewSetlistFill =
+  document.getElementById(
+    "previewSetlistFill"
+  );
+
 const nowPlayingShadowEnabled =
   document.getElementById(
     "nowPlayingShadowEnabled"
@@ -796,14 +811,6 @@ previewNowPlayingShadow.style.visibility =
         state.setlistFontFamily
       );
 
-    previewSetlist.style.color =
-  state.setlistTextColor;
-  
-  previewSetlist.style.webkitTextStroke =
-  state.setlistStrokeEnabled
-    ? `${state.setlistStrokeWidth}px ${state.setlistStrokeColor}`
-    : "0px transparent";
-
     const isNumber =
       state.listStyle === "number";
 
@@ -817,6 +824,29 @@ previewNowPlayingShadow.style.visibility =
       !isNumber
     );
   }
+
+if (previewSetlistStroke) {
+  previewSetlistStroke.style.color =
+    "transparent";
+
+  previewSetlistStroke.style.webkitTextStroke =
+    state.setlistStrokeEnabled
+      ? `${state.setlistStrokeWidth}px ${state.setlistStrokeColor}`
+      : "0px transparent";
+
+  previewSetlistStroke.style.visibility =
+    state.setlistStrokeEnabled
+      ? "visible"
+      : "hidden";
+}
+
+if (previewSetlistFill) {
+  previewSetlistFill.style.color =
+    state.setlistTextColor;
+
+  previewSetlistFill.style.webkitTextStroke =
+    "0px transparent";
+}  
 
   if (nowPlayingTextColor) {
     nowPlayingTextColor.value =
