@@ -936,3 +936,29 @@ body.obsBody .obsList .loopSpacer::before {
   content: "・";
   margin-right: 8px;
 }
+.textDecorationGroup {
+  margin-top: 24px;
+}
+
+.colorInputRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.colorInputRow input[type="color"] {
+  width: 56px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.colorInputRow span {
+  font-size: 14px;
+  color: #b8b8b8;
+  font-family: monospace;
+}
