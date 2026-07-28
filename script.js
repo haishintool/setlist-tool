@@ -176,6 +176,16 @@ const displaySetlist =
 const currentSongElement =
   document.getElementById("currentSong");
 
+  const currentSongStroke =
+  document.getElementById(
+    "currentSongStroke"
+  );
+
+const currentSongFill =
+  document.getElementById(
+    "currentSongFill"
+  );
+
   const previewNowPlaying =
   document.querySelector(
     ".previewNowPlaying"
@@ -961,33 +971,65 @@ function renderNowPlaying() {
     return;
   }
 
-  const currentSong =
-    state.currentSong || "";
+const currentSong =
+  state.currentSong || "";
 
-  currentSongElement.textContent =
+if (currentSongStroke) {
+  currentSongStroke.textContent =
     currentSong;
+}
 
-  currentSongElement.style.fontFamily =
-    createFontStack(
-      state.nowPlayingFontFamily
-    );
+if (currentSongFill) {
+  currentSongFill.textContent =
+    currentSong;
+}
 
-  currentSongElement.style.color =
-    state.nowPlayingTextColor;
+const nowPlayingFontStack =
+  createFontStack(
+    state.nowPlayingFontFamily
+  );
 
-  if (state.nowPlayingStrokeEnabled) {
-    currentSongElement.style.webkitTextStroke =
-      `${state.nowPlayingStrokeWidth}px ${state.nowPlayingStrokeColor}`;
-  } else {
-    currentSongElement.style.webkitTextStroke =
-      "0px transparent";
-  }
+if (currentSongStroke) {
+  currentSongStroke.style.fontFamily =
+    nowPlayingFontStack;
 
-  currentSongElement.style.fontSize =
+  currentSongStroke.style.color =
+    "transparent";
+
+  currentSongStroke.style.webkitTextStroke =
+    state.nowPlayingStrokeEnabled
+      ? `${state.nowPlayingStrokeWidth}px ${state.nowPlayingStrokeColor}`
+      : "0px transparent";
+
+  currentSongStroke.style.fontSize =
     "60px";
 
-  currentSongElement.style.fontWeight =
+  currentSongStroke.style.fontWeight =
     "700";
+
+  currentSongStroke.style.visibility =
+    state.nowPlayingStrokeEnabled
+      ? "visible"
+      : "hidden";
+}
+
+if (currentSongFill) {
+  currentSongFill.style.fontFamily =
+    nowPlayingFontStack;
+
+  currentSongFill.style.color =
+    state.nowPlayingTextColor;
+
+  currentSongFill.style.webkitTextStroke =
+    "0px transparent";
+
+  currentSongFill.style.fontSize =
+    "60px";
+
+  currentSongFill.style.fontWeight =
+    "700";
+}
+
 }
 
 /* =========================================================
