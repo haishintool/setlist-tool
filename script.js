@@ -826,8 +826,8 @@ previewNowPlayingShadow.style.visibility =
   }
 
 if (previewSetlistShadow) {
-  previewSetlistShadow.style.color =
-    state.setlistTextColor;
+previewSetlistShadow.style.color =
+  "transparent";
 
   previewSetlistShadow.style.webkitTextStroke =
     "0px transparent";
