@@ -758,7 +758,7 @@ body.obsBody {
   min-height: 100vh;
   padding: 0;
   overflow: hidden;
-  background: #000 !important;
+  background: transparent;
 }
 
 body.obsBody .obsSetlist {
@@ -827,7 +827,7 @@ body.obsBody .obsList.bulletStyle li::before {
 }
 
 body.nowPlayingBody {
-  background: #000000 !important;
+  background: transparent;
 }
 /* Now Playing セットリスト */
 
