@@ -191,10 +191,60 @@ const currentSongFill =
     ".previewNowPlaying"
   );
 
+const previewNowPlayingShadow =
+  document.getElementById(
+    "previewNowPlayingShadow"
+  );  
+
 const previewNowPlayingStroke =
   document.getElementById(
     "previewNowPlayingStroke"
   );
+
+const nowPlayingShadowEnabled =
+  document.getElementById(
+    "nowPlayingShadowEnabled"
+  );
+
+const nowPlayingShadowColor =
+  document.getElementById(
+    "nowPlayingShadowColor"
+  );
+
+const nowPlayingShadowColorValue =
+  document.getElementById(
+    "nowPlayingShadowColorValue"
+  );
+
+const nowPlayingShadowOffsetX =
+  document.getElementById(
+    "nowPlayingShadowOffsetX"
+  );
+
+const nowPlayingShadowOffsetXValue =
+  document.getElementById(
+    "nowPlayingShadowOffsetXValue"
+  );
+
+const nowPlayingShadowOffsetY =
+  document.getElementById(
+    "nowPlayingShadowOffsetY"
+  );
+
+const nowPlayingShadowOffsetYValue =
+  document.getElementById(
+    "nowPlayingShadowOffsetYValue"
+  );
+
+const nowPlayingShadowBlur =
+  document.getElementById(
+    "nowPlayingShadowBlur"
+  );
+
+const nowPlayingShadowBlurValue =
+  document.getElementById(
+    "nowPlayingShadowBlurValue"
+  );  
 
 const previewNowPlayingFill =
   document.getElementById(
@@ -455,98 +505,112 @@ function renderControlPage() {
 }
 
 function renderPreview() {
-if (previewNowPlaying) {
-const nowPlayingFontStack =
-  createFontStack(
-    state.nowPlayingFontFamily
-  );
+  if (previewNowPlaying) {
+    const nowPlayingFontStack =
+      createFontStack(
+        state.nowPlayingFontFamily
+      );
 
-if (previewNowPlayingStroke) {
-  previewNowPlayingStroke.style.fontFamily =
-    nowPlayingFontStack;
+    if (previewNowPlayingShadow) {
+      previewNowPlayingShadow.style.fontFamily =
+        nowPlayingFontStack;
 
-previewNowPlayingStroke.style.color =
-  "transparent";
+      previewNowPlayingShadow.style.color =
+        "transparent";
 
-  previewNowPlayingStroke.style.webkitTextStroke =
-    state.nowPlayingStrokeEnabled
-      ? `${state.nowPlayingStrokeWidth}px ${state.nowPlayingStrokeColor}`
-      : "0px transparent";
+      previewNowPlayingShadow.style.webkitTextStroke =
+        "0px transparent";
 
-  previewNowPlayingStroke.style.visibility =
-    state.nowPlayingStrokeEnabled
-      ? "visible"
-      : "hidden";
-}
+      previewNowPlayingShadow.style.textShadow =
+        nowPlayingShadowEnabled?.checked
+          ? `${nowPlayingShadowOffsetX.value}px ${nowPlayingShadowOffsetY.value}px ${nowPlayingShadowBlur.value}px ${nowPlayingShadowColor.value}`
+          : "none";
+    }
 
-if (previewNowPlayingFill) {
-  previewNowPlayingFill.style.fontFamily =
-    nowPlayingFontStack;
+    if (previewNowPlayingStroke) {
+      previewNowPlayingStroke.style.fontFamily =
+        nowPlayingFontStack;
 
-  previewNowPlayingFill.style.color =
-    state.nowPlayingTextColor;
+      previewNowPlayingStroke.style.color =
+        "transparent";
 
-  previewNowPlayingFill.style.webkitTextStroke =
-    "0px transparent";
-}
+      previewNowPlayingStroke.style.webkitTextStroke =
+        state.nowPlayingStrokeEnabled
+          ? `${state.nowPlayingStrokeWidth}px ${state.nowPlayingStrokeColor}`
+          : "0px transparent";
 
-if (previewSetlist) {
-  previewSetlist.style.fontFamily =
-    createFontStack(
-      state.setlistFontFamily
+      previewNowPlayingStroke.style.visibility =
+        state.nowPlayingStrokeEnabled
+          ? "visible"
+          : "hidden";
+    }
+
+    if (previewNowPlayingFill) {
+      previewNowPlayingFill.style.fontFamily =
+        nowPlayingFontStack;
+
+      previewNowPlayingFill.style.color =
+        state.nowPlayingTextColor;
+
+      previewNowPlayingFill.style.webkitTextStroke =
+        "0px transparent";
+    }
+  }
+
+  if (previewSetlist) {
+    previewSetlist.style.fontFamily =
+      createFontStack(
+        state.setlistFontFamily
+      );
+
+    const isNumber =
+      state.listStyle === "number";
+
+    previewSetlist.classList.toggle(
+      "numberStyle",
+      isNumber
     );
 
-  const isNumber =
-    state.listStyle === "number";
+    previewSetlist.classList.toggle(
+      "bulletStyle",
+      !isNumber
+    );
+  }
 
-  previewSetlist.classList.toggle(
-    "numberStyle",
-    isNumber
-  );
+  if (nowPlayingTextColor) {
+    nowPlayingTextColor.value =
+      state.nowPlayingTextColor;
+  }
 
-  previewSetlist.classList.toggle(
-    "bulletStyle",
-    !isNumber
-  );
-}
+  if (nowPlayingTextColorValue) {
+    nowPlayingTextColorValue.textContent =
+      state.nowPlayingTextColor.toUpperCase();
+  }
 
-if (nowPlayingTextColor) {
-  nowPlayingTextColor.value =
-    state.nowPlayingTextColor;
-}
+  if (nowPlayingStrokeEnabled) {
+    nowPlayingStrokeEnabled.checked =
+      state.nowPlayingStrokeEnabled;
+  }
 
-if (nowPlayingTextColorValue) {
-  nowPlayingTextColorValue.textContent =
-    state.nowPlayingTextColor.toUpperCase();
-}
+  if (nowPlayingStrokeColor) {
+    nowPlayingStrokeColor.value =
+      state.nowPlayingStrokeColor;
+  }
 
-if (nowPlayingStrokeEnabled) {
-  nowPlayingStrokeEnabled.checked =
-    state.nowPlayingStrokeEnabled;
-}
+  if (nowPlayingStrokeColorValue) {
+    nowPlayingStrokeColorValue.textContent =
+      state.nowPlayingStrokeColor.toUpperCase();
+  }
 
-if (nowPlayingStrokeColor) {
-  nowPlayingStrokeColor.value =
-    state.nowPlayingStrokeColor;
-}
+  if (nowPlayingStrokeWidth) {
+    nowPlayingStrokeWidth.value =
+      state.nowPlayingStrokeWidth;
+  }
 
-if (nowPlayingStrokeColorValue) {
-  nowPlayingStrokeColorValue.textContent =
-    state.nowPlayingStrokeColor.toUpperCase();
-}
-
-if (nowPlayingStrokeWidth) {
-  nowPlayingStrokeWidth.value =
-    state.nowPlayingStrokeWidth;
-}
-
-if (nowPlayingStrokeWidthValue) {
-  nowPlayingStrokeWidthValue.textContent =
-    `${state.nowPlayingStrokeWidth}px`;
-}
-
-}
-
+  if (nowPlayingStrokeWidthValue) {
+    nowPlayingStrokeWidthValue.textContent =
+      `${state.nowPlayingStrokeWidth}px`;
+  }
 }
 
 function renderSongCount() {

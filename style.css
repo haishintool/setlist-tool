@@ -1022,15 +1022,23 @@ body.obsBody .obsList .loopSpacer::before {
   display: inline-grid;
 }
 
+.layeredTextShadow,
 .layeredTextStroke,
 .layeredTextFill {
   grid-area: 1 / 1;
 }
 
+.layeredTextShadow {
+  color: transparent;
+  z-index: 0;
+}
+
 .layeredTextStroke {
   color: transparent;
+  z-index: 1;
 }
 
 .layeredTextFill {
   position: relative;
+  z-index: 2;
 }
