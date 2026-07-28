@@ -956,6 +956,76 @@ if (setlistTextColorValue) {
     state.setlistTextColor.toUpperCase();
 }
 
+if (setlistStrokeEnabled) {
+  setlistStrokeEnabled.checked =
+    state.setlistStrokeEnabled;
+}
+
+if (setlistStrokeColor) {
+  setlistStrokeColor.value =
+    state.setlistStrokeColor;
+}
+
+if (setlistStrokeColorValue) {
+  setlistStrokeColorValue.textContent =
+    state.setlistStrokeColor.toUpperCase();
+}
+
+if (setlistStrokeWidth) {
+  setlistStrokeWidth.value =
+    state.setlistStrokeWidth;
+}
+
+if (setlistStrokeWidthValue) {
+  setlistStrokeWidthValue.textContent =
+    `${state.setlistStrokeWidth}px`;
+}
+
+if (setlistShadowEnabled) {
+  setlistShadowEnabled.checked =
+    state.setlistShadowEnabled;
+}
+
+if (setlistShadowColor) {
+  setlistShadowColor.value =
+    state.setlistShadowColor;
+}
+
+if (setlistShadowColorValue) {
+  setlistShadowColorValue.textContent =
+    state.setlistShadowColor.toUpperCase();
+}
+
+if (setlistShadowOffsetX) {
+  setlistShadowOffsetX.value =
+    state.setlistShadowOffsetX;
+}
+
+if (setlistShadowOffsetXValue) {
+  setlistShadowOffsetXValue.textContent =
+    `${state.setlistShadowOffsetX}px`;
+}
+
+if (setlistShadowOffsetY) {
+  setlistShadowOffsetY.value =
+    state.setlistShadowOffsetY;
+}
+
+if (setlistShadowOffsetYValue) {
+  setlistShadowOffsetYValue.textContent =
+    `${state.setlistShadowOffsetY}px`;
+}
+
+if (setlistShadowBlur) {
+  setlistShadowBlur.value =
+    state.setlistShadowBlur;
+}
+
+if (setlistShadowBlurValue) {
+  setlistShadowBlurValue.textContent =
+    `${state.setlistShadowBlur}px`;
+}
+
 }
 
 function renderSongCount() {
