@@ -1004,11 +1004,11 @@ body.obsBody .obsList .loopSpacer::before {
   font-family: monospace;
   text-align: right;
 }
-.strokeHeader {
+.strokeHeader,
+.shadowHeader {
   display: flex;
   align-items: center;
   gap: 24px;
-  margin-top: 12px;
   margin-bottom: 18px;
 }
 .decorationCard {
