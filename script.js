@@ -171,6 +171,16 @@ const displaySetlist =
 const currentSongElement =
   document.getElementById("currentSong");
 
+  const previewNowPlaying =
+  document.querySelector(
+    ".previewNowPlaying"
+  );
+
+const previewSetlist =
+  document.querySelector(
+    ".previewSetlist"
+  );
+
 /* =========================================================
    保存データ
 ========================================================= */
@@ -347,6 +357,7 @@ function renderControlPage() {
   renderFontControls();
   renderScrollControls();
   renderActionButtons();
+  renderPreview();
 }
 
 function renderSongCount() {
