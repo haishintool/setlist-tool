@@ -1079,12 +1079,15 @@ applyNowPlayingFontButton?.addEventListener(
 nowPlayingTextColor?.addEventListener(
   "input",
   () => {
-    if (!nowPlayingTextColorValue) {
-      return;
+    if (nowPlayingTextColorValue) {
+      nowPlayingTextColorValue.textContent =
+        nowPlayingTextColor.value.toUpperCase();
     }
 
-    nowPlayingTextColorValue.textContent =
-      nowPlayingTextColor.value.toUpperCase();
+    if (previewNowPlaying) {
+      previewNowPlaying.style.color =
+        nowPlayingTextColor.value;
+    }
   }
 );
 
