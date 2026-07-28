@@ -1034,7 +1034,7 @@ body.obsBody .obsList .loopSpacer::before {
 }
 .layeredText {
   position: relative;
-  display: grid;
+  display: inline-grid;
 }
 
 .layeredTextShadow,
@@ -1056,4 +1056,19 @@ body.obsBody .obsList .loopSpacer::before {
 .layeredTextFill {
   position: relative;
   z-index: 2;
+}
+li.layeredText {
+  display: list-item;
+  position: relative;
+}
+
+li.layeredText > .layeredTextShadow,
+li.layeredText > .layeredTextStroke {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+li.layeredText > .layeredTextFill {
+  position: relative;
 }
