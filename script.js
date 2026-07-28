@@ -1151,6 +1151,14 @@ nowPlayingStrokeColor?.addEventListener(
       nowPlayingStrokeColorValue.textContent =
         nowPlayingStrokeColor.value.toUpperCase();
     }
+
+    if (
+      previewNowPlaying &&
+      nowPlayingStrokeEnabled?.checked
+    ) {
+      previewNowPlaying.style.webkitTextStroke =
+        `${nowPlayingStrokeWidth.value}px ${nowPlayingStrokeColor.value}`;
+    }
   }
 );
 
@@ -1160,6 +1168,31 @@ nowPlayingStrokeWidth?.addEventListener(
     if (nowPlayingStrokeWidthValue) {
       nowPlayingStrokeWidthValue.textContent =
         `${nowPlayingStrokeWidth.value}px`;
+    }
+
+    if (
+      previewNowPlaying &&
+      nowPlayingStrokeEnabled?.checked
+    ) {
+      previewNowPlaying.style.webkitTextStroke =
+        `${nowPlayingStrokeWidth.value}px ${nowPlayingStrokeColor.value}`;
+    }
+  }
+);
+
+nowPlayingStrokeEnabled?.addEventListener(
+  "change",
+  () => {
+    if (!previewNowPlaying) {
+      return;
+    }
+
+    if (nowPlayingStrokeEnabled.checked) {
+      previewNowPlaying.style.webkitTextStroke =
+        `${nowPlayingStrokeWidth.value}px ${nowPlayingStrokeColor.value}`;
+    } else {
+      previewNowPlaying.style.webkitTextStroke =
+        "0px transparent";
     }
   }
 );
