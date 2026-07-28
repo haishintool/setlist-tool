@@ -193,6 +193,31 @@ const nowPlayingTextColorValue =
     "nowPlayingTextColorValue"
   );
 
+const nowPlayingStrokeEnabled =
+  document.getElementById(
+    "nowPlayingStrokeEnabled"
+  );
+
+const nowPlayingStrokeColor =
+  document.getElementById(
+    "nowPlayingStrokeColor"
+  );
+
+const nowPlayingStrokeColorValue =
+  document.getElementById(
+    "nowPlayingStrokeColorValue"
+  );
+
+const nowPlayingStrokeWidth =
+  document.getElementById(
+    "nowPlayingStrokeWidth"
+  );
+
+const nowPlayingStrokeWidthValue =
+  document.getElementById(
+    "nowPlayingStrokeWidthValue"
+  );  
+
 /* =========================================================
    保存データ
 ========================================================= */
