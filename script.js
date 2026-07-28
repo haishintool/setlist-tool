@@ -455,8 +455,8 @@ if (previewNowPlayingStroke) {
   previewNowPlayingStroke.style.fontFamily =
     nowPlayingFontStack;
 
-  previewNowPlayingStroke.style.color =
-    state.nowPlayingStrokeColor;
+previewNowPlayingStroke.style.color =
+  "transparent";
 
   previewNowPlayingStroke.style.webkitTextStroke =
     state.nowPlayingStrokeEnabled
