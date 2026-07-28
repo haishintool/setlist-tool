@@ -537,6 +537,8 @@ if (nowPlayingStrokeWidthValue) {
 
 }
 
+}
+
 function renderSongCount() {
   if (!songCount) {
     return;
