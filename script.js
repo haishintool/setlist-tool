@@ -797,7 +797,12 @@ previewNowPlayingShadow.style.visibility =
       );
 
     previewSetlist.style.color =
-  state.setlistTextColor;  
+  state.setlistTextColor;
+  
+  previewSetlist.style.webkitTextStroke =
+  state.setlistStrokeEnabled
+    ? `${state.setlistStrokeWidth}px ${state.setlistStrokeColor}`
+    : "0px transparent";
 
     const isNumber =
       state.listStyle === "number";
@@ -1699,6 +1704,46 @@ setlistTextColor?.addEventListener(
     renderPreview();
   }
 );
+
+setlistStrokeEnabled?.addEventListener(
+  "change",
+  async () => {
+    state.setlistStrokeEnabled =
+      setlistStrokeEnabled.checked;
+
+    renderPreview();
+
+    await updateState({
+      setlistStrokeEnabled:
+        setlistStrokeEnabled.checked,
+    });
+  }
+);
+
+if (setlistStrokeEnabled) {
+  setlistStrokeEnabled.checked =
+    state.setlistStrokeEnabled;
+}
+
+if (setlistStrokeColor) {
+  setlistStrokeColor.value =
+    state.setlistStrokeColor;
+}
+
+if (setlistStrokeColorValue) {
+  setlistStrokeColorValue.textContent =
+    state.setlistStrokeColor.toUpperCase();
+}
+
+if (setlistStrokeWidth) {
+  setlistStrokeWidth.value =
+    state.setlistStrokeWidth;
+}
+
+if (setlistStrokeWidthValue) {
+  setlistStrokeWidthValue.textContent =
+    `${state.setlistStrokeWidth}px`;
+}
 
 setlistTextColor?.addEventListener(
   "change",
