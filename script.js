@@ -1152,8 +1152,27 @@ itemStroke.textContent =
 itemFill.textContent =
   item.title;
 
+itemStroke.style.color =
+  "transparent";
+
+itemStroke.style.webkitTextStroke =
+  state.setlistStrokeEnabled
+    ? `${state.setlistStrokeWidth}px ${state.setlistStrokeColor}`
+    : "0px transparent";
+
+itemStroke.style.visibility =
+  state.setlistStrokeEnabled
+    ? "visible"
+    : "hidden";  
+
 itemFill.style.color =
   state.setlistTextColor;
+
+itemFill.style.color =
+  state.setlistTextColor;
+
+itemFill.style.webkitTextStroke =
+  "0px transparent";
 
 listItem.appendChild(
   itemShadow
