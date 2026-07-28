@@ -759,6 +759,16 @@ html:has(body.nowPlayingBody) {
   background: transparent !important;
 }
 
+html,
+body,
+body.obsBody,
+body.nowPlayingBody,
+.obsSetlist,
+.obsList {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
 body.obsBody {
   min-height: 100vh;
   padding: 0;
