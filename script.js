@@ -182,6 +182,9 @@ const displaySetlist =
 const currentSongElement =
   document.getElementById("currentSong");
 
+const currentSongShadow =
+  document.getElementById("currentSongShadow");  
+
   const currentSongStroke =
   document.getElementById(
     "currentSongStroke"
@@ -1145,6 +1148,11 @@ if (currentSongStroke) {
     currentSong;
 }
 
+if (currentSongShadow) {
+  currentSongShadow.textContent =
+    currentSong;
+}
+
 if (currentSongFill) {
   currentSongFill.textContent =
     currentSong;
@@ -1154,6 +1162,27 @@ const nowPlayingFontStack =
   createFontStack(
     state.nowPlayingFontFamily
   );
+
+if (currentSongShadow) {
+  currentSongShadow.style.fontFamily =
+    nowPlayingFontStack;
+
+  currentSongShadow.style.color =
+    "transparent";
+
+  currentSongShadow.style.webkitTextStroke =
+    "0px transparent";
+
+  currentSongShadow.style.textShadow =
+    state.nowPlayingShadowEnabled
+      ? `${state.nowPlayingShadowOffsetX}px ${state.nowPlayingShadowOffsetY}px ${state.nowPlayingShadowBlur}px ${state.nowPlayingShadowColor}`
+      : "none";
+
+  currentSongShadow.style.visibility =
+    state.nowPlayingShadowEnabled
+      ? "visible"
+      : "hidden";
+}  
 
 if (currentSongStroke) {
   currentSongStroke.style.fontFamily =
