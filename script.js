@@ -181,6 +181,16 @@ const previewSetlist =
     ".previewSetlist"
   );
 
+  const nowPlayingTextColor =
+  document.getElementById(
+    "nowPlayingTextColor"
+  );
+
+const nowPlayingTextColorValue =
+  document.getElementById(
+    "nowPlayingTextColorValue"
+  );
+
 /* =========================================================
    保存データ
 ========================================================= */
@@ -1063,6 +1073,18 @@ applyNowPlayingFontButton?.addEventListener(
     applyNowPlayingFont(
       nowPlayingFontInput.value
     );
+  }
+);
+
+nowPlayingTextColor?.addEventListener(
+  "input",
+  () => {
+    if (!nowPlayingTextColorValue) {
+      return;
+    }
+
+    nowPlayingTextColorValue.textContent =
+      nowPlayingTextColor.value.toUpperCase();
   }
 );
 
