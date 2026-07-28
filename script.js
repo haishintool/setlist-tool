@@ -368,12 +368,25 @@ function renderPreview() {
       );
   }
 
-  if (previewSetlist) {
-    previewSetlist.style.fontFamily =
-      createFontStack(
-        state.setlistFontFamily
-      );
-  }
+if (previewSetlist) {
+  previewSetlist.style.fontFamily =
+    createFontStack(
+      state.setlistFontFamily
+    );
+
+  const isNumber =
+    state.listStyle === "number";
+
+  previewSetlist.classList.toggle(
+    "numberStyle",
+    isNumber
+  );
+
+  previewSetlist.classList.toggle(
+    "bulletStyle",
+    !isNumber
+  );
+}
 }
 
 function renderSongCount() {

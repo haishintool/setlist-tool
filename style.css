@@ -923,3 +923,16 @@ body.obsBody .obsList .loopSpacer::before {
   font-weight: 700;
   color: #ffffff;
 }
+.previewSetlist.numberStyle {
+  list-style-type: decimal;
+}
+
+.previewSetlist.bulletStyle {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.previewSetlist.bulletStyle li::before {
+  content: "・";
+  margin-right: 8px;
+}
