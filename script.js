@@ -57,6 +57,8 @@ const DEFAULT_STATE = {
   nowPlayingFontFamily: "",
   setlistFontFamily: "",
 
+  nowPlayingTextColor: "#ffffff",
+
   visibleSongs: 10,
   scrollSpeed: 20,
 };
@@ -332,12 +334,21 @@ const scrollSpeed =
     ? Number(targetState.scrollSpeed)
     : DEFAULT_STATE.scrollSpeed;    
 
+const nowPlayingTextColor =
+  typeof targetState.nowPlayingTextColor === "string" &&
+  /^#[0-9a-fA-F]{6}$/.test(
+    targetState.nowPlayingTextColor
+  )
+    ? targetState.nowPlayingTextColor
+    : DEFAULT_STATE.nowPlayingTextColor;
+
 return {
   songs,
   currentSong,
   listStyle,
   nowPlayingFontFamily,
   setlistFontFamily,
+  nowPlayingTextColor,
   visibleSongs,
   scrollSpeed,
 };
@@ -371,12 +382,15 @@ function renderControlPage() {
 }
 
 function renderPreview() {
-  if (previewNowPlaying) {
-    previewNowPlaying.style.fontFamily =
-      createFontStack(
-        state.nowPlayingFontFamily
-      );
-  }
+if (previewNowPlaying) {
+  previewNowPlaying.style.fontFamily =
+    createFontStack(
+      state.nowPlayingFontFamily
+    );
+
+  previewNowPlaying.style.color =
+    state.nowPlayingTextColor;
+}
 
 if (previewSetlist) {
   previewSetlist.style.fontFamily =
@@ -397,6 +411,17 @@ if (previewSetlist) {
     !isNumber
   );
 }
+
+if (nowPlayingTextColor) {
+  nowPlayingTextColor.value =
+    state.nowPlayingTextColor;
+}
+
+if (nowPlayingTextColorValue) {
+  nowPlayingTextColorValue.textContent =
+    state.nowPlayingTextColor.toUpperCase();
+}
+
 }
 
 function renderSongCount() {
@@ -1088,6 +1113,16 @@ nowPlayingTextColor?.addEventListener(
       previewNowPlaying.style.color =
         nowPlayingTextColor.value;
     }
+  }
+);
+
+nowPlayingTextColor?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      nowPlayingTextColor:
+        nowPlayingTextColor.value
+    });
   }
 );
 
