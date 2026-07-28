@@ -348,32 +348,59 @@
     </span>
   </div>
 </div>
+
+<!-- 縁取りカード -->
 <div class="decorationOption decorationCard">
-<div class="strokeHeader">
-  <label class="toggleLabel">
-    <input
-      id="nowPlayingStrokeEnabled"
-      type="checkbox"
-      checked
-    />
+  <div class="strokeHeader">
+    <label class="toggleLabel">
+      <input
+        id="nowPlayingStrokeEnabled"
+        type="checkbox"
+        checked
+      />
 
-    <span>縁取り</span>
-  </label>
+      <span>縁取り</span>
+    </label>
 
-  <div class="colorInputRow">
-    <input
-      id="nowPlayingStrokeColor"
-      type="color"
-      value="#000000"
-      aria-label="Now Playingの縁取り色"
-    />
+    <div class="colorInputRow">
+      <input
+        id="nowPlayingStrokeColor"
+        type="color"
+        value="#000000"
+        aria-label="Now Playingの縁取り色"
+      />
 
-    <span id="nowPlayingStrokeColorValue">
-      #000000
-    </span>
+      <span id="nowPlayingStrokeColorValue">
+        #000000
+      </span>
+    </div>
   </div>
 
-  <div class="decorationOption decorationCard">
+  <label
+    class="fieldLabel"
+    for="nowPlayingStrokeWidth"
+  >
+    太さ
+  </label>
+
+  <div class="rangeInputRow">
+    <input
+      id="nowPlayingStrokeWidth"
+      type="range"
+      min="0"
+      max="10"
+      step="1"
+      value="2"
+    />
+
+    <span id="nowPlayingStrokeWidthValue">
+      2px
+    </span>
+  </div>
+</div>
+
+<!-- シャドウカード -->
+<div class="decorationOption decorationCard">
   <div class="shadowHeader">
     <label class="toggleLabel">
       <input
@@ -461,33 +488,6 @@
 
     <span id="nowPlayingShadowBlurValue">
       6px
-    </span>
-  </div>
-</div>
-
-</div>
-
-  <label
-    class="fieldLabel"
-    for="nowPlayingStrokeWidth"
-  >
-    太さ
-  </label>
-
-  <div class="rangeInputRow">
-    <input
-      id="nowPlayingStrokeWidth"
-      type="range"
-      min="0"
-      max="10"
-      step="1"
-      value="2"
-    />
-
-    <span
-      id="nowPlayingStrokeWidthValue"
-    >
-      2px
     </span>
   </div>
 </div>
