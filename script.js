@@ -68,6 +68,18 @@ nowPlayingShadowOffsetX: 3,
 nowPlayingShadowOffsetY: 3,
 nowPlayingShadowBlur: 6,
 
+setlistTextColor: "#ffffff",
+
+setlistStrokeEnabled: true,
+setlistStrokeColor: "#000000",
+setlistStrokeWidth: 2,
+
+setlistShadowEnabled: false,
+setlistShadowColor: "#000000",
+setlistShadowOffsetX: 3,
+setlistShadowOffsetY: 3,
+setlistShadowBlur: 6,
+
   visibleSongs: 10,
   scrollSpeed: 20,
 };
@@ -300,6 +312,86 @@ const nowPlayingStrokeWidthValue =
     "nowPlayingStrokeWidthValue"
   );  
 
+const setlistTextColor =
+  document.getElementById(
+    "setlistTextColor"
+  );
+
+const setlistTextColorValue =
+  document.getElementById(
+    "setlistTextColorValue"
+  );  
+
+const setlistStrokeEnabled =
+  document.getElementById(
+    "setlistStrokeEnabled"
+  );
+
+const setlistStrokeColor =
+  document.getElementById(
+    "setlistStrokeColor"
+  );
+
+const setlistStrokeColorValue =
+  document.getElementById(
+    "setlistStrokeColorValue"
+  );
+
+const setlistStrokeWidth =
+  document.getElementById(
+    "setlistStrokeWidth"
+  );
+
+const setlistStrokeWidthValue =
+  document.getElementById(
+    "setlistStrokeWidthValue"
+  );  
+
+const setlistShadowEnabled =
+  document.getElementById(
+    "setlistShadowEnabled"
+  );
+
+const setlistShadowColor =
+  document.getElementById(
+    "setlistShadowColor"
+  );
+
+const setlistShadowColorValue =
+  document.getElementById(
+    "setlistShadowColorValue"
+  );
+
+const setlistShadowOffsetX =
+  document.getElementById(
+    "setlistShadowOffsetX"
+  );
+
+const setlistShadowOffsetXValue =
+  document.getElementById(
+    "setlistShadowOffsetXValue"
+  );
+
+const setlistShadowOffsetY =
+  document.getElementById(
+    "setlistShadowOffsetY"
+  );
+
+const setlistShadowOffsetYValue =
+  document.getElementById(
+    "setlistShadowOffsetYValue"
+  );
+
+const setlistShadowBlur =
+  document.getElementById(
+    "setlistShadowBlur"
+  );
+
+const setlistShadowBlurValue =
+  document.getElementById(
+    "setlistShadowBlurValue"
+  );  
+
 /* =========================================================
    保存データ
 ========================================================= */
@@ -511,6 +603,75 @@ const nowPlayingShadowBlur =
     ? targetState.nowPlayingShadowBlur
     : DEFAULT_STATE.nowPlayingShadowBlur;
 
+const setlistTextColor =
+  /^#[0-9a-fA-F]{6}$/.test(
+    targetState.setlistTextColor
+  )
+    ? targetState.setlistTextColor
+    : DEFAULT_STATE.setlistTextColor;
+
+const setlistStrokeEnabled =
+  typeof targetState.setlistStrokeEnabled ===
+  "boolean"
+    ? targetState.setlistStrokeEnabled
+    : DEFAULT_STATE.setlistStrokeEnabled;
+
+const setlistStrokeColor =
+  /^#[0-9a-fA-F]{6}$/.test(
+    targetState.setlistStrokeColor
+  )
+    ? targetState.setlistStrokeColor
+    : DEFAULT_STATE.setlistStrokeColor;
+
+const setlistStrokeWidth =
+  Number.isInteger(
+    targetState.setlistStrokeWidth
+  ) &&
+  targetState.setlistStrokeWidth >= 0 &&
+  targetState.setlistStrokeWidth <= 20
+    ? targetState.setlistStrokeWidth
+    : DEFAULT_STATE.setlistStrokeWidth;
+
+const setlistShadowEnabled =
+  typeof targetState.setlistShadowEnabled ===
+  "boolean"
+    ? targetState.setlistShadowEnabled
+    : DEFAULT_STATE.setlistShadowEnabled;
+
+const setlistShadowColor =
+  /^#[0-9a-fA-F]{6}$/.test(
+    targetState.setlistShadowColor
+  )
+    ? targetState.setlistShadowColor
+    : DEFAULT_STATE.setlistShadowColor;
+
+const setlistShadowOffsetX =
+  Number.isInteger(
+    targetState.setlistShadowOffsetX
+  ) &&
+  targetState.setlistShadowOffsetX >= -20 &&
+  targetState.setlistShadowOffsetX <= 20
+    ? targetState.setlistShadowOffsetX
+    : DEFAULT_STATE.setlistShadowOffsetX;
+
+const setlistShadowOffsetY =
+  Number.isInteger(
+    targetState.setlistShadowOffsetY
+  ) &&
+  targetState.setlistShadowOffsetY >= -20 &&
+  targetState.setlistShadowOffsetY <= 20
+    ? targetState.setlistShadowOffsetY
+    : DEFAULT_STATE.setlistShadowOffsetY;
+
+const setlistShadowBlur =
+  Number.isInteger(
+    targetState.setlistShadowBlur
+  ) &&
+  targetState.setlistShadowBlur >= 0 &&
+  targetState.setlistShadowBlur <= 30
+    ? targetState.setlistShadowBlur
+    : DEFAULT_STATE.setlistShadowBlur;    
+
 return {
   songs,
   currentSong,
@@ -522,10 +683,23 @@ return {
   nowPlayingStrokeColor,
   nowPlayingStrokeWidth,
   nowPlayingShadowEnabled,
-nowPlayingShadowColor,
-nowPlayingShadowOffsetX,
-nowPlayingShadowOffsetY,
-nowPlayingShadowBlur,
+  nowPlayingShadowColor,
+  nowPlayingShadowOffsetX,
+  nowPlayingShadowOffsetY,
+  nowPlayingShadowBlur,
+
+  setlistTextColor,
+
+setlistStrokeEnabled,
+setlistStrokeColor,
+setlistStrokeWidth,
+
+setlistShadowEnabled,
+setlistShadowColor,
+setlistShadowOffsetX,
+setlistShadowOffsetY,
+setlistShadowBlur,
+
   visibleSongs,
   scrollSpeed,
 };
@@ -621,6 +795,9 @@ previewNowPlayingShadow.style.visibility =
       createFontStack(
         state.setlistFontFamily
       );
+
+    previewSetlist.style.color =
+  state.setlistTextColor;  
 
     const isNumber =
       state.listStyle === "number";
@@ -922,8 +1099,22 @@ function renderDisplayPage() {
         "true"
       );
     } else {
-      listItem.textContent =
-        item.title;
+const itemFill =
+  document.createElement("span");
+
+itemFill.classList.add(
+  "setlistTextFill"
+);
+
+itemFill.textContent =
+  item.title;
+
+itemFill.style.color =
+  state.setlistTextColor;
+
+listItem.appendChild(
+  itemFill
+);
 
       if (item.duplicate) {
         listItem.setAttribute(

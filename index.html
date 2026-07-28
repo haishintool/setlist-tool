@@ -600,64 +600,171 @@
         </p>
       </section>
 
-      <!-- 自動スクロール設定 -->
+<!-- 文字色カード -->
+<div class="decorationCard">
+  <label
+    class="fieldLabel"
+    for="setlistTextColor"
+  >
+    文字色
+  </label>
 
-      <section
-        class="controlGroup"
-        aria-labelledby="autoScrollTitle"
-      >
-        <div class="controlGroupHeader">
-          <h3 id="autoScrollTitle">
-            自動スクロール
-          </h3>
-        </div>
+  <div class="colorInputRow">
+    <input
+      id="setlistTextColor"
+      type="color"
+      value="#ffffff"
+      aria-label="セットリストの文字色"
+    />
 
-        <div class="fontControls">
-          <label
-            class="fieldLabel"
-            for="visibleSongsInput"
-          >
-            スクロールを開始する曲数
-          </label>
+    <span id="setlistTextColorValue">
+      #FFFFFF
+    </span>
+  </div>
+</div>
 
-          <input
-            id="visibleSongsInput"
-            class="textInput"
-            type="number"
-            min="1"
-            max="100"
-            step="1"
-            value="10"
-          />
+<!-- 縁取りカード -->
+<div class="decorationOption decorationCard">
+  <div class="strokeHeader">
+    <label class="toggleLabel">
+      <input
+        id="setlistStrokeEnabled"
+        type="checkbox"
+        checked
+      />
 
-          <p class="helpText">
-            指定した曲数を超えると、自動スクロールを開始します。
-          </p>
+      <span>縁取り</span>
+    </label>
 
-          <label
-            class="fieldLabel"
-            for="scrollSpeedInput"
-          >
-            スクロール速度
-          </label>
+    <div class="colorInputRow">
+      <input
+        id="setlistStrokeColor"
+        type="color"
+        value="#000000"
+        aria-label="セットリストの縁取り色"
+      />
 
-          <input
-            id="scrollSpeedInput"
-            type="range"
-            min="5"
-            max="100"
-            step="5"
-            value="20"
-          />
+      <span id="setlistStrokeColorValue">
+        #000000
+      </span>
+    </div>
+  </div>
 
-          <p class="helpText">
-            現在の速度：
-            <span id="scrollSpeedValue">
-              20
-            </span>
-          </p>
-        </div>
-      </section>
+  <label
+    class="fieldLabel"
+    for="setlistStrokeWidth"
+  >
+    太さ
+  </label>
+
+  <div class="rangeInputRow">
+    <input
+      id="setlistStrokeWidth"
+      type="range"
+      min="0"
+      max="10"
+      step="1"
+      value="2"
+    />
+
+    <span id="setlistStrokeWidthValue">
+      2px
+    </span>
+  </div>
+</div>
+
+<!-- シャドウカード -->
+<div class="decorationOption decorationCard">
+  <div class="shadowHeader">
+    <label class="toggleLabel">
+      <input
+        id="setlistShadowEnabled"
+        type="checkbox"
+      />
+
+      <span>シャドウ</span>
+    </label>
+
+    <div class="colorInputRow">
+      <input
+        id="setlistShadowColor"
+        type="color"
+        value="#000000"
+        aria-label="セットリストのシャドウ色"
+      />
+
+      <span id="setlistShadowColorValue">
+        #000000
+      </span>
+    </div>
+  </div>
+
+  <label
+    class="fieldLabel"
+    for="setlistShadowOffsetX"
+  >
+    横位置
+  </label>
+
+  <div class="rangeInputRow">
+    <input
+      id="setlistShadowOffsetX"
+      type="range"
+      min="-20"
+      max="20"
+      step="1"
+      value="3"
+    />
+
+    <span id="setlistShadowOffsetXValue">
+      3px
+    </span>
+  </div>
+
+  <label
+    class="fieldLabel"
+    for="setlistShadowOffsetY"
+  >
+    縦位置
+  </label>
+
+  <div class="rangeInputRow">
+    <input
+      id="setlistShadowOffsetY"
+      type="range"
+      min="-20"
+      max="20"
+      step="1"
+      value="3"
+    />
+
+    <span id="setlistShadowOffsetYValue">
+      3px
+    </span>
+  </div>
+
+  <label
+    class="fieldLabel"
+    for="setlistShadowBlur"
+  >
+    ぼかし
+  </label>
+
+  <div class="rangeInputRow">
+    <input
+      id="setlistShadowBlur"
+      type="range"
+      min="0"
+      max="30"
+      step="1"
+      value="6"
+    />
+
+    <span id="setlistShadowBlurValue">
+      6px
+    </span>
+  </div>
+</div>
 
       <!-- セットリスト操作 -->
 
