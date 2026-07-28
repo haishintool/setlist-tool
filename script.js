@@ -1579,6 +1579,17 @@ nowPlayingShadowOffsetX?.addEventListener(
   }
 );
 
+nowPlayingShadowOffsetX?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      nowPlayingShadowOffsetX: Number(
+        nowPlayingShadowOffsetX.value
+      ),
+    });
+  }
+);
+
 nowPlayingShadowOffsetY?.addEventListener(
   "input",
   () => {
@@ -1591,6 +1602,17 @@ nowPlayingShadowOffsetY?.addEventListener(
   }
 );
 
+nowPlayingShadowOffsetY?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      nowPlayingShadowOffsetY: Number(
+        nowPlayingShadowOffsetY.value
+      ),
+    });
+  }
+);
+
 nowPlayingShadowBlur?.addEventListener(
   "input",
   () => {
@@ -1600,6 +1622,17 @@ nowPlayingShadowBlur?.addEventListener(
     }
 
     updateNowPlayingShadowPreview();
+  }
+);
+
+nowPlayingShadowBlur?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      nowPlayingShadowBlur: Number(
+        nowPlayingShadowBlur.value
+      ),
+    });
   }
 );
 
