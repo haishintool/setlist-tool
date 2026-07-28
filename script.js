@@ -932,26 +932,33 @@ function renderNowPlaying() {
     return;
   }
 
-const currentSong =
-  state.currentSong || "";
+  const currentSong =
+    state.currentSong || "";
 
-currentSongElement.textContent =
-  currentSong;
+  currentSongElement.textContent =
+    currentSong;
 
-currentSongElement.style.fontFamily =
-  createFontStack(
-    state.nowPlayingFontFamily
-  );
+  currentSongElement.style.fontFamily =
+    createFontStack(
+      state.nowPlayingFontFamily
+    );
 
   currentSongElement.style.color =
-  state.nowPlayingTextColor;
+    state.nowPlayingTextColor;
 
-currentSongElement.style.fontSize =
-  "60px";
+  if (state.nowPlayingStrokeEnabled) {
+    currentSongElement.style.webkitTextStroke =
+      `${state.nowPlayingStrokeWidth}px ${state.nowPlayingStrokeColor}`;
+  } else {
+    currentSongElement.style.webkitTextStroke =
+      "0px transparent";
+  }
+
+  currentSongElement.style.fontSize =
+    "60px";
 
   currentSongElement.style.fontWeight =
     "700";
-
 }
 
 /* =========================================================
