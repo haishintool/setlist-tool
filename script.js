@@ -1144,6 +1144,26 @@ nowPlayingTextColor?.addEventListener(
   }
 );
 
+nowPlayingStrokeColor?.addEventListener(
+  "input",
+  () => {
+    if (nowPlayingStrokeColorValue) {
+      nowPlayingStrokeColorValue.textContent =
+        nowPlayingStrokeColor.value.toUpperCase();
+    }
+  }
+);
+
+nowPlayingStrokeWidth?.addEventListener(
+  "input",
+  () => {
+    if (nowPlayingStrokeWidthValue) {
+      nowPlayingStrokeWidthValue.textContent =
+        `${nowPlayingStrokeWidth.value}px`;
+    }
+  }
+);
+
 nowPlayingTextColor?.addEventListener(
   "change",
   async () => {
