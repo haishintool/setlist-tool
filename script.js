@@ -857,6 +857,9 @@ currentSongElement.style.fontFamily =
     state.nowPlayingFontFamily
   );
 
+  currentSongElement.style.color =
+  state.nowPlayingTextColor;
+
 currentSongElement.style.fontSize =
   "60px";
 
