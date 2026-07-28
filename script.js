@@ -1200,6 +1200,22 @@ itemStroke.textContent =
 itemFill.textContent =
   item.title;
 
+itemShadow.style.color =
+  "transparent";
+
+itemShadow.style.webkitTextStroke =
+  "0px transparent";
+
+itemShadow.style.textShadow =
+  state.setlistShadowEnabled
+    ? `${state.setlistShadowOffsetX}px ${state.setlistShadowOffsetY}px ${state.setlistShadowBlur}px ${state.setlistShadowColor}`
+    : "none";
+
+itemShadow.style.visibility =
+  state.setlistShadowEnabled
+    ? "visible"
+    : "hidden";
+
 itemStroke.style.color =
   "transparent";
 
