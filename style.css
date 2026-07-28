@@ -1034,7 +1034,7 @@ body.obsBody .obsList .loopSpacer::before {
 }
 .layeredText {
   position: relative;
-  display: inline-grid;
+  display: grid;
 }
 
 .layeredTextShadow,
