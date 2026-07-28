@@ -61,6 +61,12 @@ const DEFAULT_STATE = {
   nowPlayingStrokeEnabled: true,
   nowPlayingStrokeColor: "#000000",
   nowPlayingStrokeWidth: 2,
+  
+  nowPlayingShadowEnabled: false,
+nowPlayingShadowColor: "#000000",
+nowPlayingShadowOffsetX: 3,
+nowPlayingShadowOffsetY: 3,
+nowPlayingShadowBlur: 6,
 
   visibleSongs: 10,
   scrollSpeed: 20,
@@ -1417,6 +1423,70 @@ nowPlayingStrokeEnabled?.addEventListener(
       nowPlayingStrokeEnabled:
         nowPlayingStrokeEnabled.checked,
     });
+  }
+);
+
+function updateNowPlayingShadowPreview() {
+  if (!previewNowPlayingShadow) {
+    return;
+  }
+
+  previewNowPlayingShadow.style.textShadow =
+    nowPlayingShadowEnabled.checked
+      ? `${nowPlayingShadowOffsetX.value}px ${nowPlayingShadowOffsetY.value}px ${nowPlayingShadowBlur.value}px ${nowPlayingShadowColor.value}`
+      : "none";
+}
+
+nowPlayingShadowEnabled?.addEventListener(
+  "change",
+  updateNowPlayingShadowPreview
+);
+
+nowPlayingShadowColor?.addEventListener(
+  "input",
+  () => {
+    if (nowPlayingShadowColorValue) {
+      nowPlayingShadowColorValue.textContent =
+        nowPlayingShadowColor.value.toUpperCase();
+    }
+
+    updateNowPlayingShadowPreview();
+  }
+);
+
+nowPlayingShadowOffsetX?.addEventListener(
+  "input",
+  () => {
+    if (nowPlayingShadowOffsetXValue) {
+      nowPlayingShadowOffsetXValue.textContent =
+        `${nowPlayingShadowOffsetX.value}px`;
+    }
+
+    updateNowPlayingShadowPreview();
+  }
+);
+
+nowPlayingShadowOffsetY?.addEventListener(
+  "input",
+  () => {
+    if (nowPlayingShadowOffsetYValue) {
+      nowPlayingShadowOffsetYValue.textContent =
+        `${nowPlayingShadowOffsetY.value}px`;
+    }
+
+    updateNowPlayingShadowPreview();
+  }
+);
+
+nowPlayingShadowBlur?.addEventListener(
+  "input",
+  () => {
+    if (nowPlayingShadowBlurValue) {
+      nowPlayingShadowBlurValue.textContent =
+        `${nowPlayingShadowBlur.value}px`;
+    }
+
+    updateNowPlayingShadowPreview();
   }
 );
 
