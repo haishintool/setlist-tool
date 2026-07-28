@@ -360,6 +360,22 @@ function renderControlPage() {
   renderPreview();
 }
 
+function renderPreview() {
+  if (previewNowPlaying) {
+    previewNowPlaying.style.fontFamily =
+      createFontStack(
+        state.nowPlayingFontFamily
+      );
+  }
+
+  if (previewSetlist) {
+    previewSetlist.style.fontFamily =
+      createFontStack(
+        state.setlistFontFamily
+      );
+  }
+}
+
 function renderSongCount() {
   if (!songCount) {
     return;
