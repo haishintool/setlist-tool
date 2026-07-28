@@ -766,6 +766,57 @@
   </div>
 </div>
 
+<!-- スクロール設定 -->
+
+<section
+  class="controlGroup"
+  aria-labelledby="scrollSettingsTitle"
+>
+  <div class="controlGroupHeader">
+    <h3 id="scrollSettingsTitle">
+      スクロール設定
+    </h3>
+  </div>
+
+  <label
+    class="fieldLabel"
+    for="visibleSongsInput"
+  >
+    表示する曲数
+  </label>
+
+  <input
+    id="visibleSongsInput"
+    class="textInput"
+    type="number"
+    min="1"
+    step="1"
+    value="10"
+  />
+
+  <label
+    class="fieldLabel"
+    for="scrollSpeedInput"
+  >
+    スクロール速度
+  </label>
+
+  <div class="rangeInputRow">
+    <input
+      id="scrollSpeedInput"
+      type="range"
+      min="1"
+      max="100"
+      step="1"
+      value="20"
+    />
+
+    <span id="scrollSpeedValue">
+      20
+    </span>
+  </div>
+</section>
+
       <!-- セットリスト操作 -->
 
             <section
