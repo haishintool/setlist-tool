@@ -1173,6 +1173,12 @@ if (currentSongShadow) {
   currentSongShadow.style.webkitTextStroke =
     "0px transparent";
 
+currentSongShadow.style.fontSize =
+  "60px";
+
+currentSongShadow.style.fontWeight =
+  "700";    
+
   currentSongShadow.style.textShadow =
     state.nowPlayingShadowEnabled
       ? `${state.nowPlayingShadowOffsetX}px ${state.nowPlayingShadowOffsetY}px ${state.nowPlayingShadowBlur}px ${state.nowPlayingShadowColor}`
