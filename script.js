@@ -825,6 +825,24 @@ previewNowPlayingShadow.style.visibility =
     );
   }
 
+if (previewSetlistShadow) {
+  previewSetlistShadow.style.color =
+    state.setlistTextColor;
+
+  previewSetlistShadow.style.webkitTextStroke =
+    "0px transparent";
+
+  previewSetlistShadow.style.textShadow =
+    state.setlistShadowEnabled
+      ? `${state.setlistShadowOffsetX}px ${state.setlistShadowOffsetY}px ${state.setlistShadowBlur}px ${state.setlistShadowColor}`
+      : "none";
+
+  previewSetlistShadow.style.visibility =
+    state.setlistShadowEnabled
+      ? "visible"
+      : "hidden";
+}  
+
 if (previewSetlistStroke) {
   previewSetlistStroke.style.color =
     "transparent";
