@@ -893,6 +893,16 @@ if (nowPlayingShadowBlurValue) {
     `${state.nowPlayingShadowBlur}px`;
 }
 
+if (setlistTextColor) {
+  setlistTextColor.value =
+    state.setlistTextColor;
+}
+
+if (setlistTextColorValue) {
+  setlistTextColorValue.textContent =
+    state.setlistTextColor.toUpperCase();
+}
+
 }
 
 function renderSongCount() {
@@ -1672,6 +1682,31 @@ nowPlayingTextColor?.addEventListener(
       previewNowPlaying.style.color =
         nowPlayingTextColor.value;
     }
+  }
+);
+
+setlistTextColor?.addEventListener(
+  "input",
+  () => {
+    if (setlistTextColorValue) {
+      setlistTextColorValue.textContent =
+        setlistTextColor.value.toUpperCase();
+    }
+
+    state.setlistTextColor =
+      setlistTextColor.value;
+
+    renderPreview();
+  }
+);
+
+setlistTextColor?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      setlistTextColor:
+        setlistTextColor.value,
+    });
   }
 );
 
