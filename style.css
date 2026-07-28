@@ -1012,3 +1012,20 @@ body.obsBody .obsList .loopSpacer::before {
   border-radius: 10px;
   background: #0d0e13;
 }
+.layeredText {
+  position: relative;
+  display: inline-grid;
+}
+
+.layeredTextStroke,
+.layeredTextFill {
+  grid-area: 1 / 1;
+}
+
+.layeredTextStroke {
+  color: transparent;
+}
+
+.layeredTextFill {
+  position: relative;
+}

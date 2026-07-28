@@ -181,6 +181,16 @@ const currentSongElement =
     ".previewNowPlaying"
   );
 
+const previewNowPlayingStroke =
+  document.getElementById(
+    "previewNowPlayingStroke"
+  );
+
+const previewNowPlayingFill =
+  document.getElementById(
+    "previewNowPlayingFill"
+  );  
+
 const previewSetlist =
   document.querySelector(
     ".previewSetlist"
@@ -436,20 +446,37 @@ function renderControlPage() {
 
 function renderPreview() {
 if (previewNowPlaying) {
-  previewNowPlaying.style.fontFamily =
-    createFontStack(
-      state.nowPlayingFontFamily
-    );
+const nowPlayingFontStack =
+  createFontStack(
+    state.nowPlayingFontFamily
+  );
 
-  previewNowPlaying.style.color =
-    state.nowPlayingTextColor;
+if (previewNowPlayingStroke) {
+  previewNowPlayingStroke.style.fontFamily =
+    nowPlayingFontStack;
+
+  previewNowPlayingStroke.style.color =
+    state.nowPlayingStrokeColor;
+
+  previewNowPlayingStroke.style.webkitTextStroke =
+    state.nowPlayingStrokeEnabled
+      ? `${state.nowPlayingStrokeWidth}px ${state.nowPlayingStrokeColor}`
+      : "0px transparent";
+
+  previewNowPlayingStroke.style.visibility =
+    state.nowPlayingStrokeEnabled
+      ? "visible"
+      : "hidden";
 }
 
-if (state.nowPlayingStrokeEnabled) {
-  previewNowPlaying.style.webkitTextStroke =
-    `${state.nowPlayingStrokeWidth}px ${state.nowPlayingStrokeColor}`;
-} else {
-  previewNowPlaying.style.webkitTextStroke =
+if (previewNowPlayingFill) {
+  previewNowPlayingFill.style.fontFamily =
+    nowPlayingFontStack;
+
+  previewNowPlayingFill.style.color =
+    state.nowPlayingTextColor;
+
+  previewNowPlayingFill.style.webkitTextStroke =
     "0px transparent";
 }
 
