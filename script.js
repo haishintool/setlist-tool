@@ -1104,6 +1104,10 @@ function renderDisplayPage() {
     const listItem =
       document.createElement("li");
 
+      listItem.classList.add(
+  "layeredText"
+);
+
     if (item.type === "spacer") {
       listItem.classList.add(
         "loopSpacer"
@@ -1114,18 +1118,50 @@ function renderDisplayPage() {
         "true"
       );
     } else {
+
+const itemShadow =
+  document.createElement("span");
+
+itemShadow.classList.add(
+  "layeredTextShadow",
+  "setlistTextShadow"
+);
+
+const itemStroke =
+  document.createElement("span");
+
+itemStroke.classList.add(
+  "layeredTextStroke",
+  "setlistTextStroke"
+);  
+
 const itemFill =
   document.createElement("span");
 
 itemFill.classList.add(
+  "layeredTextFill",
   "setlistTextFill"
 );
+
+itemShadow.textContent =
+  item.title;
+
+itemStroke.textContent =
+  item.title;
 
 itemFill.textContent =
   item.title;
 
 itemFill.style.color =
   state.setlistTextColor;
+
+listItem.appendChild(
+  itemShadow
+);
+
+listItem.appendChild(
+  itemStroke
+);
 
 listItem.appendChild(
   itemFill
@@ -1716,6 +1752,56 @@ setlistStrokeEnabled?.addEventListener(
     await updateState({
       setlistStrokeEnabled:
         setlistStrokeEnabled.checked,
+    });
+  }
+);
+
+setlistStrokeColor?.addEventListener(
+  "input",
+  () => {
+    if (setlistStrokeColorValue) {
+      setlistStrokeColorValue.textContent =
+        setlistStrokeColor.value.toUpperCase();
+    }
+
+    state.setlistStrokeColor =
+      setlistStrokeColor.value;
+
+    renderPreview();
+  }
+);
+
+setlistStrokeColor?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      setlistStrokeColor:
+        setlistStrokeColor.value,
+    });
+  }
+);
+
+setlistStrokeWidth?.addEventListener(
+  "input",
+  () => {
+    if (setlistStrokeWidthValue) {
+      setlistStrokeWidthValue.textContent =
+        `${setlistStrokeWidth.value}px`;
+    }
+
+    state.setlistStrokeWidth =
+      Number(setlistStrokeWidth.value);
+
+    renderPreview();
+  }
+);
+
+setlistStrokeWidth?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      setlistStrokeWidth:
+        Number(setlistStrokeWidth.value),
     });
   }
 );
