@@ -2004,6 +2004,18 @@ nowPlayingShadowEnabled?.addEventListener(
   }
 );
 
+setlistShadowEnabled?.addEventListener(
+  "change",
+  async () => {
+    renderPreview();
+
+    await updateState({
+      setlistShadowEnabled:
+        setlistShadowEnabled.checked,
+    });
+  }
+);
+
 nowPlayingShadowColor?.addEventListener(
   "input",
   () => {
@@ -2026,6 +2038,28 @@ nowPlayingShadowColor?.addEventListener(
   }
 );
 
+setlistShadowColor?.addEventListener(
+  "input",
+  () => {
+    if (setlistShadowColorValue) {
+      setlistShadowColorValue.textContent =
+        setlistShadowColor.value.toUpperCase();
+    }
+
+    renderPreview();
+  }
+);
+
+setlistShadowColor?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      setlistShadowColor:
+        setlistShadowColor.value,
+    });
+  }
+);
+
 nowPlayingShadowOffsetX?.addEventListener(
   "input",
   () => {
@@ -2044,6 +2078,29 @@ nowPlayingShadowOffsetX?.addEventListener(
     await updateState({
       nowPlayingShadowOffsetX: Number(
         nowPlayingShadowOffsetX.value
+      ),
+    });
+  }
+);
+
+setlistShadowOffsetX?.addEventListener(
+  "input",
+  () => {
+    if (setlistShadowOffsetXValue) {
+      setlistShadowOffsetXValue.textContent =
+        `${setlistShadowOffsetX.value}px`;
+    }
+
+    renderPreview();
+  }
+);
+
+setlistShadowOffsetX?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      setlistShadowOffsetX: Number(
+        setlistShadowOffsetX.value
       ),
     });
   }
@@ -2072,6 +2129,29 @@ nowPlayingShadowOffsetY?.addEventListener(
   }
 );
 
+setlistShadowOffsetY?.addEventListener(
+  "input",
+  () => {
+    if (setlistShadowOffsetYValue) {
+      setlistShadowOffsetYValue.textContent =
+        `${setlistShadowOffsetY.value}px`;
+    }
+
+    renderPreview();
+  }
+);
+
+setlistShadowOffsetY?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      setlistShadowOffsetY: Number(
+        setlistShadowOffsetY.value
+      ),
+    });
+  }
+);
+
 nowPlayingShadowBlur?.addEventListener(
   "input",
   () => {
@@ -2090,6 +2170,29 @@ nowPlayingShadowBlur?.addEventListener(
     await updateState({
       nowPlayingShadowBlur: Number(
         nowPlayingShadowBlur.value
+      ),
+    });
+  }
+);
+
+setlistShadowBlur?.addEventListener(
+  "input",
+  () => {
+    if (setlistShadowBlurValue) {
+      setlistShadowBlurValue.textContent =
+        `${setlistShadowBlur.value}px`;
+    }
+
+    renderPreview();
+  }
+);
+
+setlistShadowBlur?.addEventListener(
+  "change",
+  async () => {
+    await updateState({
+      setlistShadowBlur: Number(
+        setlistShadowBlur.value
       ),
     });
   }
