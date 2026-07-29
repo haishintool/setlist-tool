@@ -216,11 +216,6 @@ const displaySetlist =
 const currentSongElement =
   document.getElementById("currentSong");
 
-const nowPlayingTrack =
-  document.getElementById(
-    "nowPlayingTrack"
-  );  
-
 const currentSongShadow =
   document.getElementById("currentSongShadow");  
 
@@ -1584,150 +1579,106 @@ function stopAutoScroll() {
 
 function stopNowPlayingScroll() {
   if (nowPlayingAnimation) {
-    nowPlayingAnimation.cancel();
+    cancelAnimationFrame(nowPlayingAnimation);
     nowPlayingAnimation = null;
   }
 
-  if (nowPlayingTrack) {
-    nowPlayingTrack.style.transform =
-      "translate3d(0, 0, 0)";
+  if (currentSongElement) {
+    currentSongElement.style.transform =
+      "translate3d(0,0,0)";
   }
 }
 
 function startNowPlayingScroll() {
   if (
-    !nowPlayingTrack ||
     !currentSongElement ||
     !currentSongFill
   ) {
     return;
   }
 
-  const viewport =
-    nowPlayingTrack.closest(
-      ".nowPlayingViewport"
-    );
+  stopNowPlayingScroll();
 
-  if (!viewport) {
+  const viewport =
+    currentSongElement.parentElement;
+
+  const viewportWidth =
+    viewport.clientWidth;
+
+  const textWidth =
+    currentSongFill.scrollWidth;
+
+  if (textWidth <= viewportWidth) {
     return;
   }
 
-  stopNowPlayingScroll();
+  const distance =
+    textWidth - viewportWidth;
 
-  requestAnimationFrame(() => {
-    /*
-      文字の実際の横幅を取得
-    */
-    const textWidth =
-      Math.ceil(
-        currentSongFill
-          .getBoundingClientRect()
-          .width
-      );
+  const speed = 40;
 
-    const viewportWidth =
-      viewport.clientWidth;
+  const waitStart = 5000;
+  const waitEnd = 2000;
 
-    const overflowDistance =
-      Math.max(
-        0,
-        textWidth - viewportWidth
-      );
+  let startTime = null;
 
-    /*
-      曲名が表示枠内に収まる場合は
-      動かさない
-    */
-    if (
-      overflowDistance <= 0 ||
-      !state.currentSong
-    ) {
-      return;
+  function animate(now) {
+
+    if (!startTime) {
+      startTime = now;
     }
 
-    const scrollSpeed = 40;
+    const elapsed =
+      now - startTime;
 
-    const startPauseDuration = 5000;
-    const endPauseDuration = 2000;
+    let x = 0;
 
-    const scrollDuration =
-      Math.max(
-        3000,
-        (
-          overflowDistance /
-          scrollSpeed
-        ) * 1000
-      );
+    if (elapsed < waitStart) {
 
-    /*
-      最初の位置へ瞬時に戻す時間
-    */
-    const resetDuration = 50;
+      x = 0;
 
-    const totalDuration =
-      startPauseDuration +
-      scrollDuration +
-      endPauseDuration +
-      resetDuration;
+    } else {
 
-    const scrollStartOffset =
-      startPauseDuration /
-      totalDuration;
+      const scrollElapsed =
+        elapsed - waitStart;
 
-    const scrollEndOffset =
-      (
-        startPauseDuration +
-        scrollDuration
-      ) /
-      totalDuration;
+      const scrollTime =
+        (distance / speed) * 1000;
 
-    const resetStartOffset =
-      (
-        startPauseDuration +
-        scrollDuration +
-        endPauseDuration
-      ) /
-      totalDuration;
+      if (scrollElapsed < scrollTime) {
+
+        x =
+          -(scrollElapsed / scrollTime)
+          * distance;
+
+      } else if (
+        scrollElapsed <
+        scrollTime + waitEnd
+      ) {
+
+        x = -distance;
+
+      } else {
+
+        startTime = now;
+        x = 0;
+
+      }
+    }
+
+    currentSongElement.style.transform =
+      `translate3d(${x}px,0,0)`;
 
     nowPlayingAnimation =
-      nowPlayingTrack.animate(
-        [
-          {
-            transform:
-              "translate3d(0, 0, 0)",
-            offset: 0
-          },
-          {
-            transform:
-              "translate3d(0, 0, 0)",
-            offset:
-              scrollStartOffset
-          },
-          {
-            transform:
-              `translate3d(-${overflowDistance}px, 0, 0)`,
-            offset:
-              scrollEndOffset
-          },
-          {
-            transform:
-              `translate3d(-${overflowDistance}px, 0, 0)`,
-            offset:
-              resetStartOffset
-          },
-          {
-            transform:
-              "translate3d(0, 0, 0)",
-            offset: 1
-          }
-        ],
-        {
-          duration: totalDuration,
-          iterations: Infinity,
-          easing: "linear"
-        }
+      requestAnimationFrame(
+        animate
       );
-  });
+  }
+
+  nowPlayingAnimation =
+    requestAnimationFrame(
+      animate
+    );
 }
 
 function renderNowPlaying() {
