@@ -160,22 +160,25 @@
   </div>
 </section>
 
-      <div class="sectionHeader">
-        <div>
-          <p class="sectionNumber">01</p>
+<div class="settingsTabs">
 
-          <h2 id="controlPanelTitle">
-            CONTROL
-          </h2>
-        </div>
+  <button
+    id="setlistTabButton"
+    class="settingsTab isActive"
+    type="button"
+  >
+    Set List
+  </button>
 
-        <span
-          id="songCount"
-          class="songCount"
-        >
-          0 SONGS
-        </span>
-      </div>
+  <button
+    id="nowPlayingTabButton"
+    class="settingsTab"
+    type="button"
+  >
+    Now Playing
+  </button>
+
+</div>
 
       <!-- 曲名追加 -->
 
@@ -261,8 +264,16 @@
         </div>
       </section>
 
+<div
+  id="nowPlayingTab"
+  class="settingsTabPanel"
+  hidden
+>
+
       <!-- Now Playing フォント -->
 
+
+      
       <section
         class="controlGroup"
         aria-labelledby="nowPlayingFontTitle"
@@ -528,6 +539,13 @@
 </div>
 
       </section>
+
+      </div>
+
+      <div
+  id="setlistTab"
+  class="settingsTabPanel"
+>
 
       <!-- セットリスト フォント -->
 
@@ -842,6 +860,8 @@
     </span>
   </div>
 </section>
+
+</div>
 
       <!-- セットリスト操作 -->
 

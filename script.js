@@ -170,6 +170,26 @@ const copyRoomUrlButton =
 const copyRoomUrlStatus =
   document.getElementById("copyRoomUrlStatus");
 
+const setlistTabButton =
+  document.getElementById(
+    "setlistTabButton"
+  );
+
+const nowPlayingTabButton =
+  document.getElementById(
+    "nowPlayingTabButton"
+  );
+
+const setlistTab =
+  document.getElementById(
+    "setlistTab"
+  );
+
+const nowPlayingTab =
+  document.getElementById(
+    "nowPlayingTab"
+  );  
+
 /* 削除確認モーダル */
 
 const confirmModal =
@@ -1825,9 +1845,48 @@ function closeConfirmModal() {
   lastFocusedElement = null;
 }
 
+function switchSettingsTab(tabName) {
+  const isSetlist =
+    tabName === "setlist";
+
+  setlistTab.hidden =
+    !isSetlist;
+
+  nowPlayingTab.hidden =
+    isSetlist;
+
+  setlistTabButton?.classList.toggle(
+    "isActive",
+    isSetlist
+  );
+
+  nowPlayingTabButton?.classList.toggle(
+    "isActive",
+    !isSetlist
+  );
+}
+
 /* =========================================================
    index.html イベント
 ========================================================= */
+
+setlistTabButton?.addEventListener(
+  "click",
+  () => {
+    switchSettingsTab(
+      "setlist"
+    );
+  }
+);
+
+nowPlayingTabButton?.addEventListener(
+  "click",
+  () => {
+    switchSettingsTab(
+      "nowPlaying"
+    );
+  }
+);
 
 songForm?.addEventListener(
   "submit",
@@ -2605,12 +2664,16 @@ if (playerPageLink) {
     `https://haishintool.github.io/youtube-player/?id=${encodeURIComponent(roomId)}`;
 }
 
-  state =
-    await loadState();
+state =
+  await loadState();
 
-  lastSavedData =
-    JSON.stringify(state);
+lastSavedData =
+  JSON.stringify(state);
 
-  render();
+render();
+
+switchSettingsTab(
+  "setlist"
+);
 
 })();
