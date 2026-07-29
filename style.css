@@ -1072,3 +1072,14 @@ li.layeredText > .layeredTextStroke {
 li.layeredText > .layeredTextFill {
   position: relative;
 }
+.previewSetlist {
+  list-style: none;
+  padding-left: 0;
+}
+
+.setlistMarker {
+  display: inline-block;
+  width: 2em;
+  text-align: right;
+  margin-right: 0.35em;
+}
