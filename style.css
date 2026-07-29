@@ -1057,29 +1057,26 @@ body.obsBody .obsList .loopSpacer::before {
   position: relative;
   z-index: 2;
 }
-li.layeredText {
-  display: list-item;
-  position: relative;
-}
 
-li.layeredText > .layeredTextShadow,
-li.layeredText > .layeredTextStroke {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-li.layeredText > .layeredTextFill {
-  position: relative;
-}
 .previewSetlist {
   list-style: none;
   padding-left: 0;
 }
 
+.previewSetlist > li.layeredText {
+  display: inline-grid;
+  position: relative;
+}
+
+.previewSetlist .layeredTextShadow,
+.previewSetlist .layeredTextStroke,
+.previewSetlist .layeredTextFill {
+  grid-area: 1 / 1;
+}
+
 .setlistMarker {
   display: inline-block;
   width: 2em;
-  text-align: right;
   margin-right: 0.35em;
+  text-align: right;
 }
