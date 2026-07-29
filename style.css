@@ -1146,12 +1146,24 @@ body.obsBody .obsList .loopSpacer::before {
   max-width: 100vw;
   overflow: hidden;
   position: relative;
+  text-align: left;
+}
+
+.nowPlayingTrack {
+  display: block;
+  width: max-content;
+  min-width: max-content;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 
 .obsNowPlaying {
+  display: inline-block;
+  position: relative;
+  width: max-content;
+  min-width: max-content;
   white-space: nowrap;
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
+  text-align: left;
 }
 
 .obsNowPlaying .layeredTextShadow,

@@ -216,6 +216,11 @@ const displaySetlist =
 const currentSongElement =
   document.getElementById("currentSong");
 
+const nowPlayingTrack =
+  document.getElementById(
+    "nowPlayingTrack"
+  );  
+
 const currentSongShadow =
   document.getElementById("currentSongShadow");  
 
@@ -1583,14 +1588,15 @@ function stopNowPlayingScroll() {
     nowPlayingAnimation = null;
   }
 
-  if (currentSongElement) {
-    currentSongElement.style.transform =
+  if (nowPlayingTrack) {
+    nowPlayingTrack.style.transform =
       "translate3d(0, 0, 0)";
   }
 }
 
 function startNowPlayingScroll() {
   if (
+    !nowPlayingTrack ||
     !currentSongElement ||
     !currentSongFill
   ) {
@@ -1598,7 +1604,7 @@ function startNowPlayingScroll() {
   }
 
   const viewport =
-    currentSongElement.closest(
+    nowPlayingTrack.closest(
       ".nowPlayingViewport"
     );
 
@@ -1609,20 +1615,28 @@ function startNowPlayingScroll() {
   stopNowPlayingScroll();
 
   requestAnimationFrame(() => {
+    /*
+      文字の実際の横幅を取得
+    */
     const textWidth =
-      currentSongFill.scrollWidth;
+      Math.ceil(
+        currentSongFill
+          .getBoundingClientRect()
+          .width
+      );
 
     const viewportWidth =
       viewport.clientWidth;
 
     const overflowDistance =
-      Math.ceil(
+      Math.max(
+        0,
         textWidth - viewportWidth
       );
 
     /*
-      表示枠に収まっている場合は
-      スクロールさせない
+      曲名が表示枠内に収まる場合は
+      動かさない
     */
     if (
       overflowDistance <= 0 ||
@@ -1631,10 +1645,6 @@ function startNowPlayingScroll() {
       return;
     }
 
-    /*
-      スクロール速度
-      1秒間に40px進む
-    */
     const scrollSpeed = 40;
 
     const startPauseDuration = 5000;
@@ -1649,6 +1659,9 @@ function startNowPlayingScroll() {
         ) * 1000
       );
 
+    /*
+      最初の位置へ瞬時に戻す時間
+    */
     const resetDuration = 50;
 
     const totalDuration =
@@ -1677,7 +1690,7 @@ function startNowPlayingScroll() {
       totalDuration;
 
     nowPlayingAnimation =
-      currentSongElement.animate(
+      nowPlayingTrack.animate(
         [
           {
             transform:
