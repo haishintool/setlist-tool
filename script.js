@@ -825,9 +825,20 @@ previewNowPlayingShadow.style.visibility =
     );
   }
 
+const previewMarker =
+  state.listStyle === "number"
+    ? "1."
+    : "・";
+
+const previewTitle =
+  "曲名サンプル";
+
 if (previewSetlistShadow) {
-previewSetlistShadow.style.color =
-  "transparent";
+  previewSetlistShadow.innerHTML =
+    `<span class="setlistMarker">${previewMarker}</span><span class="setlistTitle">${previewTitle}</span>`;
+
+  previewSetlistShadow.style.color =
+    "transparent";
 
   previewSetlistShadow.style.webkitTextStroke =
     "0px transparent";
@@ -841,9 +852,12 @@ previewSetlistShadow.style.color =
     state.setlistShadowEnabled
       ? "visible"
       : "hidden";
-}  
+}
 
 if (previewSetlistStroke) {
+  previewSetlistStroke.innerHTML =
+    `<span class="setlistMarker">${previewMarker}</span><span class="setlistTitle">${previewTitle}</span>`;
+
   previewSetlistStroke.style.color =
     "transparent";
 
@@ -859,12 +873,15 @@ if (previewSetlistStroke) {
 }
 
 if (previewSetlistFill) {
+  previewSetlistFill.innerHTML =
+    `<span class="setlistMarker">${previewMarker}</span><span class="setlistTitle">${previewTitle}</span>`;
+
   previewSetlistFill.style.color =
     state.setlistTextColor;
 
   previewSetlistFill.style.webkitTextStroke =
     "0px transparent";
-}  
+}
 
   if (nowPlayingTextColor) {
     nowPlayingTextColor.value =
