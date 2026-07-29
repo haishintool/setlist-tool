@@ -1080,3 +1080,15 @@ body.obsBody .obsList .loopSpacer::before {
   margin-right: 0.35em;
   text-align: right;
 }
+
+.previewSetlist,
+.previewSetlist.numberStyle,
+.previewSetlist.bulletStyle,
+.previewSetlist > li {
+  list-style: none !important;
+  list-style-type: none !important;
+}
+
+.previewSetlist > li::marker {
+  content: "";
+}
