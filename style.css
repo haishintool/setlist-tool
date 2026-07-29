@@ -759,12 +759,12 @@ html:has(body.nowPlayingBody) {
   background: transparent !important;
 }
 
-html,
-body,
+html:has(body.obsBody),
+html:has(body.nowPlayingBody),
 body.obsBody,
 body.nowPlayingBody,
-.obsSetlist,
-.obsList {
+body.obsBody .obsSetlist,
+body.obsBody .obsList {
   background: transparent !important;
   background-color: transparent !important;
 }
@@ -808,10 +808,6 @@ body.obsBody .obsList {
 
   will-change: transform;
   transform: translate3d(0, 0, 0);
-}
-
-body.obsBody .obsList.numberStyle {
-  padding-left: 1.65em;
 }
 
 .obsNowPlaying {
