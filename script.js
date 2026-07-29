@@ -1278,14 +1278,22 @@ itemFill.classList.add(
   "setlistTextFill"
 );
 
-itemShadow.textContent =
-  item.title;
+const marker =
+  state.listStyle === "number"
+    ? `${item.songIndex + 1}.`
+    : "・";
 
-itemStroke.textContent =
-  item.title;
+const titleHtml =
+  `<span class="setlistMarker">${marker}</span><span class="setlistTitle">${item.title}</span>`;
 
-itemFill.textContent =
-  item.title;
+itemShadow.innerHTML =
+  titleHtml;
+
+itemStroke.innerHTML =
+  titleHtml;
+
+itemFill.innerHTML =
+  titleHtml;
 
 itemShadow.style.color =
   "transparent";

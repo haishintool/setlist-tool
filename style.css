@@ -814,10 +814,6 @@ body.obsBody .obsList.numberStyle {
   padding-left: 1.65em;
 }
 
-body.obsBody .obsList.bulletStyle {
-  list-style: none;
-}
-
 .obsNowPlaying {
   margin-top: 20px;
   display: grid;
