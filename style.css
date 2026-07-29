@@ -1153,8 +1153,10 @@ body.obsBody .obsList .loopSpacer::before {
   display: inline-grid;
   width: max-content;
   min-width: max-content;
-  justify-content: initial;
-  text-align: left;
+
+  justify-content: center;
+  text-align: center;
+
   white-space: nowrap;
 
   transform: translate3d(0, 0, 0);

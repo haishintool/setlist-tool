@@ -1608,9 +1608,27 @@ function startNowPlayingScroll() {
   const textWidth =
     currentSongFill.scrollWidth;
 
-  if (textWidth <= viewportWidth) {
-    return;
-  }
+if (textWidth <= viewportWidth) {
+  currentSongElement.style.justifyContent =
+    "center";
+
+  currentSongElement.style.textAlign =
+    "center";
+
+  currentSongElement.style.transform =
+    "translate3d(0,0,0)";
+
+  return;
+}
+
+currentSongElement.style.justifyContent =
+  "start";
+
+currentSongElement.style.textAlign =
+  "left";
+
+currentSongElement.style.justifyContent =
+  "start";
 
   const distance =
     textWidth - viewportWidth;
