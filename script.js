@@ -97,6 +97,8 @@ let isLoading = false;
 let autoScrollAnimationId = null;
 let autoScrollLastTime = null;
 let autoScrollResetTimer = null;
+let nowPlayingAnimation = null;
+let nowPlayingResizeTimer = null;
 
 /* =========================================================
    HTML要素取得
@@ -1575,6 +1577,146 @@ function stopAutoScroll() {
    nowplaying.html 描画
 ========================================================= */
 
+function stopNowPlayingScroll() {
+  if (nowPlayingAnimation) {
+    nowPlayingAnimation.cancel();
+    nowPlayingAnimation = null;
+  }
+
+  if (currentSongElement) {
+    currentSongElement.style.transform =
+      "translate3d(0, 0, 0)";
+  }
+}
+
+function startNowPlayingScroll() {
+  if (
+    !currentSongElement ||
+    !currentSongFill
+  ) {
+    return;
+  }
+
+  const viewport =
+    currentSongElement.closest(
+      ".nowPlayingViewport"
+    );
+
+  if (!viewport) {
+    return;
+  }
+
+  stopNowPlayingScroll();
+
+  requestAnimationFrame(() => {
+    const textWidth =
+      currentSongFill.scrollWidth;
+
+    const viewportWidth =
+      viewport.clientWidth;
+
+    const overflowDistance =
+      Math.ceil(
+        textWidth - viewportWidth
+      );
+
+    /*
+      表示枠に収まっている場合は
+      スクロールさせない
+    */
+    if (
+      overflowDistance <= 0 ||
+      !state.currentSong
+    ) {
+      return;
+    }
+
+    /*
+      スクロール速度
+      1秒間に40px進む
+    */
+    const scrollSpeed = 40;
+
+    const startPauseDuration = 5000;
+    const endPauseDuration = 2000;
+
+    const scrollDuration =
+      Math.max(
+        3000,
+        (
+          overflowDistance /
+          scrollSpeed
+        ) * 1000
+      );
+
+    const resetDuration = 50;
+
+    const totalDuration =
+      startPauseDuration +
+      scrollDuration +
+      endPauseDuration +
+      resetDuration;
+
+    const scrollStartOffset =
+      startPauseDuration /
+      totalDuration;
+
+    const scrollEndOffset =
+      (
+        startPauseDuration +
+        scrollDuration
+      ) /
+      totalDuration;
+
+    const resetStartOffset =
+      (
+        startPauseDuration +
+        scrollDuration +
+        endPauseDuration
+      ) /
+      totalDuration;
+
+    nowPlayingAnimation =
+      currentSongElement.animate(
+        [
+          {
+            transform:
+              "translate3d(0, 0, 0)",
+            offset: 0
+          },
+          {
+            transform:
+              "translate3d(0, 0, 0)",
+            offset:
+              scrollStartOffset
+          },
+          {
+            transform:
+              `translate3d(-${overflowDistance}px, 0, 0)`,
+            offset:
+              scrollEndOffset
+          },
+          {
+            transform:
+              `translate3d(-${overflowDistance}px, 0, 0)`,
+            offset:
+              resetStartOffset
+          },
+          {
+            transform:
+              "translate3d(0, 0, 0)",
+            offset: 1
+          }
+        ],
+        {
+          duration: totalDuration,
+          iterations: Infinity,
+          easing: "linear"
+        }
+      );
+  });
+}
+
 function renderNowPlaying() {
   if (!currentSongElement) {
     return;
@@ -1669,6 +1811,14 @@ if (currentSongFill) {
 
   currentSongFill.style.fontWeight =
     "700";
+}
+
+if (document.fonts?.ready) {
+  document.fonts.ready.then(() => {
+    startNowPlayingScroll();
+  });
+} else {
+  startNowPlayingScroll();
 }
 
 }
@@ -2627,6 +2777,22 @@ function createFontStack(fontName) {
 
   return `"${safeFontName}", "Yu Gothic", "Meiryo", sans-serif`;
 }
+
+window.addEventListener(
+  "resize",
+  () => {
+    if (nowPlayingResizeTimer) {
+      clearTimeout(
+        nowPlayingResizeTimer
+      );
+    }
+
+    nowPlayingResizeTimer =
+      setTimeout(() => {
+        startNowPlayingScroll();
+      }, 200);
+  }
+);
 
 /* =========================================================
    初期表示
