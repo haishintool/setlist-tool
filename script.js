@@ -1609,10 +1609,7 @@ function startNowPlayingScroll() {
     currentSongFill.scrollWidth;
 
 if (textWidth <= viewportWidth) {
-  currentSongElement.style.justifyContent =
-    "center";
-
-  currentSongElement.style.textAlign =
+  viewport.style.justifyContent =
     "center";
 
   currentSongElement.style.transform =
@@ -1621,14 +1618,8 @@ if (textWidth <= viewportWidth) {
   return;
 }
 
-currentSongElement.style.justifyContent =
-  "start";
-
-currentSongElement.style.textAlign =
-  "left";
-
-currentSongElement.style.justifyContent =
-  "start";
+viewport.style.justifyContent =
+  "flex-start";
 
   const distance =
     textWidth - viewportWidth;
