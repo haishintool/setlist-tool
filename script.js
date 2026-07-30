@@ -442,6 +442,15 @@ const editorTabButton =
 const editorTab =
   document.getElementById("editorTab");
 
+const setlistEditor =
+  document.getElementById("setlistEditor");
+
+const editorSongCount =
+  document.getElementById("editorSongCount");
+
+const updateEditorButton =
+  document.getElementById("updateEditorButton");  
+
 /* =========================================================
    保存データ
 ========================================================= */
