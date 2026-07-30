@@ -1754,28 +1754,49 @@ if (currentSongShadow) {
   currentSongShadow.style.fontFamily =
     nowPlayingFontStack;
 
+  currentSongShadow.style.fontSize =
+    "60px";
+
+  currentSongShadow.style.fontWeight =
+    "400";
+
+  /*
+    縁取り込みの文字シルエットを
+    シャドウ色で作る
+  */
   currentSongShadow.style.color =
-    "transparent";
+    state.nowPlayingShadowColor;
 
   currentSongShadow.style.webkitTextStroke =
-    "0px transparent";
+    state.nowPlayingStrokeEnabled
+      ? `${state.nowPlayingStrokeWidth}px ${state.nowPlayingShadowColor}`
+      : "0px transparent";
 
-currentSongShadow.style.fontSize =
-  "60px";
-
-currentSongShadow.style.fontWeight =
-  "400";    
-
-  currentSongShadow.style.textShadow =
+  /*
+    文字レイヤー自体を指定位置へ移動する
+  */
+  currentSongShadow.style.transform =
     state.nowPlayingShadowEnabled
-      ? `${state.nowPlayingShadowOffsetX}px ${state.nowPlayingShadowOffsetY}px ${state.nowPlayingShadowBlur}px ${state.nowPlayingShadowColor}`
+      ? `translate(
+          ${state.nowPlayingShadowOffsetX}px,
+          ${state.nowPlayingShadowOffsetY}px
+        )`
+      : "translate(0, 0)";
+
+  /*
+    移動後の文字全体をぼかす
+  */
+  currentSongShadow.style.textShadow =
+    state.nowPlayingShadowEnabled &&
+    state.nowPlayingShadowBlur > 0
+      ? `0 0 ${state.nowPlayingShadowBlur}px ${state.nowPlayingShadowColor}`
       : "none";
 
   currentSongShadow.style.visibility =
     state.nowPlayingShadowEnabled
       ? "visible"
       : "hidden";
-}  
+}
 
 if (currentSongStroke) {
   currentSongStroke.style.fontFamily =
