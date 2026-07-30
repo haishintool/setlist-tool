@@ -769,7 +769,6 @@ function renderControlPage() {
   renderListStyleButtons();
   renderFontControls();
   renderScrollControls();
-  renderActionButtons();
   renderPreview();
   renderEditor();
 }
@@ -1202,21 +1201,6 @@ if (setlistLineHeightValue) {
     state.setlistLineHeight.toFixed(2);
 }
 
-}
-
-function renderActionButtons() {
-  const hasSongs =
-    state.songs.length > 0;
-
-  if (undoButton) {
-    undoButton.disabled =
-      !hasSongs;
-  }
-
-  if (clearButton) {
-    clearButton.disabled =
-      !hasSongs;
-  }
 }
 
 function renderEditor() {
