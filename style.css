@@ -1049,6 +1049,31 @@ body.obsBody .obsList .loopSpacer::before {
   z-index: 2;
 }
 
+body.obsBody .obsList > li.layeredText {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.setlistTextShadow,
+.setlistTextStroke,
+.setlistTextFill {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.setlistTitle {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .previewSetlist {
   list-style: none;
   padding-left: 0;
