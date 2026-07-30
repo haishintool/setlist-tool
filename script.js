@@ -1257,6 +1257,11 @@ function renderEditor() {
     setlistEditor.value =
       state.songs.join("\n");
   }
+
+  if (editorSongCount) {
+    editorSongCount.textContent =
+      `現在：${state.songs.length}曲`;
+  }
 }
 
 /* =========================================================
