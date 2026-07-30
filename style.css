@@ -1182,6 +1182,10 @@ body.nowPlayingBody .nowPlayingViewport {
   background-color: transparent !important;
 }
 
+body.nowPlayingBody .obsSetlist {
+  padding: 0;
+}
+
 /* =========================================================
    EDITOR
 ========================================================= */
