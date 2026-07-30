@@ -1185,7 +1185,7 @@ body.nowPlayingBody .nowPlayingViewport {
 ========================================================= */
 
 #setlistEditor {
-  font-size: 18px;
+  font-size: 25px;
   line-height: 1.5;
 }
 
@@ -1198,6 +1198,6 @@ body.nowPlayingBody .nowPlayingViewport {
 
 #editorSongCount {
   margin: 0;
-  font-size: 15px;
+  font-size: 25px;
   font-weight: 600;
 }
