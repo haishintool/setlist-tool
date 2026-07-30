@@ -1188,15 +1188,20 @@ body.obsBody .obsList > li.layeredText {
   max-width: 100vw;
   margin-inline: auto;
 
+  min-height: 140px;
+
   overflow: hidden;
   position: relative;
 
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .nowPlayingViewport .obsNowPlaying {
-  margin-top: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
   display: inline-grid;
   width: max-content;
   min-width: max-content;
@@ -1205,9 +1210,6 @@ body.obsBody .obsList > li.layeredText {
   text-align: center;
 
   white-space: nowrap;
-
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
 }
 
 .nowPlayingViewport .layeredTextShadow,
