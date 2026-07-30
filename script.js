@@ -1861,22 +1861,6 @@ if (document.fonts?.ready) {
    セットリスト操作
 ========================================================= */
 
-function addSong(songTitle) {
-  const normalizedTitle =
-    String(songTitle ?? "").trim();
-
-  if (!normalizedTitle) {
-    return;
-  }
-
-  updateState({
-    songs: [
-      ...state.songs,
-      normalizedTitle
-    ]
-  });
-}
-
 function undoLastSong() {
   if (state.songs.length === 0) {
     return;
