@@ -436,6 +436,12 @@ const setlistShadowBlurValue =
     "setlistShadowBlurValue"
   );  
 
+const editorTabButton =
+  document.getElementById("editorTabButton");
+
+const editorTab =
+  document.getElementById("editorTab");
+
 /* =========================================================
    保存データ
 ========================================================= */
@@ -2004,11 +2010,20 @@ function switchSettingsTab(tabName) {
   const isSetlist =
     tabName === "setlist";
 
+  const isNowPlaying =
+    tabName === "nowPlaying";
+
+  const isEditor =
+    tabName === "editor";
+
   setlistTab.hidden =
     !isSetlist;
 
   nowPlayingTab.hidden =
-    isSetlist;
+    !isNowPlaying;
+
+  editorTab.hidden =
+    !isEditor;
 
   setlistTabButton?.classList.toggle(
     "isActive",
@@ -2017,7 +2032,12 @@ function switchSettingsTab(tabName) {
 
   nowPlayingTabButton?.classList.toggle(
     "isActive",
-    !isSetlist
+    isNowPlaying
+  );
+
+  editorTabButton?.classList.toggle(
+    "isActive",
+    isEditor
   );
 }
 
@@ -2040,6 +2060,13 @@ nowPlayingTabButton?.addEventListener(
     switchSettingsTab(
       "nowPlaying"
     );
+  }
+);
+
+editorTabButton?.addEventListener(
+  "click",
+  () => {
+    switchSettingsTab("editor");
   }
 );
 
