@@ -759,7 +759,41 @@
           >
             ・中黒
           </button>
+
+          <button
+  id="imageStyleButton"
+  class="segmentButton"
+  type="button"
+  role="radio"
+  aria-checked="false"
+  data-list-style="image"
+>
+  画像
+</button>
         </div>
+        <div
+  id="setlistMarkerImageControls"
+  class="markerImageControls"
+  hidden
+>
+  <label
+    class="fieldLabel"
+    for="setlistMarkerImageInput"
+  >
+    アイコン画像
+  </label>
+
+  <input
+    id="setlistMarkerImageInput"
+    class="fileInput"
+    type="file"
+    accept="image/png,image/jpeg,image/webp,image/gif"
+  />
+
+  <p class="fieldHint">
+    PNG・JPEG・WebP・GIFに対応
+  </p>
+</div>
 
 <label
   class="fieldLabel"
