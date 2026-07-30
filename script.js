@@ -599,7 +599,7 @@ const nowPlayingStrokeWidth =
     targetState.nowPlayingStrokeWidth
   ) &&
   targetState.nowPlayingStrokeWidth >= 0 &&
-  targetState.nowPlayingStrokeWidth <= 10
+  targetState.nowPlayingStrokeWidth <= 20
     ? targetState.nowPlayingStrokeWidth
     : DEFAULT_STATE.nowPlayingStrokeWidth;    
 
