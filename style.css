@@ -594,6 +594,13 @@ a {
   white-space: nowrap;
 }
 
+.setlistTitle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
 .emptyMessage {
   display: grid;
   place-items: center;
