@@ -801,7 +801,7 @@ body.obsBody .obsList {
   padding: 0;
   color: #fff;
   font-size: 32px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.35;
   text-shadow: none;
 
@@ -912,7 +912,7 @@ body.obsBody .obsList .loopSpacer::before {
 .previewNowPlaying {
   margin: 0;
   font-size: 40px;
-  font-weight: 700;
+  font-weight: 400;
   color: #ffffff;
 }
 
@@ -921,7 +921,7 @@ body.obsBody .obsList .loopSpacer::before {
   padding-left: 34px;
 
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 400;
   color: #ffffff;
 }
 .previewSetlist.numberStyle {

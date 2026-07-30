@@ -1764,7 +1764,7 @@ currentSongShadow.style.fontSize =
   "60px";
 
 currentSongShadow.style.fontWeight =
-  "700";    
+  "400";    
 
   currentSongShadow.style.textShadow =
     state.nowPlayingShadowEnabled
@@ -1793,7 +1793,7 @@ if (currentSongStroke) {
     "60px";
 
   currentSongStroke.style.fontWeight =
-    "700";
+    "400";
 
   currentSongStroke.style.visibility =
     state.nowPlayingStrokeEnabled
@@ -1809,13 +1809,13 @@ if (currentSongFill) {
     state.nowPlayingTextColor;
 
   currentSongFill.style.webkitTextStroke =
-    "0px transparent";
+  "0px transparent";
 
   currentSongFill.style.fontSize =
     "60px";
 
   currentSongFill.style.fontWeight =
-    "700";
+    "400";
 }
 
 if (document.fonts?.ready) {
