@@ -161,12 +161,6 @@ const applySetlistFontButton =
     "applySetlistFontButton"
   );
 
-const undoButton =
-  document.getElementById("undoButton");
-
-const clearButton =
-  document.getElementById("clearButton");
-
 const copyRoomUrlButton =
   document.getElementById("copyRoomUrlButton");
 
@@ -192,20 +186,6 @@ const nowPlayingTab =
   document.getElementById(
     "nowPlayingTab"
   );  
-
-/* 削除確認モーダル */
-
-const confirmModal =
-  document.getElementById("confirmModal");
-
-const confirmClearButton =
-  document.getElementById("confirmClearButton");
-
-const cancelClearButton =
-  document.getElementById("cancelClearButton");
-
-const closeModalButtons =
-  document.querySelectorAll("[data-close-modal]");
 
 /* display.html側 */
 
@@ -1858,29 +1838,6 @@ if (document.fonts?.ready) {
 }
 
 /* =========================================================
-   セットリスト操作
-========================================================= */
-
-function undoLastSong() {
-  if (state.songs.length === 0) {
-    return;
-  }
-
-  updateState({
-    songs:
-      state.songs.slice(0, -1)
-  });
-}
-
-function clearAllSongs() {
-  updateState({
-    songs: []
-  });
-
-  closeConfirmModal();
-}
-
-/* =========================================================
    Now Playing操作
 ========================================================= */
 
@@ -1969,49 +1926,8 @@ function applySetlistFont(
 }
 
 /* =========================================================
-   削除確認モーダル
+   タブ切り替え
 ========================================================= */
-
-function openConfirmModal() {
-  if (
-    !confirmModal ||
-    state.songs.length === 0
-  ) {
-    return;
-  }
-
-  lastFocusedElement =
-    document.activeElement;
-
-  confirmModal.hidden = false;
-
-  document.body.style.overflow =
-    "hidden";
-
-  requestAnimationFrame(() => {
-    confirmClearButton?.focus();
-  });
-}
-
-function closeConfirmModal() {
-  if (!confirmModal) {
-    return;
-  }
-
-  confirmModal.hidden = true;
-
-  document.body.style.overflow = "";
-
-  if (
-    lastFocusedElement &&
-    typeof lastFocusedElement.focus ===
-      "function"
-  ) {
-    lastFocusedElement.focus();
-  }
-
-  lastFocusedElement = null;
-}
 
 function switchSettingsTab(tabName) {
   const isSetlist =
@@ -2735,58 +2651,6 @@ scrollSpeedInput?.addEventListener(
     await updateState({
       scrollSpeed
     });
-  }
-);
-
-undoButton?.addEventListener(
-  "click",
-  () => {
-    undoLastSong();
-  }
-);
-
-clearButton?.addEventListener(
-  "click",
-  () => {
-    openConfirmModal();
-  }
-);
-
-confirmClearButton?.addEventListener(
-  "click",
-  () => {
-    clearAllSongs();
-  }
-);
-
-cancelClearButton?.addEventListener(
-  "click",
-  () => {
-    closeConfirmModal();
-  }
-);
-
-closeModalButtons.forEach(
-  (button) => {
-    button.addEventListener(
-      "click",
-      () => {
-        closeConfirmModal();
-      }
-    );
-  }
-);
-
-document.addEventListener(
-  "keydown",
-  (event) => {
-    if (
-      event.key === "Escape" &&
-      confirmModal &&
-      !confirmModal.hidden
-    ) {
-      closeConfirmModal();
-    }
   }
 );
 
