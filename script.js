@@ -2099,6 +2099,41 @@ editorTabButton?.addEventListener(
   }
 );
 
+setlistEditor?.addEventListener(
+  "input",
+  () => {
+    const songs =
+      setlistEditor.value
+        .split("\n")
+        .map((song) => song.trim())
+        .filter(Boolean);
+
+    if (editorSongCount) {
+      editorSongCount.textContent =
+        `現在：${songs.length}曲`;
+    }
+  }
+);
+
+updateEditorButton?.addEventListener(
+  "click",
+  async () => {
+    if (!setlistEditor) {
+      return;
+    }
+
+    const songs =
+      setlistEditor.value
+        .split("\n")
+        .map((song) => song.trim())
+        .filter(Boolean);
+
+    await updateState({
+      songs
+    });
+  }
+);
+
 songForm?.addEventListener(
   "submit",
   (event) => {
