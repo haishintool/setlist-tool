@@ -1646,8 +1646,15 @@ if (textWidth <= viewportWidth) {
 viewport.style.justifyContent =
   "flex-start";
 
-  const distance =
-    textWidth - viewportWidth;
+const fontSize = 60;
+
+const endPadding =
+  fontSize * 2.5;
+
+const distance =
+  textWidth -
+  viewportWidth +
+  endPadding;
 
   const speed = 40;
 
