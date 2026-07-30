@@ -82,6 +82,7 @@ setlistShadowBlur: 6,
 
   visibleSongs: 10,
   scrollSpeed: 20,
+  setlistLineHeight: 1.2,  
 };
 
 /* =========================================================
@@ -154,6 +155,12 @@ const scrollSpeedInput =
 
 const scrollSpeedValue =
   document.getElementById("scrollSpeedValue");
+
+const setlistLineHeightInput =
+  document.getElementById("setlistLineHeightInput");
+
+const setlistLineHeightValue =
+  document.getElementById("setlistLineHeightValue");
 
 const applySetlistFontButton =
   document.getElementById(
@@ -570,6 +577,13 @@ const scrollSpeed =
     ? Number(targetState.scrollSpeed)
     : DEFAULT_STATE.scrollSpeed;    
 
+const setlistLineHeight =
+  Number.isFinite(
+    Number(targetState.setlistLineHeight)
+  )
+    ? Number(targetState.setlistLineHeight)
+    : DEFAULT_STATE.setlistLineHeight;
+
 const nowPlayingTextColor =
   typeof targetState.nowPlayingTextColor === "string" &&
   /^#[0-9a-fA-F]{6}$/.test(
@@ -739,6 +753,7 @@ setlistShadowBlur,
 
   visibleSongs,
   scrollSpeed,
+  setlistLineHeight,
 };
 }
 
@@ -832,6 +847,9 @@ previewNowPlayingShadow.style.visibility =
       createFontStack(
         state.setlistFontFamily
       );
+
+    previewSetlist.style.lineHeight =
+    state.setlistLineHeight;  
 
     const isNumber =
       state.listStyle === "number";
@@ -1183,6 +1201,17 @@ function renderScrollControls() {
     scrollSpeedValue.textContent =
       state.scrollSpeed;
   }
+
+  if (setlistLineHeightInput) {
+  setlistLineHeightInput.value =
+    state.setlistLineHeight;
+}
+
+if (setlistLineHeightValue) {
+  setlistLineHeightValue.textContent =
+    state.setlistLineHeight.toFixed(2);
+}
+
 }
 
 function renderActionButtons() {
@@ -1422,7 +1451,7 @@ displaySetlist.style.fontSize =
   "32px";
 
 displaySetlist.style.lineHeight =
-  "48px";
+  state.setlistLineHeight;
 
 displaySetlist.style.paddingBottom =
   "0";
@@ -1431,7 +1460,10 @@ const scrollContainer =
   displaySetlist.parentElement;
 
 if (scrollContainer) {
-  const lineHeight = 48;
+const fontSize = 32;
+const lineHeight =
+  fontSize * state.setlistLineHeight;
+  
   const rowGap = 11;
   const verticalPadding = 60;
 
@@ -2612,6 +2644,27 @@ scrollSpeedInput?.addEventListener(
       scrollSpeedValue.textContent =
         scrollSpeedInput.value;
     }
+  }
+);
+
+setlistLineHeightInput?.addEventListener(
+  "input",
+  async () => {
+    const value =
+      Number(setlistLineHeightInput.value);
+
+    state.setlistLineHeight = value;
+
+if (setlistLineHeightValue) {
+  setlistLineHeightValue.textContent =
+    value.toFixed(2);
+}
+
+    renderPreview();
+
+    await updateState({
+      setlistLineHeight: value,
+    });
   }
 );
 
