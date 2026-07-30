@@ -797,6 +797,7 @@ function renderControlPage() {
   renderScrollControls();
   renderActionButtons();
   renderPreview();
+  renderEditor();
 }
 
 function renderPreview() {
@@ -1241,6 +1242,20 @@ function renderActionButtons() {
   if (clearButton) {
     clearButton.disabled =
       !hasSongs;
+  }
+}
+
+function renderEditor() {
+  if (!setlistEditor) {
+    return;
+  }
+
+  if (
+    document.activeElement !==
+    setlistEditor
+  ) {
+    setlistEditor.value =
+      state.songs.join("\n");
   }
 }
 
