@@ -1441,7 +1441,7 @@ displaySetlist.style.fontFamily =
   );
 
 displaySetlist.style.fontSize =
-  "32px";
+  "60px";
 
 displaySetlist.style.lineHeight =
   state.setlistLineHeight;
@@ -1453,7 +1453,7 @@ const scrollContainer =
   displaySetlist.parentElement;
 
 if (scrollContainer) {
-const fontSize = 32;
+const fontSize = 60;
 const lineHeight =
   fontSize * state.setlistLineHeight;
   
