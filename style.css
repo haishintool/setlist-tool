@@ -1143,6 +1143,8 @@ body.obsBody .obsList .loopSpacer::before {
 .nowPlayingViewport {
   width: 700px;
   max-width: 100vw;
+  margin-inline: auto;
+
   overflow: hidden;
   position: relative;
 
