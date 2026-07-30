@@ -2300,6 +2300,10 @@ nowPlayingShadowEnabled?.addEventListener(
 setlistShadowEnabled?.addEventListener(
   "change",
   async () => {
+
+    state.setlistShadowEnabled =
+      setlistShadowEnabled.checked;
+
     renderPreview();
 
     await updateState({
