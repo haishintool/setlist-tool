@@ -107,12 +107,6 @@ let nowPlayingResizeTimer = null;
 
 /* index.html側 */
 
-const songForm =
-  document.getElementById("songForm");
-
-const songInput =
-  document.getElementById("songInput");
-
 const songCount =
   document.getElementById("songCount");
 
@@ -787,7 +781,7 @@ function render() {
 ========================================================= */
 
 function renderControlPage() {
-  if (!songForm) {
+  if (!setlistTab) {
     return;
   }
 
@@ -2131,22 +2125,6 @@ updateEditorButton?.addEventListener(
     await updateState({
       songs
     });
-  }
-);
-
-songForm?.addEventListener(
-  "submit",
-  (event) => {
-    event.preventDefault();
-
-    if (!songInput) {
-      return;
-    }
-
-    addSong(songInput.value);
-
-    songInput.value = "";
-    songInput.focus();
   }
 );
 

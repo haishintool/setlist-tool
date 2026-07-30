@@ -252,7 +252,6 @@ a {
   font-weight: 800;
 }
 
-.songForm,
 .fontInputRow {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
