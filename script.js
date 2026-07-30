@@ -1786,11 +1786,21 @@ if (currentSongShadow) {
   /*
     移動後の文字全体をぼかす
   */
-  currentSongShadow.style.textShadow =
-    state.nowPlayingShadowEnabled &&
-    state.nowPlayingShadowBlur > 0
-      ? `0 0 ${state.nowPlayingShadowBlur}px ${state.nowPlayingShadowColor}`
-      : "none";
+currentSongShadow.style.transform =
+  state.nowPlayingShadowEnabled
+    ? `translate(
+        ${state.nowPlayingShadowOffsetX}px,
+        ${state.nowPlayingShadowOffsetY}px
+      )`
+    : "translate(0, 0)";
+
+currentSongShadow.style.filter =
+  state.nowPlayingShadowEnabled &&
+  state.nowPlayingShadowBlur > 0
+    ? `blur(${state.nowPlayingShadowBlur}px)`
+    : "none";
+
+currentSongShadow.style.textShadow = "none";
 
   currentSongShadow.style.visibility =
     state.nowPlayingShadowEnabled
