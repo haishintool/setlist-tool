@@ -592,6 +592,8 @@ a {
 
 .setlist li {
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .setlistTitle {
