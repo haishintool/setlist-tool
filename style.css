@@ -1201,3 +1201,12 @@ body.nowPlayingBody .nowPlayingViewport {
   font-size: 25px;
   font-weight: 600;
 }
+
+#updateEditorButton {
+  min-width: 150px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 0 24px;
+  cursor: pointer;
+}
