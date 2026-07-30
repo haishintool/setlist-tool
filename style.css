@@ -596,11 +596,16 @@ a {
   text-overflow: ellipsis;
 }
 
+.setlistMarker {
+  flex-shrink: 0;
+}
+
 .setlistTitle {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  flex: 1;
   min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .emptyMessage {
@@ -1019,8 +1024,8 @@ body.obsBody .obsList .loopSpacer::before {
   background: #0d0e13;
 }
 .layeredText {
-  position: relative;
-  display: inline-grid;
+    position: relative;
+    display: grid;
 }
 
 .layeredTextShadow,
