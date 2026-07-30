@@ -1179,3 +1179,25 @@ body.nowPlayingBody .nowPlayingViewport {
   background: transparent !important;
   background-color: transparent !important;
 }
+
+/* =========================================================
+   EDITOR
+========================================================= */
+
+#setlistEditor {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.editorFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#editorSongCount {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
