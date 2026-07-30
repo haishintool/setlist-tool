@@ -803,7 +803,7 @@ body.obsBody .obsList {
   font-size: 32px;
   font-weight: 500;
   line-height: 1.35;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.42);
+  text-shadow: none;
 
   will-change: transform;
   transform: translate3d(0, 0, 0);
