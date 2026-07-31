@@ -1263,11 +1263,8 @@ body.nowPlayingBody .obsSetlist {
 }
 
 .setlistMarkerImage {
-  width: 28px;
-  height: 28px;
-
+  display: block;
   object-fit: contain;
-  vertical-align: middle;
-
+  flex-shrink: 0;
   margin-right: 0.4em;
 }

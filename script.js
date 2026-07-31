@@ -55,7 +55,7 @@ const DEFAULT_STATE = {
   currentSong: "",
 listStyle: "number",
 setlistMarkerImage: "",
-setlistMarkerImageSize: 28,
+setlistMarkerImageSize: 100,
 
 nowPlayingFontFamily: "",
   setlistFontFamily: "",
@@ -582,13 +582,13 @@ const setlistMarkerImageSize =
     Number(targetState.setlistMarkerImageSize)
   )
     ? Math.min(
-        100,
+        300,
         Math.max(
-          8,
+          20,
           Number(targetState.setlistMarkerImageSize)
         )
       )
-    : DEFAULT_STATE.setlistMarkerImageSize;    
+    : DEFAULT_STATE.setlistMarkerImageSize; 
 
 const nowPlayingFontFamily =
   typeof targetState.nowPlayingFontFamily === "string" &&
@@ -913,7 +913,10 @@ previewMarkerHtml =
     class="setlistMarkerImage"
     src="${state.setlistMarkerImage}"
     alt=""
-    style="width: ${state.setlistMarkerImageSize}px; height: ${state.setlistMarkerImageSize}px;"
+style="
+  width: ${state.setlistMarkerImageSize / 100}em;
+  height: ${state.setlistMarkerImageSize / 100}em;
+"
   >`;
 } else {
   const previewMarker =
@@ -1215,8 +1218,8 @@ if (setlistMarkerImageSize) {
 }
 
 if (setlistMarkerImageSizeValue) {
-  setlistMarkerImageSizeValue.textContent =
-    `${state.setlistMarkerImageSize}px`;
+setlistMarkerImageSizeValue.textContent =
+  `${state.setlistMarkerImageSize}%`;
 }  
 
 }
@@ -1435,7 +1438,10 @@ markerHtml =
     class="setlistMarkerImage"
     src="${state.setlistMarkerImage}"
     alt=""
-    style="width: ${state.setlistMarkerImageSize}px; height: ${state.setlistMarkerImageSize}px;"
+style="
+  width: ${state.setlistMarkerImageSize / 100}em;
+  height: ${state.setlistMarkerImageSize / 100}em;
+"
   >`;
 } else {
   const marker =
@@ -2851,8 +2857,8 @@ setlistMarkerImageSize?.addEventListener(
     state.setlistMarkerImageSize = value;
 
     if (setlistMarkerImageSizeValue) {
-      setlistMarkerImageSizeValue.textContent =
-        `${value}px`;
+setlistMarkerImageSizeValue.textContent =
+  `${value}%`;
     }
 
     renderPreview();
