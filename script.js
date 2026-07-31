@@ -877,17 +877,33 @@ previewNowPlayingShadow.style.visibility =
     );
   }
 
-const previewMarker =
-  state.listStyle === "number"
-    ? "1."
-    : "・";
+let previewMarkerHtml;
+
+if (
+  state.listStyle === "image" &&
+  state.setlistMarkerImage
+) {
+  previewMarkerHtml =
+    `<img class="setlistMarkerImage" src="${state.setlistMarkerImage}" alt="">`;
+} else {
+  const previewMarker =
+    state.listStyle === "number"
+      ? "1."
+      : "・";
+
+  previewMarkerHtml =
+    `<span class="setlistMarker">${previewMarker}</span>`;
+}
 
 const previewTitle =
   "曲名サンプル";
 
+const previewTitleHtml =
+  `${previewMarkerHtml}<span class="setlistTitle">${previewTitle}</span>`;
+
 if (previewSetlistShadow) {
   previewSetlistShadow.innerHTML =
-    `<span class="setlistMarker">${previewMarker}</span><span class="setlistTitle">${previewTitle}</span>`;
+    previewTitleHtml;
 
   previewSetlistShadow.style.color =
     "transparent";
@@ -908,7 +924,7 @@ if (previewSetlistShadow) {
 
 if (previewSetlistStroke) {
   previewSetlistStroke.innerHTML =
-    `<span class="setlistMarker">${previewMarker}</span><span class="setlistTitle">${previewTitle}</span>`;
+    previewTitleHtml;
 
   previewSetlistStroke.style.color =
     "transparent";
@@ -926,8 +942,8 @@ if (previewSetlistStroke) {
 
 if (previewSetlistFill) {
   previewSetlistFill.innerHTML =
-    `<span class="setlistMarker">${previewMarker}</span><span class="setlistTitle">${previewTitle}</span>`;
-
+    previewTitleHtml;
+    
   previewSetlistFill.style.color =
     state.setlistTextColor;
 
@@ -1387,7 +1403,7 @@ if (
 
 const titleHtml =
   `${markerHtml}<span class="setlistTitle">${item.title}</span>`;
-  
+
 itemShadow.innerHTML =
   titleHtml;
 
