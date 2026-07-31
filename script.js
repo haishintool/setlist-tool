@@ -55,6 +55,7 @@ const DEFAULT_STATE = {
   currentSong: "",
 listStyle: "number",
 setlistMarkerImage: "",
+setlistMarkerImageSize: 28,
 
 nowPlayingFontFamily: "",
   setlistFontFamily: "",
@@ -129,6 +130,16 @@ const setlistMarkerImageControls =
 const setlistMarkerImageInput =
   document.getElementById(
     "setlistMarkerImageInput"
+  );  
+
+const setlistMarkerImageSize =
+  document.getElementById(
+    "setlistMarkerImageSize"
+  );
+
+const setlistMarkerImageSizeValue =
+  document.getElementById(
+    "setlistMarkerImageSizeValue"
   );  
 
 const nowPlayingFontPreset =
@@ -566,6 +577,19 @@ const setlistMarkerImage =
     ? targetState.setlistMarkerImage
     : "";    
 
+const setlistMarkerImageSize =
+  Number.isFinite(
+    Number(targetState.setlistMarkerImageSize)
+  )
+    ? Math.min(
+        100,
+        Math.max(
+          8,
+          Number(targetState.setlistMarkerImageSize)
+        )
+      )
+    : DEFAULT_STATE.setlistMarkerImageSize;    
+
 const nowPlayingFontFamily =
   typeof targetState.nowPlayingFontFamily === "string" &&
   targetState.nowPlayingFontFamily.trim()
@@ -739,6 +763,7 @@ return {
   currentSong,
   listStyle,
   setlistMarkerImage,  
+  setlistMarkerImageSize,
   nowPlayingFontFamily,
   setlistFontFamily,
   nowPlayingTextColor,
@@ -883,8 +908,13 @@ if (
   state.listStyle === "image" &&
   state.setlistMarkerImage
 ) {
-  previewMarkerHtml =
-    `<img class="setlistMarkerImage" src="${state.setlistMarkerImage}" alt="">`;
+previewMarkerHtml =
+  `<img
+    class="setlistMarkerImage"
+    src="${state.setlistMarkerImage}"
+    alt=""
+    style="width: ${state.setlistMarkerImageSize}px; height: ${state.setlistMarkerImageSize}px;"
+  >`;
 } else {
   const previewMarker =
     state.listStyle === "number"
@@ -943,7 +973,7 @@ if (previewSetlistStroke) {
 if (previewSetlistFill) {
   previewSetlistFill.innerHTML =
     previewTitleHtml;
-    
+
   previewSetlistFill.style.color =
     state.setlistTextColor;
 
@@ -1178,6 +1208,17 @@ function renderListStyleButtons() {
     setlistMarkerImageControls.hidden =
       !isImage;
   }
+
+if (setlistMarkerImageSize) {
+  setlistMarkerImageSize.value =
+    state.setlistMarkerImageSize;
+}
+
+if (setlistMarkerImageSizeValue) {
+  setlistMarkerImageSizeValue.textContent =
+    `${state.setlistMarkerImageSize}px`;
+}  
+
 }
 
 function renderFontControls() {
@@ -1389,8 +1430,13 @@ if (
   state.listStyle === "image" &&
   state.setlistMarkerImage
 ) {
-  markerHtml =
-    `<img class="setlistMarkerImage" src="${state.setlistMarkerImage}" alt="">`;
+markerHtml =
+  `<img
+    class="setlistMarkerImage"
+    src="${state.setlistMarkerImage}"
+    alt=""
+    style="width: ${state.setlistMarkerImageSize}px; height: ${state.setlistMarkerImageSize}px;"
+  >`;
 } else {
   const marker =
     state.listStyle === "number"
@@ -2792,6 +2838,36 @@ scrollSpeedInput?.addEventListener(
 
     await updateState({
       scrollSpeed
+    });
+  }
+);
+
+setlistMarkerImageSize?.addEventListener(
+  "input",
+  () => {
+    const value =
+      Number(setlistMarkerImageSize.value);
+
+    state.setlistMarkerImageSize = value;
+
+    if (setlistMarkerImageSizeValue) {
+      setlistMarkerImageSizeValue.textContent =
+        `${value}px`;
+    }
+
+    renderPreview();
+    renderDisplayPage();
+  }
+);
+
+setlistMarkerImageSize?.addEventListener(
+  "change",
+  async () => {
+    const value =
+      Number(setlistMarkerImageSize.value);
+
+    await updateState({
+      setlistMarkerImageSize: value
     });
   }
 );
