@@ -783,12 +783,28 @@
     アイコン画像
   </label>
 
-  <input
-    id="setlistMarkerImageInput"
-    class="fileInput"
-    type="file"
-    accept="image/png,image/jpeg,image/webp,image/gif"
-  />
+<input
+  id="setlistMarkerImageInput"
+  class="fileInput"
+  type="file"
+  accept="image/png,image/jpeg,image/webp,image/gif"
+  hidden
+/>
+
+<button
+  type="button"
+  id="setlistMarkerImageButton"
+  class="secondaryButton"
+>
+  🖼 マーカー画像を選択
+</button>
+
+<p
+  id="setlistMarkerImageName"
+  class="fieldHint"
+>
+  画像が選択されていません
+</p>
 
   <p class="fieldHint">
     PNG・JPEG・WebP・GIFに対応

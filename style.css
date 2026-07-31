@@ -1278,3 +1278,58 @@ body.nowPlayingBody .obsSetlist {
   display: inline-flex;
   align-items: center;
 }
+
+.secondaryButton {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border: 1px solid #3b3b46;
+  border-radius: 8px;
+
+  background: #1a1a20;
+  color: #f4f4f6;
+
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.1s ease;
+}
+
+.secondaryButton:hover {
+  background: #24242c;
+  border-color: #6b6b78;
+}
+
+.secondaryButton:focus-visible {
+  outline: none;
+  border-color: #b42642;
+  box-shadow: 0 0 0 3px rgba(180, 38, 66, 0.22);
+}
+
+.secondaryButton:active {
+  transform: translateY(1px);
+}
+
+.fieldHint {
+  margin: 8px 2px 0;
+
+  color: #9a9aa5;
+
+  font-size: 12px;
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+}

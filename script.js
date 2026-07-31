@@ -451,6 +451,16 @@ const editorSongCount =
 const updateEditorButton =
   document.getElementById("updateEditorButton");  
 
+const setlistMarkerImageButton =
+  document.getElementById(
+    "setlistMarkerImageButton"
+  );
+
+const setlistMarkerImageName =
+  document.getElementById(
+    "setlistMarkerImageName"
+  );    
+
 /* =========================================================
    保存データ
 ========================================================= */
@@ -2203,6 +2213,13 @@ imageStyleButton?.addEventListener(
   }
 );
 
+setlistMarkerImageButton?.addEventListener(
+  "click",
+  () => {
+    setlistMarkerImageInput?.click();
+  }
+);
+
 setlistMarkerImageInput?.addEventListener(
   "change",
   () => {
@@ -2217,6 +2234,11 @@ setlistMarkerImageInput?.addEventListener(
       alert("画像ファイルを選択してください。");
       setlistMarkerImageInput.value = "";
       return;
+    }
+
+    if (setlistMarkerImageName) {
+      setlistMarkerImageName.textContent =
+        `✓ ${file.name}`;
     }
 
     const reader = new FileReader();
