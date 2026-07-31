@@ -1095,10 +1095,13 @@ body.obsBody .obsList > li.layeredText {
 }
 
 .setlistMarker {
-  display: inline-block;
-  width: 2em;
-  margin-right: 0.35em;
-  text-align: right;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    min-width: 2em;
+    margin-right: 0.35em;
+    flex-shrink: 0;
 }
 
 .previewSetlist,
@@ -1263,8 +1266,15 @@ body.nowPlayingBody .obsSetlist {
 }
 
 .setlistMarkerImage {
-display: inline-block;
+  display: block;
   object-fit: contain;
   flex-shrink: 0;
   margin-right: 0.4em;
+}
+
+.previewSetlist .layeredTextShadow,
+.previewSetlist .layeredTextStroke,
+.previewSetlist .layeredTextFill {
+  display: inline-flex;
+  align-items: center;
 }
