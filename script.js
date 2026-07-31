@@ -1367,14 +1367,27 @@ itemFill.classList.add(
   "setlistTextFill"
 );
 
-const marker =
-  state.listStyle === "number"
-    ? `${item.songIndex + 1}.`
-    : "・";
+let markerHtml;
+
+if (
+  state.listStyle === "image" &&
+  state.setlistMarkerImage
+) {
+  markerHtml =
+    `<img class="setlistMarkerImage" src="${state.setlistMarkerImage}" alt="">`;
+} else {
+  const marker =
+    state.listStyle === "number"
+      ? `${item.songIndex + 1}.`
+      : "・";
+
+  markerHtml =
+    `<span class="setlistMarker">${marker}</span>`;
+}
 
 const titleHtml =
-  `<span class="setlistMarker">${marker}</span><span class="setlistTitle">${item.title}</span>`;
-
+  `${markerHtml}<span class="setlistTitle">${item.title}</span>`;
+  
 itemShadow.innerHTML =
   titleHtml;
 
