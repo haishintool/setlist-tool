@@ -116,6 +116,19 @@ const numberStyleButton =
 const bulletStyleButton =
   document.getElementById("bulletStyleButton");
 
+const imageStyleButton =
+  document.getElementById("imageStyleButton");
+
+const setlistMarkerImageControls =
+  document.getElementById(
+    "setlistMarkerImageControls"
+  );
+
+const setlistMarkerImageInput =
+  document.getElementById(
+    "setlistMarkerImageInput"
+  );  
+
 const nowPlayingFontPreset =
   document.getElementById(
     "nowPlayingFontPreset"
@@ -539,10 +552,11 @@ function normalizeState(targetState) {
       ? targetState.currentSong.trim()
       : "";
 
-  const listStyle =
-    targetState.listStyle === "bullet"
-      ? "bullet"
-      : "number";
+const listStyle =
+  targetState.listStyle === "bullet" ||
+  targetState.listStyle === "image"
+    ? targetState.listStyle
+    : "number";
 
 const nowPlayingFontFamily =
   typeof targetState.nowPlayingFontFamily === "string" &&
@@ -1090,13 +1104,20 @@ function renderSongCount() {
 function renderListStyleButtons() {
   if (
     !numberStyleButton ||
-    !bulletStyleButton
+    !bulletStyleButton ||
+    !imageStyleButton
   ) {
     return;
   }
 
   const isNumber =
     state.listStyle === "number";
+
+  const isBullet =
+    state.listStyle === "bullet";
+
+  const isImage =
+    state.listStyle === "image";
 
   numberStyleButton.classList.toggle(
     "isActive",
@@ -1110,13 +1131,28 @@ function renderListStyleButtons() {
 
   bulletStyleButton.classList.toggle(
     "isActive",
-    !isNumber
+    isBullet
   );
 
   bulletStyleButton.setAttribute(
     "aria-checked",
-    String(!isNumber)
+    String(isBullet)
   );
+
+  imageStyleButton.classList.toggle(
+    "isActive",
+    isImage
+  );
+
+  imageStyleButton.setAttribute(
+    "aria-checked",
+    String(isImage)
+  );
+
+  if (setlistMarkerImageControls) {
+    setlistMarkerImageControls.hidden =
+      !isImage;
+  }
 }
 
 function renderFontControls() {
@@ -2064,6 +2100,15 @@ bulletStyleButton?.addEventListener(
   () => {
     updateState({
       listStyle: "bullet"
+    });
+  }
+);
+
+imageStyleButton?.addEventListener(
+  "click",
+  () => {
+    updateState({
+      listStyle: "image"
     });
   }
 );
