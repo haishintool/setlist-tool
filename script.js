@@ -2236,10 +2236,10 @@ setlistMarkerImageInput?.addEventListener(
       return;
     }
 
-    if (setlistMarkerImageName) {
-      setlistMarkerImageName.textContent =
-        `✓ ${file.name}`;
-    }
+if (setlistMarkerImageName) {
+  setlistMarkerImageName.textContent =
+    `✓ ${file.name}（PNG・JPEG・WebP・GIF対応）`;
+}
 
     const reader = new FileReader();
 
