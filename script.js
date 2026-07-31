@@ -53,8 +53,10 @@ const POLLING_INTERVAL = 1000;
 const DEFAULT_STATE = {
   songs: [],
   currentSong: "",
-  listStyle: "number",
-  nowPlayingFontFamily: "",
+listStyle: "number",
+setlistMarkerImage: "",
+
+nowPlayingFontFamily: "",
   setlistFontFamily: "",
 
   nowPlayingTextColor: "#ffffff",
@@ -558,6 +560,12 @@ const listStyle =
     ? targetState.listStyle
     : "number";
 
+const setlistMarkerImage =
+  typeof targetState.setlistMarkerImage === "string" &&
+  targetState.setlistMarkerImage.startsWith("data:image/")
+    ? targetState.setlistMarkerImage
+    : "";    
+
 const nowPlayingFontFamily =
   typeof targetState.nowPlayingFontFamily === "string" &&
   targetState.nowPlayingFontFamily.trim()
@@ -730,6 +738,7 @@ return {
   songs,
   currentSong,
   listStyle,
+  setlistMarkerImage,  
   nowPlayingFontFamily,
   setlistFontFamily,
   nowPlayingTextColor,
@@ -2110,6 +2119,43 @@ imageStyleButton?.addEventListener(
     updateState({
       listStyle: "image"
     });
+  }
+);
+
+setlistMarkerImageInput?.addEventListener(
+  "change",
+  () => {
+    const file =
+      setlistMarkerImageInput.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      alert("画像ファイルを選択してください。");
+      setlistMarkerImageInput.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.addEventListener("load", async () => {
+      if (typeof reader.result !== "string") {
+        return;
+      }
+
+      await updateState({
+        setlistMarkerImage: reader.result,
+        listStyle: "image"
+      });
+    });
+
+    reader.addEventListener("error", () => {
+      alert("画像を読み込めませんでした。");
+    });
+
+    reader.readAsDataURL(file);
   }
 );
 
