@@ -1280,6 +1280,8 @@ body.nowPlayingBody .obsSetlist {
 }
 
 .markerImageButton {
+  margin-top: 10px;
+
   width: 100%;
   min-height: 44px;
   padding: 11px 16px;
