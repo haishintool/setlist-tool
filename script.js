@@ -445,6 +445,21 @@ const editorTab =
 const setlistEditor =
   document.getElementById("setlistEditor");
 
+const editorSongInput =
+  document.getElementById(
+    "editorSongInput"
+  );
+
+const sendNowPlayingButton =
+  document.getElementById(
+    "sendNowPlayingButton"
+  );
+
+const addCurrentSongButton =
+  document.getElementById(
+    "addCurrentSongButton"
+  );  
+
 const editorSongCount =
   document.getElementById("editorSongCount");
 
@@ -2897,6 +2912,49 @@ setlistMarkerImageSize?.addEventListener(
     await updateState({
       setlistMarkerImageSize: value
     });
+  }
+);
+
+sendNowPlayingButton?.addEventListener(
+  "click",
+  async () => {
+    const songTitle =
+      editorSongInput?.value.trim();
+
+    if (!songTitle) {
+      return;
+    }
+
+    await setCurrentSong(songTitle);
+  }
+);
+
+addCurrentSongButton?.addEventListener(
+  "click",
+  async () => {
+    const inputSongTitle =
+      editorSongInput?.value.trim();
+
+    const songTitle =
+      inputSongTitle ||
+      state.currentSong;
+
+    if (!songTitle) {
+      return;
+    }
+
+    await updateState({
+      songs: [
+        ...state.songs,
+        songTitle
+      ],
+      currentSong: ""
+    });
+
+    if (editorSongInput) {
+      editorSongInput.value = "";
+      editorSongInput.focus();
+    }
   }
 );
 

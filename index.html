@@ -908,6 +908,33 @@
     aria-labelledby="editorTitle"
   >
 
+<div class="editorSongControl">
+  <input
+    id="editorSongInput"
+    class="textInput"
+    type="text"
+    placeholder="曲名を入力"
+  />
+
+  <div class="editorSongActions">
+    <button
+      type="button"
+      id="sendNowPlayingButton"
+      class="secondaryButton"
+    >
+      Now Playingに曲名を送信
+    </button>
+
+    <button
+      type="button"
+      id="addCurrentSongButton"
+      class="primaryButton"
+    >
+      セットリストに追加
+    </button>
+  </div>
+</div>
+
   <textarea
   id="setlistEditor"
   class="textInput"

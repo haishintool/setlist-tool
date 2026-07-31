@@ -1345,3 +1345,17 @@ body.nowPlayingBody .obsSetlist {
   font-size: 12px;
   line-height: 1.5;
 }
+
+.editorSongControl {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    auto;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.editorSongActions {
+  display: contents;
+}
