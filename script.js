@@ -1988,7 +1988,7 @@ if (!currentSong && lastNowPlayingSong) {
 
       lastNowPlayingSong = "";
       nowPlayingClearTimer = null;
-    }, 400);
+    }, 1000);
 
   return;
 }

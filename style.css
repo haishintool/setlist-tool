@@ -1364,6 +1364,8 @@ body.nowPlayingBody .obsSetlist {
   display: flex;
   align-items: center;
   width: 100%;
+
+  transition: opacity 1s ease;
 }
 
 .currentSongMarkerImage {
@@ -1382,4 +1384,8 @@ body.nowPlayingBody .obsSetlist {
 .nowPlayingViewport {
   flex: 1;
   min-width: 0;
+}
+
+.nowPlayingRow.isFadeOut {
+  opacity: 0;
 }
