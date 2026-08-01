@@ -48,7 +48,45 @@ const API_BASE_URL =
 const ROOM_API_URL =
   `${API_BASE_URL}/room/${encodeURIComponent(roomId)}`;
 
+const ROOM_WS_URL =
+  ROOM_API_URL
+    .replace("https://", "wss://")
+    + "/ws";
+
 const POLLING_INTERVAL = 5000;
+
+let roomWebSocket = null;
+let roomWebSocketReconnectTimer = null;
+
+function connectRoomWebSocket() {
+
+  if (roomWebSocket) {
+    roomWebSocket.close();
+  }
+
+  roomWebSocket =
+    new WebSocket(ROOM_WS_URL);
+
+  roomWebSocket.onopen = () => {
+  console.log("WebSocket connected");
+};  
+
+roomWebSocket.onmessage = async () => {
+  console.log("WebSocket update received");
+
+  await refreshState();
+};
+
+roomWebSocket.onclose = () => {
+  console.log("WebSocket disconnected");
+
+  roomWebSocketReconnectTimer =
+    setTimeout(() => {
+      connectRoomWebSocket();
+    }, 5000);
+};
+
+}
 
 const DEFAULT_STATE = {
   songs: [],
@@ -3317,6 +3355,8 @@ if (playerPageLink) {
 
 state =
   await loadState();
+
+connectRoomWebSocket();  
 
 lastSavedData =
   JSON.stringify(state);
