@@ -2163,7 +2163,7 @@ if (isNewSong && nowPlayingRow) {
     {
       duration: 1000,
       easing: "ease",
-      fill: "both"
+      fill: "none"
     }
   );
 }
