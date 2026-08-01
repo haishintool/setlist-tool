@@ -322,6 +322,11 @@ const previewSetlistFill =
     "previewSetlistFill"
   );
 
+const previewNowPlayingMarkerImage =
+  document.getElementById(
+    "previewNowPlayingMarkerImage"
+  );
+
 const nowPlayingShadowEnabled =
   document.getElementById(
     "nowPlayingShadowEnabled"
@@ -980,6 +985,23 @@ previewNowPlayingShadow.style.visibility =
       previewNowPlayingFill.style.webkitTextStroke =
         "0px transparent";
     }
+
+  if (previewNowPlayingMarkerImage) {
+  const hasMarkerImage =
+    Boolean(state.nowPlayingMarkerImage);
+
+  previewNowPlayingMarkerImage.hidden =
+    !hasMarkerImage;
+
+  if (hasMarkerImage) {
+    previewNowPlayingMarkerImage.src =
+      state.nowPlayingMarkerImage;
+  } else {
+    previewNowPlayingMarkerImage.removeAttribute(
+      "src"
+    );
+  }
+}  
   }
 
   if (previewSetlist) {

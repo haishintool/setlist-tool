@@ -1403,3 +1403,16 @@ body.nowPlayingBody .obsSetlist {
 .nowPlayingRow.isFadeIn {
   animation: nowPlayingFadeIn 1s ease;
 }
+
+.previewNowPlayingRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.previewNowPlayingMarkerImage {
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+  flex-shrink: 0;
+}
