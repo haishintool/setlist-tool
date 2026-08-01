@@ -58,6 +58,7 @@ setlistMarkerImage: "",
 setlistMarkerImageSize: 100,
 
 nowPlayingFontFamily: "",
+nowPlayingMarkerImage: "",
   setlistFontFamily: "",
 
   nowPlayingTextColor: "#ffffff",
@@ -131,6 +132,11 @@ const setlistMarkerImageInput =
   document.getElementById(
     "setlistMarkerImageInput"
   );  
+
+const nowPlayingMarkerImageInput =
+  document.getElementById(
+    "nowPlayingMarkerImageInput"
+  );
 
 const setlistMarkerImageSize =
   document.getElementById(
@@ -235,6 +241,11 @@ const currentSongFill =
   document.getElementById(
     "currentSongFill"
   );
+
+const currentSongMarkerImage =
+  document.getElementById(
+    "currentSongMarkerImage"
+  );  
 
   const previewNowPlaying =
   document.querySelector(
@@ -471,10 +482,20 @@ const setlistMarkerImageButton =
     "setlistMarkerImageButton"
   );
 
+const nowPlayingMarkerImageButton =
+  document.getElementById(
+    "nowPlayingMarkerImageButton"
+  );  
+
 const setlistMarkerImageName =
   document.getElementById(
     "setlistMarkerImageName"
   );    
+
+const nowPlayingMarkerImageName =
+  document.getElementById(
+    "nowPlayingMarkerImageName"
+  );  
 
 /* =========================================================
    保存データ
@@ -620,6 +641,12 @@ const nowPlayingFontFamily =
   targetState.nowPlayingFontFamily.trim()
     ? targetState.nowPlayingFontFamily.trim()
     : DEFAULT_STATE.nowPlayingFontFamily;
+
+const nowPlayingMarkerImage =
+  typeof targetState.nowPlayingMarkerImage === "string" &&
+  targetState.nowPlayingMarkerImage.startsWith("data:image/")
+    ? targetState.nowPlayingMarkerImage
+    : "";    
 
 const setlistFontFamily =
   typeof targetState.setlistFontFamily === "string" &&
@@ -790,6 +817,7 @@ return {
   setlistMarkerImage,  
   setlistMarkerImageSize,
   nowPlayingFontFamily,
+  nowPlayingMarkerImage,
   setlistFontFamily,
   nowPlayingTextColor,
   nowPlayingStrokeEnabled,
@@ -1912,6 +1940,23 @@ function renderNowPlaying() {
 const currentSong =
   state.currentSong || "";
 
+if (currentSongMarkerImage) {
+  const hasMarkerImage =
+    Boolean(state.nowPlayingMarkerImage);
+
+  currentSongMarkerImage.hidden =
+    !hasMarkerImage;
+
+  if (hasMarkerImage) {
+    currentSongMarkerImage.src =
+      state.nowPlayingMarkerImage;
+  } else {
+    currentSongMarkerImage.removeAttribute(
+      "src"
+    );
+  }
+}  
+
 if (currentSongStroke) {
   currentSongStroke.textContent =
     currentSong;
@@ -2266,6 +2311,13 @@ setlistMarkerImageButton?.addEventListener(
   }
 );
 
+nowPlayingMarkerImageButton?.addEventListener(
+  "click",
+  () => {
+    nowPlayingMarkerImageInput?.click();
+  }
+);
+
 setlistMarkerImageInput?.addEventListener(
   "change",
   () => {
@@ -2297,6 +2349,47 @@ setlistMarkerImageName.textContent =
       await updateState({
         setlistMarkerImage: reader.result,
         listStyle: "image"
+      });
+    });
+
+    reader.addEventListener("error", () => {
+      alert("画像を読み込めませんでした。");
+    });
+
+    reader.readAsDataURL(file);
+  }
+);
+
+nowPlayingMarkerImageInput?.addEventListener(
+  "change",
+  () => {
+    const file =
+      nowPlayingMarkerImageInput.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      alert("画像ファイルを選択してください。");
+      nowPlayingMarkerImageInput.value = "";
+      return;
+    }
+
+    if (nowPlayingMarkerImageName) {
+      nowPlayingMarkerImageName.textContent =
+        `✓ ${file.name}（PNG・JPEG・WebP・GIF対応）`;
+    }
+
+    const reader = new FileReader();
+
+    reader.addEventListener("load", async () => {
+      if (typeof reader.result !== "string") {
+        return;
+      }
+
+      await updateState({
+        nowPlayingMarkerImage: reader.result
       });
     });
 
