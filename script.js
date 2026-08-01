@@ -497,6 +497,11 @@ const nowPlayingMarkerImageName =
     "nowPlayingMarkerImageName"
   );  
 
+const clearNowPlayingMarkerImageButton =
+  document.getElementById(
+    "clearNowPlayingMarkerImageButton"
+  );  
+
 /* =========================================================
    保存データ
 ========================================================= */
