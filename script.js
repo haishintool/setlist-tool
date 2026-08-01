@@ -1945,14 +1945,25 @@ function renderNowPlaying() {
 const currentSong =
   state.currentSong || "";
 
+const hasSong =
+  currentSong.length > 0;
+
 if (currentSongMarkerImage) {
-  const hasMarkerImage =
-    Boolean(state.nowPlayingMarkerImage);
+  currentSongMarkerImage.style.display =
+    hasSong ? "" : "none";
+}
 
-  currentSongMarkerImage.hidden =
-    !hasMarkerImage;
+if (currentSongMarkerImage) {
+const hasMarkerImage =
+  Boolean(state.nowPlayingMarkerImage);
 
-  if (hasMarkerImage) {
+const showMarker =
+  hasMarkerImage && hasSong;
+
+currentSongMarkerImage.hidden =
+  !showMarker;
+
+if (showMarker) {
     currentSongMarkerImage.src =
       state.nowPlayingMarkerImage;
   } else {
