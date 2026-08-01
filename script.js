@@ -48,7 +48,7 @@ const API_BASE_URL =
 const ROOM_API_URL =
   `${API_BASE_URL}/room/${encodeURIComponent(roomId)}`;
 
-const POLLING_INTERVAL = 1000;
+const POLLING_INTERVAL = 5000;
 
 const DEFAULT_STATE = {
   songs: [],
