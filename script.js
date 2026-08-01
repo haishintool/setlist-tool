@@ -2318,6 +2318,22 @@ nowPlayingMarkerImageButton?.addEventListener(
   }
 );
 
+clearNowPlayingMarkerImageButton?.addEventListener(
+  "click",
+  async () => {
+    await updateState({
+      nowPlayingMarkerImage: ""
+    });
+
+    nowPlayingMarkerImageInput.value = "";
+
+    if (nowPlayingMarkerImageName) {
+      nowPlayingMarkerImageName.textContent =
+        "未選択（PNG・JPEG・WebP・GIF対応）";
+    }
+  }
+);
+
 setlistMarkerImageInput?.addEventListener(
   "change",
   () => {
