@@ -1364,8 +1364,6 @@ body.nowPlayingBody .obsSetlist {
   display: flex;
   align-items: center;
   width: 100%;
-
-  gap: 12px;
 }
 
 .currentSongMarkerImage {
@@ -1377,6 +1375,8 @@ body.nowPlayingBody .obsSetlist {
 
   position: relative;
   top: 6px;  
+
+  margin-right: 12px;  
 }
 
 .nowPlayingViewport {
