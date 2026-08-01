@@ -104,6 +104,8 @@ let autoScrollLastTime = null;
 let autoScrollResetTimer = null;
 let nowPlayingAnimation = null;
 let nowPlayingResizeTimer = null;
+let lastNowPlayingSong = "";
+let nowPlayingClearTimer = null;
 
 /* =========================================================
    HTML要素取得
@@ -245,6 +247,11 @@ const currentSongFill =
 const currentSongMarkerImage =
   document.getElementById(
     "currentSongMarkerImage"
+  );  
+
+const nowPlayingRow =
+  document.querySelector(
+    ".nowPlayingRow"
   );  
 
   const previewNowPlaying =
@@ -1944,6 +1951,62 @@ function renderNowPlaying() {
 
 const currentSong =
   state.currentSong || "";
+
+if (!currentSong && lastNowPlayingSong) {
+  stopNowPlayingScroll();
+
+  nowPlayingRow?.classList.add(
+    "isFadeOut"
+  );
+
+  if (nowPlayingClearTimer !== null) {
+    clearTimeout(nowPlayingClearTimer);
+  }
+
+  nowPlayingClearTimer =
+    window.setTimeout(() => {
+      if (currentSongShadow) {
+        currentSongShadow.textContent = "";
+      }
+
+      if (currentSongStroke) {
+        currentSongStroke.textContent = "";
+      }
+
+      if (currentSongFill) {
+        currentSongFill.textContent = "";
+      }
+
+      if (currentSongMarkerImage) {
+        currentSongMarkerImage.hidden = true;
+        currentSongMarkerImage.removeAttribute(
+          "src"
+        );
+      }
+
+      nowPlayingRow?.classList.remove(
+        "isFadeOut"
+      );
+
+      lastNowPlayingSong = "";
+      nowPlayingClearTimer = null;
+    }, 400);
+
+  return;
+}
+
+if (currentSong) {
+  if (nowPlayingClearTimer !== null) {
+    clearTimeout(nowPlayingClearTimer);
+    nowPlayingClearTimer = null;
+  }
+
+  nowPlayingRow?.classList.remove(
+    "isFadeOut"
+  );
+
+  lastNowPlayingSong = currentSong;
+}  
 
 const hasSong =
   currentSong.length > 0;
