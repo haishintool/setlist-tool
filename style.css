@@ -1373,7 +1373,7 @@ body.nowPlayingBody .obsSetlist {
   object-fit: contain;
   flex: 0 0 auto;
 
-  transform: translateY(7px);  
+  transform: translateY(2px);  
 }
 
 .nowPlayingViewport {
