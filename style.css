@@ -1362,7 +1362,7 @@ body.nowPlayingBody .obsSetlist {
 
 .nowPlayingRow {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   width: 100%;
 }
 
@@ -1373,7 +1373,8 @@ body.nowPlayingBody .obsSetlist {
   object-fit: contain;
   flex: 0 0 auto;
 
-  transform: translateY(2px);  
+  position: relative;
+  top: 3px;  
 }
 
 .nowPlayingViewport {
