@@ -1988,7 +1988,7 @@ if (!currentSong && lastNowPlayingSong) {
 
       lastNowPlayingSong = "";
       nowPlayingClearTimer = null;
-    }, 1000);
+    }, 600);
 
   return;
 }
@@ -1999,12 +1999,29 @@ if (currentSong) {
     nowPlayingClearTimer = null;
   }
 
+  const isNewSong =
+    currentSong !== lastNowPlayingSong;
+
   nowPlayingRow?.classList.remove(
     "isFadeOut"
   );
 
+  if (isNewSong && nowPlayingRow) {
+    nowPlayingRow.classList.add(
+      "isFadeInStart"
+    );
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        nowPlayingRow.classList.remove(
+          "isFadeInStart"
+        );
+      });
+    });
+  }
+
   lastNowPlayingSong = currentSong;
-}  
+}
 
 const hasSong =
   currentSong.length > 0;
