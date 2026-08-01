@@ -1992,7 +1992,7 @@ if (!currentSong && lastNowPlayingSong) {
 
       lastNowPlayingSong = "";
       nowPlayingClearTimer = null;
-    }, 2000);
+    }, 500);
 
   return;
 }

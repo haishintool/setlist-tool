@@ -1365,7 +1365,7 @@ body.nowPlayingBody .obsSetlist {
   align-items: center;
   width: 100%;
 
-  transition: opacity 2s ease;
+  transition: opacity 0.5s ease;
 }
 
 .currentSongMarkerImage {
