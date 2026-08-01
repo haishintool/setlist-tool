@@ -1359,3 +1359,24 @@ body.nowPlayingBody .obsSetlist {
 .editorSongActions {
   display: contents;
 }
+
+.nowPlayingRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.currentSongMarkerImage {
+  width: 60px;
+  height: 60px;
+
+  object-fit: contain;
+  flex: 0 0 auto;
+
+  display: none;
+}
+
+.nowPlayingViewport {
+  flex: 1;
+  min-width: 0;
+}
