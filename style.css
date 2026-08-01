@@ -1365,7 +1365,7 @@ body.nowPlayingBody .obsSetlist {
   align-items: center;
   width: 100%;
 
-  transition: opacity 0.6s ease;
+  transition: opacity 2s ease;
 }
 
 .currentSongMarkerImage {
@@ -1387,10 +1387,6 @@ body.nowPlayingBody .obsSetlist {
 }
 
 .nowPlayingRow.isFadeOut {
-  opacity: 0;
-}
-
-.nowPlayingRow.isFadeInStart {
   opacity: 0;
 }
 

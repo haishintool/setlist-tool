@@ -1992,7 +1992,7 @@ if (!currentSong && lastNowPlayingSong) {
 
       lastNowPlayingSong = "";
       nowPlayingClearTimer = null;
-    }, 600);
+    }, 2000);
 
   return;
 }
@@ -2155,21 +2155,17 @@ if (isNewSong && nowPlayingRow) {
     "isFadeOut"
   );
 
-  nowPlayingRow.classList.remove(
-    "isFadeInStart"
+  nowPlayingRow.animate(
+    [
+      { opacity: 0 },
+      { opacity: 1 }
+    ],
+    {
+      duration: 1000,
+      easing: "ease",
+      fill: "both"
+    }
   );
-
-  nowPlayingRow.classList.add(
-    "isFadeInStart"
-  );
-
-  void nowPlayingRow.offsetWidth;
-
-  requestAnimationFrame(() => {
-    nowPlayingRow.classList.remove(
-      "isFadeInStart"
-    );
-  });
 }
 
 lastNowPlayingSong = currentSong;
