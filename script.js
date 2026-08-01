@@ -1811,6 +1811,7 @@ const distance =
 
   const waitStart = 5000;
   const waitEnd = 2000;
+  const fadeDuration = 1500;
 
   let startTime = null;
 
@@ -1825,10 +1826,9 @@ const distance =
 
     let x = 0;
 
-    if (elapsed < waitStart) {
-
-      x = 0;
-
+if (elapsed < waitStart) {
+  x = 0;
+  currentSongElement.style.opacity = "1";
     } else {
 
       const scrollElapsed =
@@ -1843,19 +1843,38 @@ const distance =
           -(scrollElapsed / scrollTime)
           * distance;
 
-      } else if (
-        scrollElapsed <
-        scrollTime + waitEnd
-      ) {
+} else if (
+  scrollElapsed <
+  scrollTime + waitEnd
+) {
+  // 最後まで進んだ位置で待機
+  x = -distance;
+  currentSongElement.style.opacity = "1";
 
-        x = -distance;
+} else if (
+  scrollElapsed <
+  scrollTime + waitEnd + fadeDuration
+) {
+  // ゆっくり薄くして消す
+  x = -distance;
 
-      } else {
+  const fadeElapsed =
+    scrollElapsed -
+    scrollTime -
+    waitEnd;
 
-        startTime = now;
-        x = 0;
+  const opacity =
+    1 - fadeElapsed / fadeDuration;
 
-      }
+  currentSongElement.style.opacity =
+    String(Math.max(0, opacity));
+
+} else {
+  // 完全に消えた後、先頭へ戻す
+  startTime = now;
+  x = 0;
+  currentSongElement.style.opacity = "1";
+}
     }
 
     currentSongElement.style.transform =
