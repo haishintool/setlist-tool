@@ -1809,9 +1809,10 @@ const distance =
 
   const speed = 40;
 
-  const waitStart = 4000;
+  const waitStart = 3500;
   const waitEnd = 1000;
   const fadeDuration = 1500;
+  const waitAfterFade = 700;
 
   let startTime = null;
 
@@ -1869,8 +1870,19 @@ if (elapsed < waitStart) {
   currentSongElement.style.opacity =
     String(Math.max(0, opacity));
 
+} else if (
+  scrollElapsed <
+  scrollTime +
+  waitEnd +
+  fadeDuration +
+  waitAfterFade
+) {
+  // フェードアウト後、そのまま待機
+  x = -distance;
+  currentSongElement.style.opacity = "0";
+
 } else {
-  // 完全に消えた後、先頭へ戻す
+  // 先頭へ戻る
   startTime = now;
   x = 0;
   currentSongElement.style.opacity = "1";
