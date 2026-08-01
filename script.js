@@ -2006,19 +2006,24 @@ if (currentSong) {
     "isFadeOut"
   );
 
-  if (isNewSong && nowPlayingRow) {
-    nowPlayingRow.classList.add(
+if (isNewSong && nowPlayingRow) {
+  nowPlayingRow.classList.remove(
+    "isFadeOut"
+  );
+
+  nowPlayingRow.classList.add(
+    "isFadeInStart"
+  );
+
+  // 透明な状態をブラウザに一度確定させる
+  void nowPlayingRow.offsetWidth;
+
+  requestAnimationFrame(() => {
+    nowPlayingRow.classList.remove(
       "isFadeInStart"
     );
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        nowPlayingRow.classList.remove(
-          "isFadeInStart"
-        );
-      });
-    });
-  }
+  });
+}
 
   lastNowPlayingSong = currentSong;
 }
