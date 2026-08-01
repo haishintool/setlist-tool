@@ -1953,8 +1953,6 @@ const currentSong =
   state.currentSong || "";
 
 if (!currentSong && lastNowPlayingSong) {
-  stopNowPlayingScroll();
-
   nowPlayingRow?.classList.add(
     "isFadeOut"
   );
