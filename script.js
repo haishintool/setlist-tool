@@ -1952,6 +1952,10 @@ function renderNowPlaying() {
 const currentSong =
   state.currentSong || "";
 
+const isNewSong =
+  Boolean(currentSong) &&
+  currentSong !== lastNowPlayingSong;  
+
 if (!currentSong && lastNowPlayingSong) {
   nowPlayingRow?.classList.add(
     "isFadeOut"
@@ -1998,55 +2002,26 @@ if (currentSong) {
     clearTimeout(nowPlayingClearTimer);
     nowPlayingClearTimer = null;
   }
-
-  const isNewSong =
-    currentSong !== lastNowPlayingSong;
-
   nowPlayingRow?.classList.remove(
     "isFadeOut"
   );
 
-if (isNewSong && nowPlayingRow) {
-  nowPlayingRow.classList.remove(
-    "isFadeOut"
-  );
-
-  nowPlayingRow.classList.add(
-    "isFadeInStart"
-  );
-
-  // 透明な状態をブラウザに一度確定させる
-  void nowPlayingRow.offsetWidth;
-
-  requestAnimationFrame(() => {
-    nowPlayingRow.classList.remove(
-      "isFadeInStart"
-    );
-  });
-}
-
-  lastNowPlayingSong = currentSong;
 }
 
 const hasSong =
   currentSong.length > 0;
 
 if (currentSongMarkerImage) {
-  currentSongMarkerImage.style.display =
-    hasSong ? "" : "none";
-}
+  const hasMarkerImage =
+    Boolean(state.nowPlayingMarkerImage);
 
-if (currentSongMarkerImage) {
-const hasMarkerImage =
-  Boolean(state.nowPlayingMarkerImage);
+  const showMarker =
+    hasMarkerImage && hasSong;
 
-const showMarker =
-  hasMarkerImage && hasSong;
+  currentSongMarkerImage.hidden =
+    !showMarker;
 
-currentSongMarkerImage.hidden =
-  !showMarker;
-
-if (showMarker) {
+  if (showMarker) {
     currentSongMarkerImage.src =
       state.nowPlayingMarkerImage;
   } else {
@@ -2054,7 +2029,7 @@ if (showMarker) {
       "src"
     );
   }
-}  
+}
 
 if (currentSongStroke) {
   currentSongStroke.textContent =
@@ -2174,6 +2149,30 @@ if (currentSongFill) {
   currentSongFill.style.fontWeight =
     "400";
 }
+
+if (isNewSong && nowPlayingRow) {
+  nowPlayingRow.classList.remove(
+    "isFadeOut"
+  );
+
+  nowPlayingRow.classList.remove(
+    "isFadeInStart"
+  );
+
+  nowPlayingRow.classList.add(
+    "isFadeInStart"
+  );
+
+  void nowPlayingRow.offsetWidth;
+
+  requestAnimationFrame(() => {
+    nowPlayingRow.classList.remove(
+      "isFadeInStart"
+    );
+  });
+}
+
+lastNowPlayingSong = currentSong;
 
 if (document.fonts?.ready) {
   document.fonts.ready.then(() => {

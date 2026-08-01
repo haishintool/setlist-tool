@@ -1393,3 +1393,17 @@ body.nowPlayingBody .obsSetlist {
 .nowPlayingRow.isFadeInStart {
   opacity: 0;
 }
+
+@keyframes nowPlayingFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.nowPlayingRow.isFadeIn {
+  animation: nowPlayingFadeIn 1s ease;
+}
