@@ -1809,8 +1809,8 @@ const distance =
 
   const speed = 40;
 
-  const waitStart = 5000;
-  const waitEnd = 2000;
+  const waitStart = 4000;
+  const waitEnd = 1000;
   const fadeDuration = 1500;
 
   let startTime = null;
