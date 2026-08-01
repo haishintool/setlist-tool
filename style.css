@@ -1374,7 +1374,7 @@ body.nowPlayingBody .obsSetlist {
   flex: 0 0 auto;
 
   position: relative;
-  top: 3px;  
+  top: 6px;  
 }
 
 .nowPlayingViewport {
