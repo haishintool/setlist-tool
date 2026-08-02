@@ -233,8 +233,11 @@ const applySetlistFontButton =
     "applySetlistFontButton"
   );
 
-const copyRoomUrlButton =
-  document.getElementById("copyRoomUrlButton");
+const copyNowPlayingUrlButton =
+  document.getElementById("copyNowPlayingUrlButton");
+
+const copySetlistUrlButton =
+  document.getElementById("copySetlistUrlButton");
 
 const copyRoomUrlStatus =
   document.getElementById("copyRoomUrlStatus");
@@ -3257,6 +3260,44 @@ addCurrentSongButton?.addEventListener(
     }
   }
 );
+
+if (copyNowPlayingUrlButton) {
+  copyNowPlayingUrlButton.addEventListener(
+    "click",
+    async () => {
+      const url =
+        `${window.location.origin}` +
+        `${window.location.pathname.replace(/[^/]+$/, "")}` +
+        `nowplaying.html?id=${encodeURIComponent(roomId)}`;
+
+      await navigator.clipboard.writeText(url);
+
+      if (copyRoomUrlStatus) {
+        copyRoomUrlStatus.textContent =
+          "Now Playing URLをコピーしました";
+      }
+    }
+  );
+}
+
+if (copySetlistUrlButton) {
+  copySetlistUrlButton.addEventListener(
+    "click",
+    async () => {
+      const url =
+        `${window.location.origin}` +
+        `${window.location.pathname.replace(/[^/]+$/, "")}` +
+        `display.html?id=${encodeURIComponent(roomId)}`;
+
+      await navigator.clipboard.writeText(url);
+
+      if (copyRoomUrlStatus) {
+        copyRoomUrlStatus.textContent =
+          "Set List URLをコピーしました";
+      }
+    }
+  );
+}
 
 /* =========================================================
    ページ間同期

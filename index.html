@@ -23,53 +23,36 @@
 <body>
   <main class="app">
     <header class="appHeader">
-      <div>
-        <p class="eyebrow">
-          STREAMING SUPPORT TOOL
-        </p>
 
-        <h1>SET LIST</h1>
-      </div>
+<div class="pageLinks">
 
-      <div class="pageLinks">
-        <a
-          id="nowPlayingPageLink"
-          class="obsPageLink"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Now Playingを開く
-        </a>
+  <button
+    id="copyNowPlayingUrlButton"
+    class="secondaryButton"
+    type="button"
+  >
+    NOWPLAYING URL
+  </button>
 
-        <a
-          id="setlistPageLink"
-          class="obsPageLink"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          セットリストを開く
-        </a>
+  <button
+    id="copySetlistUrlButton"
+    class="secondaryButton"
+    type="button"
+  >
+    SET LIST URL
+  </button>
 
-        <a
-          id="playerPageLink"
-          class="obsPageLink"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          プレイヤーを開く
-        </a>
-      </div>
+  <a
+    id="playerPageLink"
+    class="obsPageLink"
+    href="#"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    OPEN PLAYER
+  </a>
 
-      <button
-        id="copyRoomUrlButton"
-        class="secondaryButton"
-        type="button"
-      >
-        部屋URLをコピー
-      </button>
+</div>
 
       <p id="copyRoomUrlStatus"></p>
     </header>
