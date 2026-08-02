@@ -1416,3 +1416,9 @@ body.nowPlayingBody .obsSetlist {
   object-fit: contain;
   flex-shrink: 0;
 }
+
+.previewSetlist .setlistTextShadow,
+.previewSetlist .setlistTextStroke,
+.previewSetlist .setlistTextFill {
+  overflow: visible;
+}
