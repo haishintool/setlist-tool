@@ -1411,8 +1411,8 @@ body.nowPlayingBody .obsSetlist {
 }
 
 .previewNowPlayingMarkerImage {
-  width: 1em;
-  height: 1em;
+    width: 30px;
+    height: 30px;
   object-fit: contain;
   flex-shrink: 0;
 }
