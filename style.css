@@ -1408,6 +1408,8 @@ body.nowPlayingBody .obsSetlist {
   display: flex;
   align-items: center;
   gap: 12px;
+
+  padding-left: 10px;  
 }
 
 .previewNowPlayingMarkerImage {
