@@ -1417,13 +1417,12 @@ body.nowPlayingBody .obsSetlist {
   flex-shrink: 0;
 }
 
-.previewSetlist .setlistTextShadow,
-.previewSetlist .setlistTextStroke,
-.previewSetlist .setlistTextFill {
-  overflow: visible;
-}
-
 .previewSetlist > li.layeredText {
   overflow: visible;
   padding-inline: 8px;
+}
+
+.previewSetlist .setlistTitle {
+  overflow: visible;
+  text-overflow: clip;
 }
