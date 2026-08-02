@@ -1428,3 +1428,17 @@ body.nowPlayingBody .obsSetlist {
   overflow: visible;
   text-overflow: clip;
 }
+
+.pageLinks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.pageLinks > * {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  justify-content: center;
+}
