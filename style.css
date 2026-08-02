@@ -1422,3 +1422,8 @@ body.nowPlayingBody .obsSetlist {
 .previewSetlist .setlistTextFill {
   overflow: visible;
 }
+
+.previewSetlist > li.layeredText {
+  overflow: visible;
+  padding-inline: 8px;
+}
