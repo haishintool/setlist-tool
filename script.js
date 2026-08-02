@@ -3272,10 +3272,16 @@ if (copyNowPlayingUrlButton) {
 
       await navigator.clipboard.writeText(url);
 
-      if (copyRoomUrlStatus) {
-        copyRoomUrlStatus.textContent =
-          "Now Playing URLをコピーしました";
-      }
+const originalText =
+  copyNowPlayingUrlButton.textContent;
+
+copyNowPlayingUrlButton.textContent =
+  "✓ COPIED!";
+
+setTimeout(() => {
+  copyNowPlayingUrlButton.textContent =
+    originalText;
+}, 1000);
     }
   );
 }
@@ -3291,10 +3297,16 @@ if (copySetlistUrlButton) {
 
       await navigator.clipboard.writeText(url);
 
-      if (copyRoomUrlStatus) {
-        copyRoomUrlStatus.textContent =
-          "Set List URLをコピーしました";
-      }
+const originalText =
+  copySetlistUrlButton.textContent;
+
+copySetlistUrlButton.textContent =
+  "✓ COPIED!";
+
+setTimeout(() => {
+  copySetlistUrlButton.textContent =
+    originalText;
+}, 1000);
     }
   );
 }
