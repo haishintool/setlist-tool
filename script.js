@@ -940,7 +940,7 @@ function renderPreview() {
       previewNowPlayingShadow.style.fontFamily =
         nowPlayingFontStack;
       
-      previewNowPlayingShadow.style.fontSize = "36px";
+previewNowPlayingShadow.style.fontSize = "32px";
 
       previewNowPlayingShadow.style.color =
         "transparent";
@@ -963,7 +963,7 @@ previewNowPlayingShadow.style.visibility =
       previewNowPlayingStroke.style.fontFamily =
         nowPlayingFontStack;
 
-      previewNowPlayingStroke.style.fontSize = "36px";
+previewNowPlayingStroke.style.fontSize = "32px";
 
       previewNowPlayingStroke.style.color =
         "transparent";
@@ -983,7 +983,7 @@ previewNowPlayingShadow.style.visibility =
       previewNowPlayingFill.style.fontFamily =
         nowPlayingFontStack;
 
-      previewNowPlayingFill.style.fontSize = "36px";
+previewNowPlayingFill.style.fontSize = "32px";
 
       previewNowPlayingFill.style.color =
         state.nowPlayingTextColor;
