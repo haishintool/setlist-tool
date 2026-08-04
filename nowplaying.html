@@ -32,17 +32,19 @@
       height="300%"
       color-interpolation-filters="sRGB"
     >
-      <feGaussianBlur
-        in="SourceAlpha"
-        stdDeviation="8"
-        result="glowBlur"
-      />
+<feGaussianBlur
+  id="nowPlayingGlowBlur"
+  in="SourceAlpha"
+  stdDeviation="8"
+  result="glowBlur"
+/>
 
-      <feFlood
-        flood-color="#ffffff"
-        flood-opacity="1"
-        result="glowColor"
-      />
+<feFlood
+  id="nowPlayingGlowColor"
+  flood-color="#ffffff"
+  flood-opacity="1"
+  result="glowColor"
+/>
 
       <feComposite
         in="glowColor"
