@@ -2147,6 +2147,20 @@ if (nowPlayingGlowBlur) {
   );
 }
 
+if (currentSongFill) {
+  currentSongFill.style.filter =
+    state.nowPlayingShadowEnabled
+      ? 'url("#nowPlayingGlowFilter")'
+      : "none";
+}
+
+if (currentSongMarkerImage) {
+  currentSongMarkerImage.style.filter =
+    state.nowPlayingShadowEnabled
+      ? 'url("#nowPlayingGlowFilter")'
+      : "none";
+}
+
 if (currentSongShadow) {
   currentSongShadow.style.fontFamily =
     nowPlayingFontStack;

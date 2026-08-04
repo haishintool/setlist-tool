@@ -1446,8 +1446,3 @@ body.nowPlayingBody .obsSetlist {
 /* =========================================================
    NOW PLAYING SVG GLOW TEST
 ========================================================= */
-
-body.nowPlayingBody .currentSongMarkerImage,
-body.nowPlayingBody .layeredTextFill {
-  filter: url("#nowPlayingGlowFilter");
-}
