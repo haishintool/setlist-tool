@@ -1181,22 +1181,18 @@ if (nowPlayingShadowColorValue) {
 }
 
 if (nowPlayingShadowOffsetX) {
-  nowPlayingShadowOffsetX.value =
     state.nowPlayingShadowOffsetX;
 }
 
 if (nowPlayingShadowOffsetXValue) {
-  nowPlayingShadowOffsetXValue.textContent =
     `${state.nowPlayingShadowOffsetX}px`;
 }
 
 if (nowPlayingShadowOffsetY) {
-  nowPlayingShadowOffsetY.value =
     state.nowPlayingShadowOffsetY;
 }
 
 if (nowPlayingShadowOffsetYValue) {
-  nowPlayingShadowOffsetYValue.textContent =
     `${state.nowPlayingShadowOffsetY}px`;
 }
 
