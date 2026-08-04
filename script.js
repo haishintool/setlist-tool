@@ -2149,6 +2149,13 @@ if (nowPlayingStrokeColor) {
     "flood-color",
     state.nowPlayingStrokeColor
   );
+
+nowPlayingStrokeColor.setAttribute(
+  "flood-opacity",
+  state.nowPlayingStrokeEnabled
+    ? "1"
+    : "0"
+);  
 }  
 
 if (nowPlayingStrokeMorphology) {
