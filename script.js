@@ -2139,6 +2139,13 @@ if (nowPlayingGlowColor) {
     state.nowPlayingShadowColor
   );
 
+if (nowPlayingStrokeColor) {
+  nowPlayingStrokeColor.setAttribute(
+    "flood-color",
+    state.nowPlayingStrokeColor
+  );
+}  
+
   nowPlayingGlowColor.setAttribute(
     "flood-opacity",
     state.nowPlayingShadowEnabled
