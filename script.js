@@ -2133,6 +2133,13 @@ const nowPlayingFontStack =
     state.nowPlayingFontFamily
   );
 
+if (nowPlayingGlowColor) {
+  nowPlayingGlowColor.setAttribute(
+    "flood-color",
+    state.nowPlayingShadowColor
+  );
+}  
+
 if (currentSongShadow) {
   currentSongShadow.style.fontFamily =
     nowPlayingFontStack;
