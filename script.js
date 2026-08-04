@@ -375,6 +375,16 @@ const nowPlayingShadowBlurValue =
     "nowPlayingShadowBlurValue"
   );  
 
+const nowPlayingGlowBlur =
+  document.getElementById(
+    "nowPlayingGlowBlur"
+  );
+
+const nowPlayingGlowColor =
+  document.getElementById(
+    "nowPlayingGlowColor"
+  );  
+
 const previewNowPlayingFill =
   document.getElementById(
     "previewNowPlayingFill"
