@@ -2140,6 +2140,13 @@ if (nowPlayingGlowColor) {
   );
 }  
 
+if (nowPlayingGlowBlur) {
+  nowPlayingGlowBlur.setAttribute(
+    "stdDeviation",
+    String(state.nowPlayingShadowBlur)
+  );
+}
+
 if (currentSongShadow) {
   currentSongShadow.style.fontFamily =
     nowPlayingFontStack;
