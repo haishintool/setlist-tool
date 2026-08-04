@@ -2902,29 +2902,6 @@ setlistShadowColor?.addEventListener(
   }
 );
 
-nowPlayingShadowOffsetX?.addEventListener(
-  "input",
-  () => {
-    if (nowPlayingShadowOffsetXValue) {
-      nowPlayingShadowOffsetXValue.textContent =
-        `${nowPlayingShadowOffsetX.value}px`;
-    }
-
-    updateNowPlayingShadowPreview();
-  }
-);
-
-nowPlayingShadowOffsetX?.addEventListener(
-  "change",
-  async () => {
-    await updateState({
-      nowPlayingShadowOffsetX: Number(
-        nowPlayingShadowOffsetX.value
-      ),
-    });
-  }
-);
-
 setlistShadowOffsetX?.addEventListener(
   "input",
   () => {
@@ -2946,29 +2923,6 @@ setlistShadowOffsetX?.addEventListener(
     await updateState({
       setlistShadowOffsetX: Number(
         setlistShadowOffsetX.value
-      ),
-    });
-  }
-);
-
-nowPlayingShadowOffsetY?.addEventListener(
-  "input",
-  () => {
-    if (nowPlayingShadowOffsetYValue) {
-      nowPlayingShadowOffsetYValue.textContent =
-        `${nowPlayingShadowOffsetY.value}px`;
-    }
-
-    updateNowPlayingShadowPreview();
-  }
-);
-
-nowPlayingShadowOffsetY?.addEventListener(
-  "change",
-  async () => {
-    await updateState({
-      nowPlayingShadowOffsetY: Number(
-        nowPlayingShadowOffsetY.value
       ),
     });
   }
