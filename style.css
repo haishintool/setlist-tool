@@ -1442,3 +1442,12 @@ body.nowPlayingBody .obsSetlist {
   text-align: center;
   justify-content: center;
 }
+
+/* =========================================================
+   NOW PLAYING SVG GLOW TEST
+========================================================= */
+
+body.nowPlayingBody .currentSongMarkerImage,
+body.nowPlayingBody .layeredTextFill {
+  filter: url("#nowPlayingGlowFilter");
+}
