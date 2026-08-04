@@ -1197,7 +1197,7 @@ body.obsBody .obsList > li.layeredText {
   position: relative;
 
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -1209,8 +1209,8 @@ body.obsBody .obsList > li.layeredText {
   width: max-content;
   min-width: max-content;
 
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-start;
+  text-align: left;
 
   white-space: nowrap;
 }
