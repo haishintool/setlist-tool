@@ -2054,9 +2054,6 @@ if (!currentSong && lastNowPlayingSong) {
 
   nowPlayingClearTimer =
     window.setTimeout(() => {
-      if (currentSongShadow) {
-        currentSongShadow.textContent = "";
-      }
 
       if (currentSongStroke) {
         currentSongStroke.textContent = "";
@@ -2123,11 +2120,6 @@ if (currentSongStroke) {
     currentSong;
 }
 
-if (currentSongShadow) {
-  currentSongShadow.textContent =
-    currentSong;
-}
-
 if (currentSongFill) {
   currentSongFill.textContent =
     currentSong;
@@ -2188,64 +2180,6 @@ if (currentSongFill) {
 if (currentSongMarkerImage) {
   currentSongMarkerImage.style.filter =
     'url("#nowPlayingGlowFilter")';
-}
-
-if (currentSongShadow) {
-  currentSongShadow.style.fontFamily =
-    nowPlayingFontStack;
-
-  currentSongShadow.style.fontSize =
-    "60px";
-
-  currentSongShadow.style.fontWeight =
-    "400";
-
-  /*
-    縁取り込みの文字シルエットを
-    シャドウ色で作る
-  */
-  currentSongShadow.style.color =
-    state.nowPlayingShadowColor;
-
-  currentSongShadow.style.webkitTextStroke =
-    state.nowPlayingStrokeEnabled
-      ? `${state.nowPlayingStrokeWidth}px ${state.nowPlayingShadowColor}`
-      : "0px transparent";
-
-  /*
-    文字レイヤー自体を指定位置へ移動する
-  */
-  currentSongShadow.style.transform =
-    state.nowPlayingShadowEnabled
-      ? `translate(
-          ${state.nowPlayingShadowOffsetX}px,
-          ${state.nowPlayingShadowOffsetY}px
-        )`
-      : "translate(0, 0)";
-
-  /*
-    移動後の文字全体をぼかす
-  */
-currentSongShadow.style.transform =
-  state.nowPlayingShadowEnabled
-    ? `translate(
-        ${state.nowPlayingShadowOffsetX}px,
-        ${state.nowPlayingShadowOffsetY}px
-      )`
-    : "translate(0, 0)";
-
-currentSongShadow.style.filter =
-  state.nowPlayingShadowEnabled &&
-  state.nowPlayingShadowBlur > 0
-    ? `blur(${state.nowPlayingShadowBlur}px)`
-    : "none";
-
-currentSongShadow.style.textShadow = "none";
-
-  currentSongShadow.style.visibility =
-    state.nowPlayingShadowEnabled
-      ? "visible"
-      : "hidden";
 }
 
 if (currentSongStroke) {
