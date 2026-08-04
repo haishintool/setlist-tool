@@ -24,40 +24,76 @@
   style="position: absolute;"
 >
   <defs>
-    <filter
-      id="nowPlayingGlowFilter"
-      x="-100%"
-      y="-100%"
-      width="300%"
-      height="300%"
-      color-interpolation-filters="sRGB"
-    >
-<feGaussianBlur
-  id="nowPlayingGlowBlur"
-  in="SourceAlpha"
-  stdDeviation="8"
-  result="glowBlur"
-/>
+<filter
+  id="nowPlayingGlowFilter"
+  x="-100%"
+  y="-100%"
+  width="300%"
+  height="300%"
+  color-interpolation-filters="sRGB"
+>
+  <!-- 元の形を外側へ広げる -->
+  <feMorphology
+    id="nowPlayingStrokeMorphology"
+    in="SourceAlpha"
+    operator="dilate"
+    radius="3"
+    result="expandedAlpha"
+  />
 
-<feFlood
-  id="nowPlayingGlowColor"
-  flood-color="#ffffff"
-  flood-opacity="1"
-  result="glowColor"
-/>
+  <!-- 広げた形から本体部分を引き、外側の縁だけ残す -->
+  <feComposite
+    in="expandedAlpha"
+    in2="SourceAlpha"
+    operator="out"
+    result="outlineAlpha"
+  />
 
-      <feComposite
-        in="glowColor"
-        in2="glowBlur"
-        operator="in"
-        result="coloredGlow"
-      />
+  <!-- 縁取り色 -->
+  <feFlood
+    id="nowPlayingStrokeColor"
+    flood-color="#00aaff"
+    flood-opacity="1"
+    result="outlineColor"
+  />
 
-      <feMerge>
-        <feMergeNode in="coloredGlow" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
+  <feComposite
+    in="outlineColor"
+    in2="outlineAlpha"
+    operator="in"
+    result="coloredOutline"
+  />
+
+  <!-- 広げた輪郭を滑らかにぼかしてグローを作る -->
+  <feGaussianBlur
+    id="nowPlayingGlowBlur"
+    in="expandedAlpha"
+    stdDeviation="8"
+    result="glowBlur"
+  />
+
+  <!-- グロー色と強さ -->
+  <feFlood
+    id="nowPlayingGlowColor"
+    flood-color="#ffffff"
+    flood-opacity="1"
+    result="glowColor"
+  />
+
+  <feComposite
+    in="glowColor"
+    in2="glowBlur"
+    operator="in"
+    result="coloredGlow"
+  />
+
+  <!-- グロー → 縁取り → 本体の順で合成 -->
+  <feMerge>
+    <feMergeNode in="coloredGlow" />
+    <feMergeNode in="coloredOutline" />
+    <feMergeNode in="SourceGraphic" />
+  </feMerge>
+</filter>
   </defs>
 </svg>  
 
