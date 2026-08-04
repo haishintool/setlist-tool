@@ -1895,10 +1895,13 @@ function startNowPlayingScroll() {
 
 if (textWidth <= viewportWidth) {
   viewport.style.justifyContent =
-    "center";
+    "flex-start";
 
   currentSongElement.style.transform =
     "translate3d(0,0,0)";
+
+  currentSongElement.style.opacity =
+    "1";
 
   return;
 }
