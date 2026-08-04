@@ -380,6 +380,11 @@ const nowPlayingGlowBlur =
     "nowPlayingGlowBlur"
   );
 
+const nowPlayingStrokeMorphology =
+  document.getElementById(
+    "nowPlayingStrokeMorphology"
+  );  
+
 const nowPlayingGlowColor =
   document.getElementById(
     "nowPlayingGlowColor"
@@ -2145,6 +2150,13 @@ if (nowPlayingStrokeColor) {
     state.nowPlayingStrokeColor
   );
 }  
+
+if (nowPlayingStrokeMorphology) {
+  nowPlayingStrokeMorphology.setAttribute(
+    "radius",
+    String(state.nowPlayingStrokeWidth)
+  );
+}
 
   nowPlayingGlowColor.setAttribute(
     "flood-opacity",
