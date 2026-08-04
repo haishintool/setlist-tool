@@ -2364,14 +2364,20 @@ function switchSettingsTab(tabName) {
   const isEditor =
     tabName === "editor";
 
+if (setlistTab) {
   setlistTab.hidden =
     !isSetlist;
+}
 
+if (nowPlayingTab) {
   nowPlayingTab.hidden =
     !isNowPlaying;
+}
 
+if (editorTab) {
   editorTab.hidden =
     !isEditor;
+}
 
   setlistTabButton?.classList.toggle(
     "isActive",
