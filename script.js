@@ -2138,7 +2138,14 @@ if (nowPlayingGlowColor) {
     "flood-color",
     state.nowPlayingShadowColor
   );
-}  
+
+  nowPlayingGlowColor.setAttribute(
+    "flood-opacity",
+    state.nowPlayingShadowEnabled
+      ? "1"
+      : "0"
+  );
+}
 
 if (nowPlayingGlowBlur) {
   nowPlayingGlowBlur.setAttribute(
@@ -2149,16 +2156,12 @@ if (nowPlayingGlowBlur) {
 
 if (currentSongFill) {
   currentSongFill.style.filter =
-    state.nowPlayingShadowEnabled
-      ? 'url("#nowPlayingGlowFilter")'
-      : "none";
+    'url("#nowPlayingGlowFilter")';
 }
 
 if (currentSongMarkerImage) {
   currentSongMarkerImage.style.filter =
-    state.nowPlayingShadowEnabled
-      ? 'url("#nowPlayingGlowFilter")'
-      : "none";
+    'url("#nowPlayingGlowFilter")';
 }
 
 if (currentSongShadow) {
