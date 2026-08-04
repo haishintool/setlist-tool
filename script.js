@@ -272,9 +272,6 @@ const displaySetlist =
 const currentSongElement =
   document.getElementById("currentSong");
 
-const currentSongShadow =
-  document.getElementById("currentSongShadow");  
-
   const currentSongStroke =
   document.getElementById(
     "currentSongStroke"
