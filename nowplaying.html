@@ -17,6 +17,48 @@
 
 <body class="obsBody nowPlayingBody">
 
+<svg
+  width="0"
+  height="0"
+  aria-hidden="true"
+  style="position: absolute;"
+>
+  <defs>
+    <filter
+      id="nowPlayingGlowFilter"
+      x="-100%"
+      y="-100%"
+      width="300%"
+      height="300%"
+      color-interpolation-filters="sRGB"
+    >
+      <feGaussianBlur
+        in="SourceAlpha"
+        stdDeviation="8"
+        result="glowBlur"
+      />
+
+      <feFlood
+        flood-color="#ffffff"
+        flood-opacity="1"
+        result="glowColor"
+      />
+
+      <feComposite
+        in="glowColor"
+        in2="glowBlur"
+        operator="in"
+        result="coloredGlow"
+      />
+
+      <feMerge>
+        <feMergeNode in="coloredGlow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+</svg>  
+
 <div class="obsSetlist">
 
   <div class="nowPlayingRow">
