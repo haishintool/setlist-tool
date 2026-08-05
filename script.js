@@ -106,8 +106,6 @@ nowPlayingMarkerImage: "",
 
   nowPlayingShadowEnabled: false,
 nowPlayingShadowColor: "#000000",
-nowPlayingShadowOffsetX: 3,
-nowPlayingShadowOffsetY: 3,
 nowPlayingShadowBlur: 6,
 
 setlistTextColor: "#ffffff",
