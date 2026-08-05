@@ -342,26 +342,6 @@ const nowPlayingShadowColorValue =
     "nowPlayingShadowColorValue"
   );
 
-const nowPlayingShadowOffsetX =
-  document.getElementById(
-    "nowPlayingShadowOffsetX"
-  );
-
-const nowPlayingShadowOffsetXValue =
-  document.getElementById(
-    "nowPlayingShadowOffsetXValue"
-  );
-
-const nowPlayingShadowOffsetY =
-  document.getElementById(
-    "nowPlayingShadowOffsetY"
-  );
-
-const nowPlayingShadowOffsetYValue =
-  document.getElementById(
-    "nowPlayingShadowOffsetYValue"
-  );
-
 const nowPlayingShadowBlur =
   document.getElementById(
     "nowPlayingShadowBlur"
