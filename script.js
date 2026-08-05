@@ -965,7 +965,7 @@ previewNowPlayingShadow.style.fontSize = "32px";
 
 previewNowPlayingShadow.style.textShadow =
   state.nowPlayingShadowEnabled
-    ? `${state.nowPlayingShadowOffsetX}px ${state.nowPlayingShadowOffsetY}px ${state.nowPlayingShadowBlur}px ${state.nowPlayingShadowColor}`
+    ? `0px 0px ${state.nowPlayingShadowBlur}px ${state.nowPlayingShadowColor}`
     : "none";
 
 previewNowPlayingShadow.style.visibility =
@@ -2819,7 +2819,7 @@ function updateNowPlayingShadowPreview() {
 
   previewNowPlayingShadow.style.textShadow =
     nowPlayingShadowEnabled.checked
-      ? `${nowPlayingShadowOffsetX.value}px ${nowPlayingShadowOffsetY.value}px ${nowPlayingShadowBlur.value}px ${nowPlayingShadowColor.value}`
+      ? `0px 0px ${nowPlayingShadowBlur.value}px ${nowPlayingShadowColor.value}`
       : "none";
 }
 
