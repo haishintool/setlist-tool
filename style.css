@@ -1444,5 +1444,9 @@ body.nowPlayingBody .obsSetlist {
 }
 
 /* =========================================================
-   NOW PLAYING SVG GLOW TEST
+   SETLIST SVG DECORATION TEST
 ========================================================= */
+
+body.obsBody .setlistTextFill {
+  filter: url("#setlistGlowFilter");
+}
