@@ -764,24 +764,6 @@ const nowPlayingShadowColor =
     ? targetState.nowPlayingShadowColor
     : DEFAULT_STATE.nowPlayingShadowColor;
 
-const nowPlayingShadowOffsetX =
-  Number.isInteger(
-    targetState.nowPlayingShadowOffsetX
-  ) &&
-  targetState.nowPlayingShadowOffsetX >= -20 &&
-  targetState.nowPlayingShadowOffsetX <= 20
-    ? targetState.nowPlayingShadowOffsetX
-    : DEFAULT_STATE.nowPlayingShadowOffsetX;
-
-const nowPlayingShadowOffsetY =
-  Number.isInteger(
-    targetState.nowPlayingShadowOffsetY
-  ) &&
-  targetState.nowPlayingShadowOffsetY >= -20 &&
-  targetState.nowPlayingShadowOffsetY <= 20
-    ? targetState.nowPlayingShadowOffsetY
-    : DEFAULT_STATE.nowPlayingShadowOffsetY;
-
 const nowPlayingShadowBlur =
   Number.isInteger(
     targetState.nowPlayingShadowBlur
@@ -875,8 +857,6 @@ return {
   nowPlayingStrokeWidth,
   nowPlayingShadowEnabled,
   nowPlayingShadowColor,
-  nowPlayingShadowOffsetX,
-  nowPlayingShadowOffsetY,
   nowPlayingShadowBlur,
 
   setlistTextColor,
