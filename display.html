@@ -11,6 +11,86 @@
 </head>
 
 <body class="obsBody">
+
+<svg
+  width="0"
+  height="0"
+  aria-hidden="true"
+  style="position: absolute;"
+>
+  <defs>
+    <filter
+      id="setlistGlowFilter"
+      x="-100%"
+      y="-100%"
+      width="300%"
+      height="300%"
+      color-interpolation-filters="sRGB"
+    >
+      <!-- 元の形を外側へ広げる -->
+      <feMorphology
+        id="setlistStrokeMorphology"
+        in="SourceAlpha"
+        operator="dilate"
+        radius="3"
+        result="expandedAlpha"
+      />
+
+      <!-- 外側の縁だけを残す -->
+      <feComposite
+        in="expandedAlpha"
+        in2="SourceAlpha"
+        operator="out"
+        result="outlineAlpha"
+      />
+
+      <!-- 縁取り色 -->
+      <feFlood
+        id="setlistStrokeColor"
+        flood-color="#00aaff"
+        flood-opacity="1"
+        result="outlineColor"
+      />
+
+      <feComposite
+        in="outlineColor"
+        in2="outlineAlpha"
+        operator="in"
+        result="coloredOutline"
+      />
+
+      <!-- グロー -->
+      <feGaussianBlur
+        id="setlistGlowBlur"
+        in="expandedAlpha"
+        stdDeviation="8"
+        result="glowBlur"
+      />
+
+      <feFlood
+        id="setlistGlowColor"
+        flood-color="#ffffff"
+        flood-opacity="1"
+        result="glowColor"
+      />
+
+      <feComposite
+        in="glowColor"
+        in2="glowBlur"
+        operator="in"
+        result="coloredGlow"
+      />
+
+      <!-- グロー → 縁取り → 本体 -->
+      <feMerge>
+        <feMergeNode in="coloredGlow" />
+        <feMergeNode in="coloredOutline" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+</svg>
+  
   <main class="obsSetlist" aria-live="polite">
     <ol
       id="displaySetlist"
