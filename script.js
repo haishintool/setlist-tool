@@ -490,6 +490,26 @@ const setlistShadowBlurValue =
     "setlistShadowBlurValue"
   );  
 
+const setlistGlowBlur =
+  document.getElementById(
+    "setlistGlowBlur"
+  );
+
+const setlistStrokeMorphology =
+  document.getElementById(
+    "setlistStrokeMorphology"
+  );
+
+const setlistGlowColorFilter =
+  document.getElementById(
+    "setlistGlowColor"
+  );
+
+const setlistStrokeColorFilter =
+  document.getElementById(
+    "setlistStrokeColor"
+  );  
+
 const editorTabButton =
   document.getElementById("editorTabButton");
 
