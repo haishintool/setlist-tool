@@ -1461,6 +1461,13 @@ function renderDisplayPage() {
 
   stopAutoScroll();
 
+  if (setlistStrokeColorFilter) {
+  setlistStrokeColorFilter.setAttribute(
+    "flood-color",
+    state.setlistStrokeColor
+  );
+}
+
   displaySetlist.replaceChildren();
 
   const shouldLoop =
