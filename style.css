@@ -1442,11 +1442,3 @@ body.nowPlayingBody .obsSetlist {
   text-align: center;
   justify-content: center;
 }
-
-/* =========================================================
-   SETLIST SVG DECORATION TEST
-========================================================= */
-
-body.obsBody .setlistTextFill {
-  filter: url("#setlistGlowFilter");
-}

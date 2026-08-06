@@ -1628,6 +1628,9 @@ itemFill.style.color =
 itemFill.style.webkitTextStroke =
   "0px transparent";
 
+itemFill.style.filter =
+  "url(#setlistGlowFilter)";  
+
 listItem.appendChild(
   itemShadow
 );
