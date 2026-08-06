@@ -1664,17 +1664,6 @@ listItem.appendChild(
 
   renderDisplayStyle();
 
-  displaySetlist
-  .querySelectorAll(".setlistTextFill")
-  .forEach((element) => {
-    element.style.filter = "none";
-
-    void element.offsetWidth;
-
-    element.style.filter =
-      'url("#setlistGlowFilter")';
-  });
-
   requestAnimationFrame(() => {
     if (scrollContainer) {
       scrollContainer.scrollTop = 0;
