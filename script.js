@@ -1158,22 +1158,6 @@ if (nowPlayingShadowColorValue) {
     state.nowPlayingShadowColor.toUpperCase();
 }
 
-if (nowPlayingShadowOffsetX) {
-    state.nowPlayingShadowOffsetX;
-}
-
-if (nowPlayingShadowOffsetXValue) {
-    `${state.nowPlayingShadowOffsetX}px`;
-}
-
-if (nowPlayingShadowOffsetY) {
-    state.nowPlayingShadowOffsetY;
-}
-
-if (nowPlayingShadowOffsetYValue) {
-    `${state.nowPlayingShadowOffsetY}px`;
-}
-
 if (nowPlayingShadowBlur) {
   nowPlayingShadowBlur.value =
     state.nowPlayingShadowBlur;
