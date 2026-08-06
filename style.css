@@ -835,44 +835,6 @@ body.nowPlayingBody {
 }
 /* Now Playing セットリスト */
 
-.nowPlayingSetlist {
-  width: 700px;
-  margin: 30px auto 0;
-
-  border: 1px solid white;
-
-  padding: 20px 30px;
-
-  text-align: left;
-  line-height: 1.5;
-
-  box-sizing: border-box;
-}
-
-.nowPlayingSetlistItem {
-  margin: 8px 0;
-}
-
-.nowPlayingSetlistItem {
-  text-align: center;
-  white-space: nowrap;
-}
-.playMark {
-  font-family:
-    "Segoe UI Symbol",
-    "Arial Unicode MS",
-    "Noto Sans Symbols 2",
-    sans-serif;
-
-  color: white;
-  font-size: 1.0em;
-
-  position: relative;
-  top: -1px;      /* ↓2px下へ */
-  /* top: -2px; なら2px上へ */
-
-  margin-right: 0.25em;
-}
 body.obsBody .obsList .loopSpacer {
   height: 48px;
   min-height: 48px;
