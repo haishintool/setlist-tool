@@ -1617,7 +1617,9 @@ itemStroke.style.webkitTextStroke =
     : "0px transparent";
 
 itemStroke.style.visibility =
-  "hidden";
+  state.setlistStrokeEnabled
+    ? "visible"
+    : "hidden";
 
 itemFill.style.color =
   state.setlistTextColor;
@@ -1661,6 +1663,17 @@ listItem.appendChild(
   });
 
   renderDisplayStyle();
+
+  displaySetlist
+  .querySelectorAll(".setlistTextFill")
+  .forEach((element) => {
+    element.style.filter = "none";
+
+    void element.offsetWidth;
+
+    element.style.filter =
+      'url("#setlistGlowFilter")';
+  });
 
   requestAnimationFrame(() => {
     if (scrollContainer) {
