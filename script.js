@@ -1549,22 +1549,6 @@ if (setlistGlowBlur) {
       );
     } else {
 
-const itemShadow =
-  document.createElement("span");
-
-itemShadow.classList.add(
-  "layeredTextShadow",
-  "setlistTextShadow"
-);
-
-const itemStroke =
-  document.createElement("span");
-
-itemStroke.classList.add(
-  "layeredTextStroke",
-  "setlistTextStroke"
-);  
-
 const itemFill =
   document.createElement("span");
 
@@ -1602,12 +1586,6 @@ style="
 const titleHtml =
   `${markerHtml}<span class="setlistTitle">${item.title}</span>`;
 
-itemShadow.innerHTML =
-  titleHtml;
-
-itemStroke.innerHTML =
-  titleHtml;
-
 itemFill.innerHTML =
   titleHtml;
 
@@ -1630,38 +1608,6 @@ if (itemFillMarker) {
   itemFillMarker.style.filter =
     'url("#setlistGlowFilter")';
 }  
-
-itemShadow.style.color =
-  "transparent";
-
-itemShadow.style.webkitTextStroke =
-  "0px transparent";
-
-itemShadow.style.textShadow =
-  state.setlistShadowEnabled
-    ? `${state.setlistShadowOffsetX}px ${state.setlistShadowOffsetY}px ${state.setlistShadowBlur}px ${state.setlistShadowColor}`
-    : "none";
-
-itemShadow.style.visibility =
-  state.setlistShadowEnabled
-    ? "visible"
-    : "hidden";
-
-itemStroke.style.color =
-  "transparent";
-
-itemStroke.style.webkitTextStroke =
-  state.setlistStrokeEnabled
-    ? `${state.setlistStrokeWidth}px ${state.setlistStrokeColor}`
-    : "0px transparent";
-
-itemStroke.style.visibility =
-  state.setlistStrokeEnabled
-    ? "visible"
-    : "hidden";
-
-itemFill.style.color =
-  state.setlistTextColor;
 
 itemFill.style.color =
   state.setlistTextColor;
