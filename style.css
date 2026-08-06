@@ -1336,6 +1336,8 @@ body.nowPlayingBody .obsSetlist {
 .nowPlayingViewport {
   flex: 1;
   min-width: 0;
+  padding-left: 30px;
+  box-sizing: border-box;
 }
 
 .nowPlayingRow.isFadeOut {
