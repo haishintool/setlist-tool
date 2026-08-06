@@ -1316,6 +1316,8 @@ body.nowPlayingBody .obsSetlist {
   display: flex;
   align-items: center;
   width: 100%;
+  padding-left: 30px;
+  box-sizing: border-box;
 
   transition: opacity 0.5s ease;
 }
@@ -1336,8 +1338,6 @@ body.nowPlayingBody .obsSetlist {
 .nowPlayingViewport {
   flex: 1;
   min-width: 0;
-  padding-left: 30px;
-  box-sizing: border-box;
 }
 
 .nowPlayingRow.isFadeOut {
