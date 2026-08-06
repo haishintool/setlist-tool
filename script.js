@@ -1592,6 +1592,26 @@ itemStroke.innerHTML =
 itemFill.innerHTML =
   titleHtml;
 
+const itemFillTitle =
+  itemFill.querySelector(
+    ".setlistTitle"
+  );
+
+const itemFillMarker =
+  itemFill.querySelector(
+    ".setlistMarker, .setlistMarkerImage"
+  );
+
+if (itemFillTitle) {
+  itemFillTitle.style.filter =
+    'url("#setlistGlowFilter")';
+}
+
+if (itemFillMarker) {
+  itemFillMarker.style.filter =
+    'url("#setlistGlowFilter")';
+}  
+
 itemShadow.style.color =
   "transparent";
 
@@ -1629,9 +1649,6 @@ itemFill.style.color =
 
 itemFill.style.webkitTextStroke =
   "0px transparent";
-
-itemFill.style.filter =
-  "url(#setlistGlowFilter)";  
 
 listItem.appendChild(
   itemShadow
