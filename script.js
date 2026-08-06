@@ -1461,10 +1461,45 @@ function renderDisplayPage() {
 
   stopAutoScroll();
 
-  if (setlistStrokeColorFilter) {
-  setlistStrokeColorFilter.setAttribute(
+if (setlistGlowColorFilter) {
+  setlistGlowColorFilter.setAttribute(
     "flood-color",
-    state.setlistStrokeColor
+    state.setlistShadowColor
+  );
+
+  if (setlistStrokeColorFilter) {
+    setlistStrokeColorFilter.setAttribute(
+      "flood-color",
+      state.setlistStrokeColor
+    );
+
+    setlistStrokeColorFilter.setAttribute(
+      "flood-opacity",
+      state.setlistStrokeEnabled
+        ? "1"
+        : "0"
+    );
+  }
+
+  if (setlistStrokeMorphology) {
+    setlistStrokeMorphology.setAttribute(
+      "radius",
+      String(state.setlistStrokeWidth)
+    );
+  }
+
+  setlistGlowColorFilter.setAttribute(
+    "flood-opacity",
+    state.setlistShadowEnabled
+      ? "1"
+      : "0"
+  );
+}
+
+if (setlistGlowBlur) {
+  setlistGlowBlur.setAttribute(
+    "stdDeviation",
+    String(state.setlistShadowBlur)
   );
 }
 
@@ -1624,11 +1659,11 @@ itemStroke.style.visibility =
 itemFill.style.color =
   state.setlistTextColor;
 
-itemFill.style.color =
-  state.setlistTextColor;
-
 itemFill.style.webkitTextStroke =
   "0px transparent";
+
+itemFill.style.filter =
+  'url("#setlistGlowFilter")';
 
 itemFill.style.filter =
   "url(#setlistGlowFilter)";  
