@@ -1059,8 +1059,6 @@ body.obsBody .obsList > li.layeredText {
   overflow: hidden;
 }
 
-.setlistTextShadow,
-.setlistTextStroke,
 .setlistTextFill {
   display: flex;
   align-items: center;
