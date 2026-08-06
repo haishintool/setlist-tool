@@ -1860,10 +1860,21 @@ function startNowPlayingScroll() {
   const viewportWidth =
     viewport.clientWidth;
 
-  const textWidth =
-    currentSongFill.scrollWidth;
+const textWidth =
+  currentSongFill.scrollWidth;
+
+const nowPlayingRow =
+  currentSongElement.closest(
+    ".nowPlayingRow"
+  );
 
 if (textWidth <= viewportWidth) {
+  if (nowPlayingRow) {
+    nowPlayingRow.classList.add(
+      "isCentered"
+    );
+  }
+
   viewport.style.justifyContent =
     "flex-start";
 
@@ -1874,6 +1885,12 @@ if (textWidth <= viewportWidth) {
     "1";
 
   return;
+}
+
+if (nowPlayingRow) {
+  nowPlayingRow.classList.remove(
+    "isCentered"
+  );
 }
 
 viewport.style.justifyContent =

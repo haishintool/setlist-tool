@@ -1340,6 +1340,17 @@ body.nowPlayingBody .obsSetlist {
   min-width: 0;
 }
 
+.nowPlayingRow.isCentered {
+  justify-content: center;
+  padding-left: 0;
+}
+
+.nowPlayingRow.isCentered .nowPlayingViewport {
+  flex: 0 1 auto;
+  width: auto;
+  margin-inline: 0;
+}
+
 .nowPlayingRow.isFadeOut {
   opacity: 0;
 }
