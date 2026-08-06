@@ -116,8 +116,6 @@ setlistStrokeWidth: 2,
 
 setlistShadowEnabled: false,
 setlistShadowColor: "#000000",
-setlistShadowOffsetX: 3,
-setlistShadowOffsetY: 3,
 setlistShadowBlur: 6,
 
   visibleSongs: 10,
@@ -458,26 +456,6 @@ const setlistShadowColor =
 const setlistShadowColorValue =
   document.getElementById(
     "setlistShadowColorValue"
-  );
-
-const setlistShadowOffsetX =
-  document.getElementById(
-    "setlistShadowOffsetX"
-  );
-
-const setlistShadowOffsetXValue =
-  document.getElementById(
-    "setlistShadowOffsetXValue"
-  );
-
-const setlistShadowOffsetY =
-  document.getElementById(
-    "setlistShadowOffsetY"
-  );
-
-const setlistShadowOffsetYValue =
-  document.getElementById(
-    "setlistShadowOffsetYValue"
   );
 
 const setlistShadowBlur =
@@ -833,24 +811,6 @@ const setlistShadowColor =
     ? targetState.setlistShadowColor
     : DEFAULT_STATE.setlistShadowColor;
 
-const setlistShadowOffsetX =
-  Number.isInteger(
-    targetState.setlistShadowOffsetX
-  ) &&
-  targetState.setlistShadowOffsetX >= -20 &&
-  targetState.setlistShadowOffsetX <= 20
-    ? targetState.setlistShadowOffsetX
-    : DEFAULT_STATE.setlistShadowOffsetX;
-
-const setlistShadowOffsetY =
-  Number.isInteger(
-    targetState.setlistShadowOffsetY
-  ) &&
-  targetState.setlistShadowOffsetY >= -20 &&
-  targetState.setlistShadowOffsetY <= 20
-    ? targetState.setlistShadowOffsetY
-    : DEFAULT_STATE.setlistShadowOffsetY;
-
 const setlistShadowBlur =
   Number.isInteger(
     targetState.setlistShadowBlur
@@ -885,8 +845,6 @@ setlistStrokeWidth,
 
 setlistShadowEnabled,
 setlistShadowColor,
-setlistShadowOffsetX,
-setlistShadowOffsetY,
 setlistShadowBlur,
 
   visibleSongs,
@@ -1068,10 +1026,10 @@ if (previewSetlistShadow) {
   previewSetlistShadow.style.webkitTextStroke =
     "0px transparent";
 
-  previewSetlistShadow.style.textShadow =
-    state.setlistShadowEnabled
-      ? `${state.setlistShadowOffsetX}px ${state.setlistShadowOffsetY}px ${state.setlistShadowBlur}px ${state.setlistShadowColor}`
-      : "none";
+previewSetlistShadow.style.textShadow =
+  state.setlistShadowEnabled
+    ? `0px 0px ${state.setlistShadowBlur}px ${state.setlistShadowColor}`
+    : "none";
 
   previewSetlistShadow.style.visibility =
     state.setlistShadowEnabled
@@ -1216,26 +1174,6 @@ if (setlistShadowColor) {
 if (setlistShadowColorValue) {
   setlistShadowColorValue.textContent =
     state.setlistShadowColor.toUpperCase();
-}
-
-if (setlistShadowOffsetX) {
-  setlistShadowOffsetX.value =
-    state.setlistShadowOffsetX;
-}
-
-if (setlistShadowOffsetXValue) {
-  setlistShadowOffsetXValue.textContent =
-    `${state.setlistShadowOffsetX}px`;
-}
-
-if (setlistShadowOffsetY) {
-  setlistShadowOffsetY.value =
-    state.setlistShadowOffsetY;
-}
-
-if (setlistShadowOffsetYValue) {
-  setlistShadowOffsetYValue.textContent =
-    `${state.setlistShadowOffsetY}px`;
 }
 
 if (setlistShadowBlur) {
@@ -2873,58 +2811,6 @@ setlistShadowColor?.addEventListener(
     await updateState({
       setlistShadowColor:
         setlistShadowColor.value,
-    });
-  }
-);
-
-setlistShadowOffsetX?.addEventListener(
-  "input",
-  () => {
-    if (setlistShadowOffsetXValue) {
-      setlistShadowOffsetXValue.textContent =
-        `${setlistShadowOffsetX.value}px`;
-    }
-
-    state.setlistShadowOffsetX =
-      Number(setlistShadowOffsetX.value);
-
-    renderPreview();
-  }
-);
-
-setlistShadowOffsetX?.addEventListener(
-  "change",
-  async () => {
-    await updateState({
-      setlistShadowOffsetX: Number(
-        setlistShadowOffsetX.value
-      ),
-    });
-  }
-);
-
-setlistShadowOffsetY?.addEventListener(
-  "input",
-  () => {
-    if (setlistShadowOffsetYValue) {
-      setlistShadowOffsetYValue.textContent =
-        `${setlistShadowOffsetY.value}px`;
-    }
-
-    state.setlistShadowOffsetY =
-      Number(setlistShadowOffsetY.value);
-
-    renderPreview();
-  }
-);
-
-setlistShadowOffsetY?.addEventListener(
-  "change",
-  async () => {
-    await updateState({
-      setlistShadowOffsetY: Number(
-        setlistShadowOffsetY.value
-      ),
     });
   }
 );
