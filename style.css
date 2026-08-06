@@ -802,16 +802,6 @@ body.obsBody .obsSetlist {
   overflow: hidden;
 }
 
-body.obsBody .obsTitle {
-  display: table;
-  margin: 0 0 22px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-  font-size: 0.84rem;
-  font-weight: 800;
-  letter-spacing: 0.22em;
-}
-
 body.obsBody .obsList {
   display: grid;
   gap: 11px;
