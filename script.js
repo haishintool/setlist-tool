@@ -1617,9 +1617,7 @@ itemStroke.style.webkitTextStroke =
     : "0px transparent";
 
 itemStroke.style.visibility =
-  state.setlistStrokeEnabled
-    ? "visible"
-    : "hidden";  
+  "hidden";
 
 itemFill.style.color =
   state.setlistTextColor;
