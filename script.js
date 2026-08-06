@@ -1670,14 +1670,6 @@ itemFill.style.webkitTextStroke =
   "0px transparent";
 
 listItem.appendChild(
-  itemShadow
-);
-
-listItem.appendChild(
-  itemStroke
-);
-
-listItem.appendChild(
   itemFill
 );
 
