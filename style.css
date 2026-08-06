@@ -796,7 +796,7 @@ body.obsBody {
 body.obsBody .obsSetlist {
   width: 100%;
   min-height: 0;
-  padding: 30px;
+  padding: 30px 30px 30px 60px;
   color: #fff;
   background: transparent;
   overflow: hidden;
