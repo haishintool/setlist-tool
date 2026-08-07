@@ -790,11 +790,11 @@ const setlistStrokeColor =
     : DEFAULT_STATE.setlistStrokeColor;
 
 const setlistStrokeWidth =
-  Number.isInteger(
+  Number.isFinite(
     targetState.setlistStrokeWidth
   ) &&
   targetState.setlistStrokeWidth >= 0 &&
-  targetState.setlistStrokeWidth <= 20
+  targetState.setlistStrokeWidth <= 4
     ? targetState.setlistStrokeWidth
     : DEFAULT_STATE.setlistStrokeWidth;
 
@@ -812,11 +812,11 @@ const setlistShadowColor =
     : DEFAULT_STATE.setlistShadowColor;
 
 const setlistShadowBlur =
-  Number.isInteger(
+  Number.isFinite(
     targetState.setlistShadowBlur
   ) &&
   targetState.setlistShadowBlur >= 0 &&
-  targetState.setlistShadowBlur <= 30
+  targetState.setlistShadowBlur <= 6
     ? targetState.setlistShadowBlur
     : DEFAULT_STATE.setlistShadowBlur;    
 
