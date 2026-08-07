@@ -1407,3 +1407,43 @@ body.nowPlayingBody .obsSetlist {
   text-align: center;
   justify-content: center;
 }
+
+/* =========================================================
+   ページ表示倍率
+========================================================= */
+
+.pageZoomControl {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 2000;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+
+  background: #121216;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.pageZoomControl label {
+  color: var(--text-soft);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.pageZoomControl select {
+  min-height: 34px;
+  padding: 0 28px 0 10px;
+
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+
+  background: #0d0d11;
+  color: var(--text);
+  outline: none;
+}

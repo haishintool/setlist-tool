@@ -865,5 +865,58 @@
       </div>
     </div>
   </div>
+
+  <div class="pageZoomControl">
+    <label for="pageZoomSelect">
+      表示倍率
+    </label>
+
+    <select id="pageZoomSelect">
+      <option value="0.75">75%</option>
+      <option value="0.8">80%</option>
+      <option value="0.9">90%</option>
+      <option value="1" selected>100%</option>
+      <option value="1.1">110%</option>
+      <option value="1.25">125%</option>
+      <option value="1.5">150%</option>
+    </select>
+  </div>
+
+  <script>
+    const pageZoomSelect =
+      document.getElementById(
+        "pageZoomSelect"
+      );
+
+    const appElement =
+      document.querySelector(".app");
+
+    const savedPageZoom =
+      localStorage.getItem(
+        "setlistToolPageZoom"
+      ) || "1";
+
+    pageZoomSelect.value =
+      savedPageZoom;
+
+    appElement.style.zoom =
+      savedPageZoom;
+
+    pageZoomSelect.addEventListener(
+      "change",
+      () => {
+        const selectedZoom =
+          pageZoomSelect.value;
+
+        appElement.style.zoom =
+          selectedZoom;
+
+        localStorage.setItem(
+          "setlistToolPageZoom",
+          selectedZoom
+        );
+      }
+    );
+  </script>
 </body>
 </html>
