@@ -739,11 +739,11 @@ const nowPlayingStrokeColor =
     : DEFAULT_STATE.nowPlayingStrokeColor;
 
 const nowPlayingStrokeWidth =
-  Number.isInteger(
+Number.isFinite(
     targetState.nowPlayingStrokeWidth
   ) &&
   targetState.nowPlayingStrokeWidth >= 0 &&
-  targetState.nowPlayingStrokeWidth <= 20
+  targetState.nowPlayingStrokeWidth <= 4
     ? targetState.nowPlayingStrokeWidth
     : DEFAULT_STATE.nowPlayingStrokeWidth;    
 
@@ -761,11 +761,11 @@ const nowPlayingShadowColor =
     : DEFAULT_STATE.nowPlayingShadowColor;
 
 const nowPlayingShadowBlur =
-  Number.isInteger(
+Number.isFinite(
     targetState.nowPlayingShadowBlur
   ) &&
   targetState.nowPlayingShadowBlur >= 0 &&
-  targetState.nowPlayingShadowBlur <= 30
+  targetState.nowPlayingShadowBlur <= 6
     ? targetState.nowPlayingShadowBlur
     : DEFAULT_STATE.nowPlayingShadowBlur;
 
